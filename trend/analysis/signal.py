@@ -8,7 +8,7 @@ from typing import Callable, Optional
 
 from .. import config
 from ..schema import Record
-from .grouping import assign_carrier, assign_theme, near_duplicate_clusters
+from .grouping import assign_brand, assign_theme, near_duplicate_clusters
 
 
 @dataclass
@@ -187,7 +187,7 @@ def analyze_group(name: str, records: list[Record], asof: datetime,
 
 DIMENSIONS: dict[str, Callable[[Record], str]] = {
     "tema": lambda r: assign_theme(r.text)[0],
-    "firma": assign_carrier,
+    "firma": assign_brand,
 }
 
 

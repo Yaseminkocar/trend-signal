@@ -20,7 +20,7 @@ def cmd_collect(a) -> None:
             if dbg:
                 dbg.mkdir(parents=True, exist_ok=True)
             for r in eksi.collect(f, topics=a.topics, days=a.days, max_pages=config.EKSI_MAX_PAGES_PER_TOPIC,
-                                  discover=not a.no_discover, save_html_dir=dbg):
+                                  discover=not a.no_discover, save_html_dir=dbg, today=a.until):
                 batch.append(r)
                 if len(batch) >= 50:
                     added_total += store.upsert(config.RAW_PATH, batch)[0]; batch = []
@@ -39,7 +39,7 @@ def cmd_collect(a) -> None:
                            for r in store.load(config.RAW_PATH) if r.source == "x" and r.published_at)
             skip = frozenset(k for k, n in have.items() if n >= min(a.per_day, 15))
             print(f"[x] --fill-gaps: {len(skip)} (sorgu, gün) çifti zaten dolu, atlanacak")
-        recs, profiles = x.collect(days=a.days, per_day=a.per_day, with_profiles=a.profiles, skip=skip,
+        recs, profiles = x.collect(days=a.days, per_day=a.per_day, with_profiles=a.profiles, skip=skip, today=a.until,
                                    sink=lambda rs: store.upsert(config.RAW_PATH, rs),
                                    backend=a.x_backend, headless=not a.headful,
                                    debug_dir=_debug_dir(a))
@@ -59,10 +59,13 @@ def _debug_dir(a):
 def _collect_social(a) -> None:
     from .collectors import social
     sink = lambda rs: store.upsert(config.RAW_PATH, rs)
+    until = None
+    if a.until:
+        until = datetime.combine(a.until, datetime.max.time(), tzinfo=config.TR_TZ)
     if a.source == "tiktok":
-        recs = social.collect_tiktok(days=a.days, headless=not a.headful, sink=sink)
+        recs = social.collect_tiktok(days=a.days, headless=not a.headful, sink=sink, until=until)
     else:
-        recs = social.collect_instagram(days=a.days, headless=not a.headful, sink=sink)
+        recs = social.collect_instagram(days=a.days, headless=not a.headful, sink=sink, until=until)
     added, dup = store.upsert(config.RAW_PATH, recs)
     print(f"[{a.source}] {len(recs)} kayit ({added} yeni, {dup} zaten vardi)")
 
@@ -142,12 +145,29 @@ def cmd_stats(a) -> None:
     print("sorunlar:", dict(issues.summarize()))
 
 
+def cmd_topics(a) -> None:
+    for name in config.available_topics():
+        mark = "*" if name == config.TOPIC else " "
+        print(f"{mark} {name}")
+
+
+def cmd_init_topic(a) -> None:
+    from .topics import init_topic
+    path = init_topic(a.name, a.label or a.name, a.keywords.split(","), (a.brands or "").split(","), a.force)
+    print(f"olusturuldu: {path.relative_to(config.ROOT)}")
+    print("sorgulari ve tema sozlugunu kontrol edip gerekirse duzenleyin, sonra:")
+    print(f"  python -m trend --topic {a.name} collect eksi")
+
+
 def main(argv=None) -> None:
     p = argparse.ArgumentParser(prog="trend")
+    p.add_argument("--topic", default=None, help="topics/<ad>.json (varsayilan: kargo)")
     sub = p.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("collect"); c.add_argument("source", choices=["eksi", "x", "tiktok", "instagram"])
     c.add_argument("--backend", default="scrapling", choices=["requests", "scrapling", "playwright"])
     c.add_argument("--days", type=int, default=config.EKSI_DAYS)
+    c.add_argument("--until", type=lambda v: datetime.strptime(v, "%Y-%m-%d").date(), default=None,
+                   help="toplama penceresinin son gunu (YYYY-MM-DD); varsayilan bugun")
     c.add_argument("--per-day", type=int, default=config.X_TWEETS_PER_DAY)
     c.add_argument("--profiles", type=int, default=30)
     c.add_argument("--delay", type=float, default=1.5)
@@ -161,5 +181,14 @@ def main(argv=None) -> None:
     an = sub.add_parser("analyze"); an.add_argument("--asof", default=None)
     an.add_argument("--sources", default=None); an.set_defaults(fn=cmd_analyze)
     st = sub.add_parser("stats"); st.set_defaults(fn=cmd_stats)
+    tp = sub.add_parser("topics"); tp.set_defaults(fn=cmd_topics)
+    it = sub.add_parser("init-topic"); it.add_argument("name")
+    it.add_argument("--label", default=None)
+    it.add_argument("--keywords", required=True, help="virgulle: elektrikli arac,sarj istasyonu")
+    it.add_argument("--brands", default="", help="virgulle: togg,tesla,byd")
+    it.add_argument("--force", action="store_true")
+    it.set_defaults(fn=cmd_init_topic)
     a = p.parse_args(argv)
+    if a.topic:
+        config.use_topic(a.topic)
     a.fn(a)

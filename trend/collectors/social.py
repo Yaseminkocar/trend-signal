@@ -83,15 +83,17 @@ def parse_instagram_items(data: Any, collected_at: str, query: str) -> list[Reco
     return out
 
 
-def _within(rec: Record, days: int) -> bool:
+def _within(rec: Record, days: int, until: Optional[datetime] = None) -> bool:
     if not rec.published_at:
         return True
-    return datetime.fromisoformat(rec.published_at) >= datetime.now(timezone.utc) - timedelta(days=days + 1)
+    end = until or datetime.now(timezone.utc)
+    t = datetime.fromisoformat(rec.published_at)
+    return end - timedelta(days=days + 1) <= t <= end + timedelta(days=1)
 
 
 def _browse(targets: list[tuple[str, str]], want: Callable[[str], bool],
             parse: Callable[[Any, str, str], list[Record]], source: str, days: int,
-            cookies: list[dict], headless: bool, scrolls: int, sink) -> list[Record]:
+            cookies: list[dict], headless: bool, scrolls: int, sink, until=None) -> list[Record]:
     from playwright.sync_api import sync_playwright
     from ..fetchers import UA
 
@@ -136,7 +138,7 @@ def _browse(targets: list[tuple[str, str]], want: Callable[[str], bool],
                 stats["api"] += 1
                 for rec in parse(data, now_utc_iso(), query):
                     stats["items"] += 1
-                    if not _within(rec, days):
+                    if not _within(rec, days, until):
                         stats["old"] += 1
                         continue
                     if not is_relevant(rec.text):
@@ -159,15 +161,15 @@ def _browse(targets: list[tuple[str, str]], want: Callable[[str], bool],
 
 
 def collect_tiktok(queries: list[str] | None = None, days: int = 14, headless: bool = True,
-                   scrolls: int = 4, sink=None) -> list[Record]:
+                   scrolls: int = 4, sink=None, until=None) -> list[Record]:
     queries = queries or config.TIKTOK_QUERIES
     targets = [(q, f"https://www.tiktok.com/search/video?q={quote(q)}") for q in queries]
     want = lambda u: "/api/search/" in u or "/api/challenge/item_list" in u
-    return _browse(targets, want, parse_tiktok_items, "tiktok", days, [], headless, scrolls, sink)
+    return _browse(targets, want, parse_tiktok_items, "tiktok", days, [], headless, scrolls, sink, until)
 
 
 def collect_instagram(tags: list[str] | None = None, days: int = 14, headless: bool = True,
-                      scrolls: int = 4, sink=None) -> list[Record]:
+                      scrolls: int = 4, sink=None, until=None) -> list[Record]:
     from dotenv import load_dotenv
     load_dotenv(config.ROOT / ".env")
     sid = os.getenv("IG_SESSIONID")
@@ -180,4 +182,4 @@ def collect_instagram(tags: list[str] | None = None, days: int = 14, headless: b
     tags = tags or config.INSTAGRAM_TAGS
     targets = [(t, f"https://www.instagram.com/explore/tags/{quote(t)}/") for t in tags]
     want = lambda u: ("/api/v1/" in u or "/graphql" in u) and "instagram.com" in u
-    return _browse(targets, want, parse_instagram_items, "instagram", days, cookies, headless, scrolls, sink)
+    return _browse(targets, want, parse_instagram_items, "instagram", days, cookies, headless, scrolls, sink, until)

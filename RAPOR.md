@@ -37,7 +37,7 @@ Destekleyici ama tek bir gönderi olan kanıt: Instagram'da 24.09 tarihli bir t�
 | TikTok | Login yok, Playwright (`collect tiktok`) | 9 aramada 184 video; **son 14 günde yalnız 9** (172'si eski) | Var (`createTime`) | Takipçi sayısı var, hesap yaşı yok | Arama tarihe göre değil popülerliğe göre sıralı; tarih filtresi yok |
 | Instagram | Girişsiz: 1. sayfadan sonra **login duvarı**. Yan hesap `sessionid` ile: 6 etikette 502 gönderi, son 14 günde **90** | Gönderi metni, beğeni/yorum | Var (`taken_at`) | Kullanıcı adı var, profil çekilmedi | Gönderilerin **%54'ü satış ilanı** (fiyat, WhatsApp, "sipariş için DM"); etiket sayfası yeniye kayık |
 
-Girişsiz ilk deneme `bench/social_probe.md` dosyasında (oradaki "captcha" sütunu güvenilmez; sayfa kaynağında kelime araması). TikTok ve Instagram verisi `data/records.jsonl` içinde duruyor ama **sinyal hesabı X + Ekşi ile yapılıyor** (`config.SIGNAL_SOURCES`; `--sources` ile değiştirilebilir). Gerekçeler: X metin tabanlı ve en zengin profil verisini veriyor. Ekşi ise tarihli ve **tam sayılabilen** tek kaynak (§3).
+Girişsiz ilk deneme `bench/social_probe.md` dosyasında (oradaki "captcha" sütunu güvenilmez; sayfa kaynağında kelime araması). TikTok ve Instagram verisi `data/kargo/records.jsonl` içinde duruyor ama **sinyal hesabı X + Ekşi ile yapılıyor** (`config.SIGNAL_SOURCES`; `--sources` ile değiştirilebilir). Gerekçeler: X metin tabanlı ve en zengin profil verisini veriyor. Ekşi ise tarihli ve **tam sayılabilen** tek kaynak (§3).
 
 ## 3. Araç seçimi
 
@@ -55,13 +55,13 @@ Aynı Ekşi sayfası ve aynı parser ile ölçüldü (`bench/compare_tools.py`, 
 
 ## 4. Veri toplama ve kalite
 
-**Ortak kayıt** (`data/records.jsonl`) şu alanlardan oluşuyor: `source, url, text, published_at (TZ'li ya da null), collected_at (UTC), author (maskeli), query, extra`.
+**Ortak kayıt** (`data/kargo/records.jsonl`) şu alanlardan oluşuyor: `source, url, text, published_at (TZ'li ya da null), collected_at (UTC), author (maskeli), query, extra`.
 - **Tekrar temizliği:** `id = sha1(kaynak | kanonik URL)`. Takip parametreleri, `www` ve sondaki `/` temizleniyor. Aynı komut tekrar çalışınca kayıt eklenmiyor (upsert). İlk `collected_at` korunuyor, sadece boş alanlar dolduruluyor. Metni aynı ya da neredeyse aynı içerikler de analizde tek sayılıyor (3-kelime shingle Jaccard ≥ 0.8).
-- **Eksik tarih:** Ekşi'de saat bilgisi yoksa `published_at=null`, gün bilgisi ise `extra.published_date` alanında tutuluyor. Tahmin yapılmıyor. Toplanan 570 kaydın hepsinde tarih vardı. Kural testlerle korunuyor.
-- **Maskeleme:** Kullanıcı adları, metin içindeki @mention'lar ve telefon numaraları ([tel]) tuzlu SHA-256 ile maskeleniyor (`u_xxxxxxxxxx`). X URL'leri kullanıcı adı içermeyen `x.com/i/status/<id>` biçiminde.
+- **Eksik tarih:** Ekşi'de saat bilgisi yoksa `published_at=null`, gün bilgisi ise `extra.published_date` alanında tutuluyor. Tahmin yapılmıyor. Toplanan 669 kaydın hepsinde tarih vardı.
+- **Maskeleme:** Kullanıcı adları ve metin içindeki @mention'lar tuzlu SHA-256 ile maskeleniyor (`u_xxxxxxxxxx`); satış ilanlarındaki telefon numaraları `[tel]` ile değiştiriliyor. X URL'leri kullanıcı adı içermeyen `x.com/i/status/<id>` biçiminde.
 - **Hacim:** Ekşi 187 entry. Son 14 günde 62; 9 firma başlığı + aramayla bulunan 13 aktif başlık üzerinden. X'te 383 tweet ve 48 profil var. Analize giren kısım: son 7 günde 109 tweet + 34 entry, önceki 7 günde 107 tweet + 28 entry.
 
-**Sorun günlüğü.** Otomatik kısmı `data/issues.jsonl` dosyasında:
+**Sorun günlüğü.** Otomatik kısmı `data/kargo/issues.jsonl` dosyasında:
 
 | Sorun | Kaynak | Ele alış |
 |---|---|---|
@@ -76,14 +76,7 @@ Aynı Ekşi sayfası ve aynı parser ile ölçüldü (`bench/compare_tools.py`, 
 | Rate limit: art arda boş sonuç (58 boş gün) | X | 60–90 s bekleyip bir kez tekrar deneme; `--fill-gaps` ile yalnız boş günleri yeniden toplama; veri her gün sonunda diske yazılıyor |
 | Günlük örnekleme doyuyor ("kargom" günde yüzlerce tweet) | X | (sorgu, gün) başına en fazla 25 tweet. X sayıları **hacim değil**, günlük örnekteki pay. Sınır olarak raporlanıyor |
 
-**Hesap profili ve gerçek/sahte tahmini** (`trend/profiles.py`): Kural tabanlı, her kural bir gerekçe cümlesi üretiyor.
-- Hesap 30 günden yeniyse +2, 180 günden yeniyse +1
-- Ömür boyu günde 20'den / 50'den fazla paylaşım: +1 / +2
-- Son 20 paylaşımda tekrar oranı %30'dan / %50'den fazla: +1 / +2
-- Takipçi < 10 ve takip > 200: +1
-- Varsayılan profil fotoğrafı: +1
-- Kullanıcı adı ≥ 4 haneli rakamla bitiyor: +1
-- Etiket: ≥ 4 "bot olası", 2–3 "şüpheli".
+**Hesap profili ve gerçek/sahte tahmini** (`trend/profiles.py`): Kural tabanlı, her kural bir gerekçe cümlesi üretiyor. Hesap yaşı (<30 gün +2, <180 gün +1), ömür boyu günlük paylaşım (>20 +1, >50 +2), son 20 paylaşımda tekrar oranı (>%30 +1, >%50 +2), takipçi < 10 ve takip > 200 (+1), varsayılan fotoğraf (+1), ≥ 4 haneli rakamla biten kullanıcı adı (+1). Toplam ≥ 4 "bot olası", 2–3 "şüpheli".
 
 **Sonuç:** 48 hesabın 45'i "gerçek olası", 3'ü "şüpheli" (ör. "hesap 25 günlük"; "varsayılan fotoğraf + rakamla biten ad"), hiçbiri "bot olası". Bot olası hesaplar analizde otomatik dışlanıyor. Bu çalıştırmada dışlanan hesap olmadı. **Sınır:** 20 tweetlik geçmiş ve basit eşikler, olsa olsa kaba spam'i yakalar; koordineli ama "normal görünen" hesapları yakalamaz.
 
@@ -93,10 +86,7 @@ Aynı Ekşi sayfası ve aynı parser ile ölçüldü (`bench/compare_tools.py`, 
 - **tema:** 8 temalı kök-kelime sözlüğü. En çok eşleşen tema seçiliyor; kelime başı eşleşmesi kullanılıyor, böylece "zam" kökü "zaman"ı yakalamıyor.
 - **firma:** Ekşi'de başlık slug'ından, X'te metinden çıkarılıyor.
 
-Olası yanlış birleşmeler:
-- Bir firma başlığında başka firmayı öven entry, başlık firmasına yazılıyor (ör. PTT başlığında "cargox daha kötü").
-- "kurye" kelimesi, gecikmeden şikâyet eden bir metni de kurye davranışı temasına çekebiliyor.
-- İçeriğin %65'i "diğer" temasında kalıyor. Bunlar belirli bir sorun söylemeyen, genel yorumlar.
+Olası yanlış birleşmeler: firma başlığında başka firmayı anan entry başlık firmasına yazılıyor (PTT başlığında "cargox daha kötü"); "kurye" kelimesi gecikme şikâyetini kurye temasına çekebiliyor; "kolay gelsin" selamlaşması firma sanılıyordu (düzeltildi, §5 ikinci vaka). İçeriğin %65'i "diğer" temasında kalıyor: belirli bir sorun söylemeyen genel yorumlar.
 
 **Puan:**
 - `temiz = log2((tekil_son+1)/(tekil_önceki+1))`. Tekil sayımda yakın-tekrar kümesi 1 sayılıyor ve bot olası hesaplar hariç tutuluyor.
@@ -122,18 +112,18 @@ Kurallardan sonra aynı veri "yükseliş yok / doğrulanamadı" sonucunu verdi.
 
 Bu yüzden Instagram ve TikTok toplanıyor ama sinyale alınmıyor. Tüketici şikâyeti ile satıcı ilanını ayıran bir sınıflandırıcı olmadan ölçüm yanıltıcı. Bir yan etki de oldu: "gelmedi/gecikti" sorgusu önceki haftada rate limit yüzünden yalnız 4 gün kapsadığı için (4/7) analiz dışı kaldı. Bu da X'in tema sinyallerini zayıflatıyor.
 
-**Testler:** Toplam 39 test, internet gerekmiyor (`python -m pytest`). Kapsadıkları:
-- tekrar kayıt ve URL varyantları; kullanıcı adı ve telefon numarası maskeleme
-- eksik tarih, TZ'siz tarihin reddedilmesi
-- dönem sınırları, organik artış
-- **30 kopya spam'in sahte artış yaratmaması** (ham +2, temiz < 1)
-- bot hesabın dışlanması
-- tek kaynak, az kayıt, tek gün ve dengesiz kapsama durumlarının "doğrulanamadı" vermesi
-- kaydedilmiş HTML ve GraphQL fixture'larıyla parser'lar
-- Ekşi'nin geriye sayfalamasının kesimde durması
-- GraphQL URL ayrıştırmasının hiç hata fırlatmaması
+**Testler:** 46 test, internet gerekmiyor (`python -m pytest`). Kapsam: tekrar kayıt ve URL varyantları; eksik ve TZ'siz tarih; dönem sınırları; **30 kopya spam'in sahte artış yaratmaması** (ham +2, temiz < 1); bot hesabın dışlanması; tek kaynak, az kayıt, tek gün ve dengesiz kapsamanın "doğrulanamadı" vermesi; kaydedilmiş HTML/GraphQL/TikTok/Instagram yanıtlarıyla parser'lar; maskeleme; ikinci konuyla (elektrikli araç) çalışma, `--topic` ve `--until`.
 
-## 6. İleriye bakış: LangGraph ve RAG
+## 6. Yeniden kullanım: başka konu, başka tarih
+
+Case "yeniden çalıştırılabilir" bir prototip istiyor. Bunu yalnız "aynı komut aynı sonucu verir" olarak değil, "bir marka başka bir konu ya da dönem için de kullanabilir" olarak ele aldım:
+- **Konu kod dışında.** Konuya özgü her şey `topics/<konu>.json` dosyasında: Ekşi başlıkları, sorgular, alaka kelimeleri, tema sözlüğü, markalar. Toplama, tekrar temizliği, bot tahmini, kapsama kontrolü ve 7/7 kıyas konudan bağımsız.
+- **Konuyu tek komutla başlatmak.** `init-topic` komutu anahtar kelime ve markalardan başlangıç dosyası üretiyor (genel tüketici temalarıyla). Kullanıcı sonra sorguları ve temaları gözden geçiriyor. Örnek: `topics/elektrikli_arac.json`.
+- **Veriler karışmıyor.** Her konu `data/<konu>/` ve `output/<konu>/` altında tutuluyor. Analiz tek komutla tekrar üretiliyor: `--asof` kıyas anını, toplamada `--until` pencerenin son gününü belirliyor.
+- **Deneme.** `elektrikli_arac` konusu aynı kodla uçtan uca çalıştı (Ekşi, 171 entry, 6 başlık + 14 aramayla bulunan başlık). İlk çalıştırmada "elektrikli" araması elektrikli bisiklet, diş fırçası ve süpürge başlıklarını da getirdi; konu dosyasında arama kelimesi "elektrikli araç" yapıldı ve bu başlıklar dışlandı. Yeni konuda beklenen ayar işi tam olarak bu.
+- **Sınırlar.** İyi bir tema sözlüğü alan bilgisi istiyor. Otomatik üretilen dosya bir başlangıç, bitmiş bir ayar değil. Ayrıca bu projede öğrenilen kaynak tuzakları her konuda yeniden kontrol edilmeli: Instagram'daki satış ilanları, "kolay gelsin" gibi günlük dildeki ifadeler, X'in tarih filtresi.
+
+## 7. İleriye bakış: LangGraph ve RAG
 
 **LangGraph** toplama ve karar akışını bir durum makinesi olarak modellemek için uygun: `topla → kapsama kontrolü → (dengesizse) eksik günleri yeniden topla → grupla → puanla → (aday varsa) ikinci kaynakta hedefli doğrulama sorgusu → rapor`. Bugün elle yaptığımız "Kolay Gelsin'i X'te ayrıca ara" adımı, koşullu bir kenar olarak otomatikleşir. Rate limit beklemeleri ve yeniden denemeler de graf durumunda izlenebilir.
 
@@ -143,27 +133,15 @@ Bu yüzden Instagram ve TikTok toplanıyor ama sinyale alınmıyor. Tüketici ş
 
 İki kullanımda da nihai karar bugünkü açıklanabilir eşiklerle verilmeli; LLM çıktısı kanıt URL'si olmadan kabul edilmemeli.
 
-## 7. AI ile çalışma
+## 8. AI ile çalışma
 
 **Araç:** Claude (Cowork). Case analizi, mimari, kodun büyük kısmı ve testler için kullanıldı. Kodu kendi PyCharm'ımda çalıştırdım, her adımın çıktısını geri verdim, Claude da gerektiğinde ham debug dosyalarını okuyup düzeltti.
 
-**İşe yarayan yöntemler:**
-1. İşi küçük adımlara bölmek: iskelet+testler → Ekşi → araç ölçümü → X → analiz → rapor.
-2. Analiz çekirdeğini **canlı veri gelmeden önce** yapay veriyle test etmek (spam, eksik tarih, tek kaynak).
-3. Canlı siteyi tek başlık/tek gün gibi küçük denemelerle yoklamak.
-4. Hata olduğunda tahmin yürütmek yerine ham yanıtı kaydedip (`--save-html`) veriye bakmak.
+**İşe yarayan yöntemler:** İşi küçük adımlara bölmek (iskelet+testler → Ekşi → araç ölçümü → X → analiz → rapor); analiz çekirdeğini canlı veri gelmeden önce yapay veriyle test etmek; canlı siteyi tek başlık/tek gün gibi küçük denemelerle yoklamak; hata olunca tahmin yürütmek yerine ham yanıtı kaydedip (`--save-html`) veriye bakmak.
 
-**Doğrulama:**
-- Her değişiklikten sonra `pytest`.
-- `python -m trend stats` ile gün dağılımına bakmak.
-- Her bulguyu URL'ye kadar izlemek.
-- Şüpheli sonuçta (üç "yüksek güven" aday) veriyi açıp kaynağını kontrol etmek.
+**Doğrulama:** Her değişiklikten sonra `pytest`; `python -m trend stats` ile gün dağılımı; her bulguyu URL'ye kadar izlemek; "iyi görünen" sonuçta (yüksek güvenli adaylar) veriyi açıp kaynağını kontrol etmek.
 
-**AI'ın yanıldığı örnekler** (tam liste `AI_NOTLARI.md`'de, 8 madde):
-- Ekşi `?day=` parametresinin çalışacağını **varsaydı**; canlı sitede 404 döndü.
-- X tarih filtresini UTC sandı.
-- Playwright dinleyicisinde hata fırlatan bir satır yazdı ve bu, profil kaydırmayı bozdu.
-- En önemlisi: ilk analizde "yüksek güvenli" üç yükseliş raporladı. Bunlar kendi toplama sürecimizin ürünüydü.
+**AI'ın yanıldığı örnekler** (tam liste `AI_NOTLARI.md`'de, 9 madde): Ekşi `?day=` parametresinin çalışacağını varsaydı (404 döndü); X tarih filtresini UTC sandı; Playwright dinleyicisine hata fırlatan bir satır yazdı; "kolay gelsin" selamlaşmasını firma sandı. En önemlisi: iki kez "yüksek güvenli" yükseliş raporladı, ikisi de toplama sürecinin (X rate limit, Instagram ilanları) ürünüydü.
 
 Ders: AI kodu hızla yazıyor, ama canlı sistem hakkındaki varsayımları ve "iyi görünen" sonuçları küçük deneme ve ham veriyle doğrulamak gerekiyor.
 

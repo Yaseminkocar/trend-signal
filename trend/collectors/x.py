@@ -183,18 +183,19 @@ def extract_tweet_results(obj: Any) -> list[dict]:
     return out
 
 
-_RELEVANT = None
+_RELEVANT: dict = {}
 
 
 def is_relevant(text: str) -> bool:
-    global _RELEVANT
-    if _RELEVANT is None:
-        import re
-        from ..schema import normalize_text as n
-        words = ["kargo", "kurye", "teslimat"] + [k for kws in config.CARRIERS.values() for k in kws]
-        _RELEVANT = re.compile("|".join(re.escape(n(w)) for w in words if n(w)))
+    import re
     from ..schema import normalize_text
-    return bool(_RELEVANT.search(normalize_text(text)))
+    pat = _RELEVANT.get(config.TOPIC)
+    if pat is None:
+        words = list(config.RELEVANCE_WORDS) + [k for kws in config.BRANDS.values() for k in kws]
+        words = [normalize_text(w) for w in words if normalize_text(w)]
+        pat = re.compile("|".join(re.escape(w) for w in words)) if words else re.compile(r".")
+        _RELEVANT[config.TOPIC] = pat
+    return bool(pat.search(normalize_text(text)))
 
 
 def response_query(url: str, post_data: Optional[str] = None) -> Optional[str]:

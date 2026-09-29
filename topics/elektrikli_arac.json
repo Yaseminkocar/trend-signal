@@ -1,0 +1,126 @@
+{
+  "label": "Elektrikli araç",
+  "relevance_words": [
+    "elektrikli araç",
+    "şarj istasyonu",
+    "elektrikli otomobil",
+    "elektrikli",
+    "şarj",
+    "menzil"
+  ],
+  "eksi_topics": [
+    "togg t10x",
+    "tesla model y",
+    "byd",
+    "elektrikli araç",
+    "şarj istasyonu",
+    "elektrikli otomobil"
+  ],
+  "eksi_search_keyword": "elektrikli araç",
+  "eksi_exclude_slug": "bisiklet|scooter|dis-fircasi|supurge|firin|battaniye|motosiklet",
+  "x_queries": [
+    "\"elektrikli araç\" lang:tr -filter:retweets",
+    "\"şarj istasyonu\" lang:tr -filter:retweets",
+    "\"elektrikli otomobil\" lang:tr -filter:retweets"
+  ],
+  "tiktok_queries": [
+    "elektrikli araç",
+    "şarj istasyonu",
+    "elektrikli otomobil",
+    "Togg",
+    "Tesla",
+    "BYD"
+  ],
+  "instagram_tags": [
+    "elektrikliaraç",
+    "şarjistasyonu",
+    "elektrikliotomobil",
+    "Togg",
+    "Tesla",
+    "BYD"
+  ],
+  "themes": {
+    "sarj_menzil": [
+      "şarj",
+      "menzil",
+      "istasyon",
+      "priz",
+      "kw",
+      "batarya"
+    ],
+    "fiyat_zam": [
+      "zam ",
+      "zamlan",
+      "zamm",
+      "fiyat",
+      "pahalı",
+      "ücret",
+      "kampanya",
+      "indirim"
+    ],
+    "ariza_kalite": [
+      "arıza",
+      "bozul",
+      "çalışmıyor",
+      "sorun",
+      "hata",
+      "kalitesiz",
+      "kırık",
+      "hasar"
+    ],
+    "musteri_hizmetleri": [
+      "müşteri hizmet",
+      "çağrı merkez",
+      "ulaşamıyorum",
+      "ulaşılamıyor",
+      "servis",
+      "şikayet ettim",
+      "şikayetvar",
+      "muhatap",
+      "kimse ilgilenm",
+      "iade"
+    ],
+    "bekleme_teslimat": [
+      "gecik",
+      "gelmedi",
+      "bekliyorum",
+      "günlerdir",
+      "haftadır",
+      "teslim",
+      "stok"
+    ],
+    "olumlu_deneyim": [
+      "memnun",
+      "teşekkür",
+      "sorunsuz",
+      "başarılı",
+      "tavsiye ederim",
+      "harika"
+    ],
+    "genel_memnuniyetsizlik": [
+      "rezil",
+      "rezalet",
+      "berbat",
+      "en kötü",
+      "sakın",
+      "kullanmayın",
+      "felaket"
+    ]
+  },
+  "brands": {
+    "togg": [
+      "togg"
+    ],
+    "tesla": [
+      "tesla"
+    ],
+    "byd": [
+      "byd"
+    ]
+  },
+  "brand_slugs": {
+    "togg": "togg",
+    "tesla": "tesla",
+    "byd": "byd"
+  }
+}

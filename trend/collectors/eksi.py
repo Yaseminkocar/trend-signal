@@ -129,12 +129,12 @@ def collect(fetcher: Fetcher, topics: list[str] | None = None, days: int = 14,
             raise
         if u:
             urls.append((topic, u))
-    if discover:
-        found = discover_topics(fetcher, "kargo", cutoff, today,
+    if discover and config.EKSI_SEARCH_KEYWORD:
+        found = discover_topics(fetcher, config.EKSI_SEARCH_KEYWORD, cutoff, today,
                                 save_html_dir / "eksi_search.html" if save_html_dir else None)
         print(f"[eksi] aramayla bulunan aktif başlık: {len(found)}")
         known = {u for _, u in urls}
-        urls += [("arama:kargo", u) for u in found[:max_discovered] if u not in known]
+        urls += [(f"arama:{config.EKSI_SEARCH_KEYWORD}", u) for u in found[:max_discovered] if u not in known]
 
     for topic, url in urls:
         try:

@@ -28,18 +28,18 @@ def assign_theme(text: str, themes: dict[str, list[str]] | None = None) -> tuple
     return best, best_hits
 
 
-def detect_carriers(text: str) -> list[str]:
+def detect_brands(text: str) -> list[str]:
     norm = normalize_text(text)
-    return [name for name, kws in config.CARRIERS.items() if _match(norm, kws)]
+    return [name for name, kws in config.BRANDS.items() if _match(norm, kws)]
 
 
-def assign_carrier(r: Record) -> str:
+def assign_brand(r: Record) -> str:
     topic_url = (r.extra or {}).get("topic_url") or ""
     slug = topic_url.rsplit("/", 1)[-1]
-    for key, name in config.CARRIER_SLUGS.items():
+    for key, name in config.BRAND_SLUGS.items():
         if slug.startswith(key):
             return name
-    found = detect_carriers(r.text)
+    found = detect_brands(r.text)
     if len(found) == 1:
         return found[0]
     return "coklu_firma" if found else "firma_belirsiz"

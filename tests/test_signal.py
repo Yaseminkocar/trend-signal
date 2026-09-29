@@ -98,15 +98,15 @@ def test_near_duplicate_clustering():
 
 
 def test_carrier_from_eksi_topic_and_text():
-    from trend.analysis.grouping import assign_carrier
+    from trend.analysis.grouping import assign_brand
     from trend.schema import Record
     r = Record("eksi", "https://eksisozluk.com/entry/1", "3 gündür şubede bekliyor", None,
                "2026-09-29T12:00:00+00:00", extra={"topic_url": "https://eksisozluk.com/aras-kargo--45661"})
-    assert assign_carrier(r) == "aras"
+    assert assign_brand(r) == "aras"
     x1 = rec(1, 1, text="hepsijet kuryesi kapıya gelmedi")
     x2 = rec(2, 1, text="yurtiçi hızlı ama aras kargo yavaş")
     x3 = rec(3, 1, text="kargom hala yok")
-    assert (assign_carrier(x1), assign_carrier(x2), assign_carrier(x3)) == \
+    assert (assign_brand(x1), assign_brand(x2), assign_brand(x3)) == \
         ("hepsijet", "coklu_firma", "firma_belirsiz")
 
 
@@ -145,6 +145,6 @@ def test_query_present_only_in_current_period_is_excluded():
 
 
 def test_kolay_gelsin_greeting_is_not_the_carrier():
-    from trend.analysis.grouping import assign_carrier
-    assert assign_carrier(rec(1, 1, text="Kolay gelsin herkese, sipariş için DM, PTT kargo ile gönderiyorum")) == "ptt"
-    assert assign_carrier(rec(2, 1, text="Kolay gelsin kargo 12 gündür paketimi teslim edemedi")) == "kolay_gelsin"
+    from trend.analysis.grouping import assign_brand
+    assert assign_brand(rec(1, 1, text="Kolay gelsin herkese, sipariş için DM, PTT kargo ile gönderiyorum")) == "ptt"
+    assert assign_brand(rec(2, 1, text="Kolay gelsin kargo 12 gündür paketimi teslim edemedi")) == "kolay_gelsin"

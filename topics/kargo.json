@@ -1,0 +1,215 @@
+{
+  "label": "Kargo / teslimat",
+  "relevance_words": [
+    "kargo",
+    "kurye",
+    "teslimat"
+  ],
+  "eksi_topics": [
+    "yurtiçi kargo",
+    "aras kargo",
+    "mng kargo",
+    "ptt kargo",
+    "sürat kargo",
+    "trendyol express",
+    "hepsijet",
+    "kolay gelsin",
+    "kargo"
+  ],
+  "eksi_search_keyword": "kargo",
+  "eksi_exclude_slug": "ucag|tsk|askeri|kargo-gemisi|kargo-uzay",
+  "x_queries": [
+    "kargom lang:tr -filter:retweets",
+    "kargo (gelmedi OR gecikti OR kayboldu OR hasarlı OR \"teslim edildi\") lang:tr -filter:retweets"
+  ],
+  "tiktok_queries": [
+    "kargo gecikti",
+    "kargom gelmedi",
+    "kargo şikayet",
+    "kolay gelsin kargo",
+    "hepsijet",
+    "ptt kargo",
+    "yurtiçi kargo",
+    "aras kargo",
+    "trendyol express kargo"
+  ],
+  "instagram_tags": [
+    "kargo",
+    "kargogecikmesi",
+    "kargosikayet",
+    "yurtiçikargo",
+    "hepsijet",
+    "pttkargo"
+  ],
+  "themes": {
+    "gecikme": [
+      "gecik",
+      "gelmedi",
+      "hala gelmedi",
+      "bekliyorum",
+      "kaç gün",
+      "günlerdir",
+      "haftadır",
+      "transfer merkez",
+      "aktarma",
+      "yolda görün",
+      "dağıtıma çıkm",
+      "varış şube",
+      "gün oldu",
+      "hafta oldu",
+      "teslim etmedi",
+      "teslim edemey",
+      "geç geldi",
+      "geç gel",
+      "hareket görm"
+    ],
+    "teslim_sorunu": [
+      "teslim edildi görün",
+      "teslim edilmiş görün",
+      "teslim edildi yazıyor",
+      "teslim edilmedi",
+      "adreste bulunamad",
+      "alıcı bulunamad",
+      "evde bulamad",
+      "evde bulunamad",
+      "kapıyı çalm",
+      "zili çalm",
+      "zil çalm",
+      "kapıya gelm",
+      "kapıya kadar",
+      "şubeden teslim",
+      "şubeye bırak",
+      "şubeye git",
+      "dağıtım ofis",
+      "teslim alamıyor",
+      "dağıtım yapm",
+      "notu bırak",
+      "kapıya bırak"
+    ],
+    "hasar_kayip": [
+      "kırık",
+      "kırıl",
+      "hasar",
+      "kayboldu",
+      "kayıp",
+      "ezil",
+      "parçalan",
+      "eksik ürün",
+      "eksik geld",
+      "paket açılmış",
+      "açılmış",
+      "yırtık",
+      "çalın"
+    ],
+    "musteri_hizmetleri": [
+      "müşteri hizmet",
+      "çağrı merkez",
+      "ulaşamıyorum",
+      "ulaşılamıyor",
+      "telefonu açm",
+      "şube açm",
+      "whatsapp",
+      "canlı destek",
+      "şikayet ettim",
+      "şikayetvar",
+      "cimer",
+      "muhatap",
+      "kimse ilgilenm"
+    ],
+    "ucret_zam": [
+      "zam ",
+      "zamlan",
+      "zamm",
+      "ücret",
+      "fiyat",
+      "pahalı",
+      "kargo bedava",
+      "ücretsiz kargo",
+      "kargo bedel"
+    ],
+    "kurye_davranisi": [
+      "kurye",
+      "dağıtıcı",
+      "kaba ",
+      "saygısız",
+      "küfür",
+      "bağır",
+      "tavır",
+      "terbiyesiz"
+    ],
+    "olumlu_deneyim": [
+      "hızlı geld",
+      "erken geld",
+      "ertesi gün geld",
+      "sorunsuz",
+      "memnun",
+      "teşekkür",
+      "başarılı",
+      "tavsiye ederim"
+    ],
+    "genel_memnuniyetsizlik": [
+      "rezil",
+      "rezalet",
+      "berbat",
+      "en kötü",
+      "sakın",
+      "kullanmayın",
+      "felaket",
+      "beceriksiz",
+      "iğrenç",
+      "bakkal dükkan"
+    ]
+  },
+  "brands": {
+    "yurtici": [
+      "yurtiçi",
+      "yurtici"
+    ],
+    "aras": [
+      "aras kargo",
+      "araskargo",
+      "aras "
+    ],
+    "mng": [
+      "mng"
+    ],
+    "ptt": [
+      "ptt"
+    ],
+    "surat": [
+      "sürat kargo",
+      "surat kargo",
+      "sürat "
+    ],
+    "trendyol_express": [
+      "trendyol express",
+      "trendyolexpress",
+      "tex "
+    ],
+    "hepsijet": [
+      "hepsijet",
+      "hepsi jet"
+    ],
+    "kolay_gelsin": [
+      "kolay gelsin kargo",
+      "kolaygelsin",
+      "kolay gelsin firma",
+      "kolay gelsin şube",
+      "kolay gelsin kurye"
+    ],
+    "cargox": [
+      "cargox"
+    ]
+  },
+  "brand_slugs": {
+    "yurtici": "yurtici",
+    "aras-kargo": "aras",
+    "mng-kargo": "mng",
+    "ptt-kargo": "ptt",
+    "surat-kargo": "surat",
+    "trendyol-express": "trendyol_express",
+    "hepsijet": "hepsijet",
+    "kolay-gelsin": "kolay_gelsin",
+    "cargox": "cargox"
+  }
+}
