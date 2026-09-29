@@ -67,7 +67,17 @@ Konuya özgü her şey (Ekşi başlıkları, X/TikTok/Instagram sorguları, alak
 `topics/<konu>.json` dosyasında. Kod konudan bağımsız; her konunun verisi `data/<konu>/`, çıktısı `output/<konu>/` altına yazılır.
 Varsayılan konu `kargo`. Örnek ikinci konu: `topics/elektrikli_arac.json`.
 
-Yeni konu: anahtar kelime ve markalardan başlangıç dosyası üretilir, sonra elle gözden geçirilir:
+**Tek komutla:** konu dosyası yoksa oluşturur, veriyi toplar (varsayılan: yalnız Ekşi, giriş gerektirmez) ve analiz eder:
+
+```bash
+python -m trend run "elektrikli scooter"
+python -m trend run "Kahve zincirleri" --keywords "filtre kahve,kahve fiyatı" --brands "Starbucks,Kahve Dünyası" --collect eksi,x
+```
+
+Sonuçları iyileştirmek için oluşan `topics/<konu>.json` dosyasındaki sorgular ve temalar gözden geçirilip komut tekrar çalıştırılır
+(kayıtlar çoğalmaz).
+
+Adım adım: anahtar kelime ve markalardan başlangıç dosyası üretilir, sonra elle gözden geçirilir:
 
 ```bash
 python -m trend init-topic kahve --label "Kahve zincirleri" --keywords "filtre kahve,kahve fiyatı" --brands "Starbucks,Kahve Dünyası"
@@ -110,7 +120,7 @@ trend/
   topics.py        konu dosyası üretimi (init-topic)
   report.py, cli.py
 topics/            konu ayarları (kargo.json, elektrikli_arac.json)
-tests/             46 offline test + fixture'lar
+tests/             47 offline test + fixture'lar
 bench/             araç karşılaştırması, TikTok/IG denemesi
 ```
 

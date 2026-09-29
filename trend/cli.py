@@ -131,6 +131,9 @@ def cmd_analyze(a) -> None:
         print(f"{g.group:32} {g.unique_previous:>7} {g.unique_current:>5} {g.clean_score:>+6.2f}  {g.status}")
         if g.missing:
             print(f"{'':32} eksik: {'; '.join(g.missing)}")
+    if t["current"] + t["previous"] < 2 * config.MIN_UNIQUE_CURRENT:
+        print(f"\nuyari: iki donemde toplam {t['current'] + t['previous']} kayit var; sonuc icin veri cok az. "
+              f"topics/{config.TOPIC}.json dosyasina baslik/sorgu ekleyin ya da --collect eksi,x ile ikinci kaynak toplayin")
     print(f"\ndetayli rapor: {md.relative_to(config.ROOT)}")
 
 
@@ -159,6 +162,26 @@ def cmd_init_topic(a) -> None:
     print(f"  python -m trend --topic {a.name} collect eksi")
 
 
+def cmd_run(a) -> None:
+    from .topics import _slug, init_topic
+    name = a.name or _slug(a.label).replace("-", "_")
+    if name not in config.available_topics():
+        keywords = a.keywords.split(",") if a.keywords else [a.label]
+        init_topic(name, a.label, keywords, (a.brands or "").split(","))
+        print(f"yeni konu: topics/{name}.json")
+    else:
+        print(f"mevcut konu kullaniliyor: topics/{name}.json")
+    sources = [s.strip() for s in a.collect.split(",") if s.strip()]
+    for src in sources:
+        print(f"\n== {src} ==")
+        main(["--topic", name, "collect", src, "--days", str(a.days)])
+    args = ["--topic", name, "analyze", "--sources", ",".join(sources)]
+    if a.asof:
+        args += ["--asof", a.asof]
+    main(args)
+    print(f"\nsonuclari iyilestirmek icin topics/{name}.json dosyasindaki sorgu ve temalari gozden gecirip tekrar calistirin")
+
+
 def main(argv=None) -> None:
     p = argparse.ArgumentParser(prog="trend")
     p.add_argument("--topic", default=None, help="topics/<ad>.json (varsayilan: kargo)")
@@ -182,6 +205,15 @@ def main(argv=None) -> None:
     an.add_argument("--sources", default=None); an.set_defaults(fn=cmd_analyze)
     st = sub.add_parser("stats"); st.set_defaults(fn=cmd_stats)
     tp = sub.add_parser("topics"); tp.set_defaults(fn=cmd_topics)
+    rn = sub.add_parser("run", help="konu olustur (yoksa) + topla + analiz et")
+    rn.add_argument("label", help='ornek: "elektrikli scooter"')
+    rn.add_argument("--name", default=None)
+    rn.add_argument("--keywords", default=None, help="virgulle; verilmezse konu adi kullanilir")
+    rn.add_argument("--brands", default="")
+    rn.add_argument("--collect", default="eksi", help="virgulle: eksi,x,tiktok,instagram")
+    rn.add_argument("--days", type=int, default=config.EKSI_DAYS)
+    rn.add_argument("--asof", default=None)
+    rn.set_defaults(fn=cmd_run)
     it = sub.add_parser("init-topic"); it.add_argument("name")
     it.add_argument("--label", default=None)
     it.add_argument("--keywords", required=True, help="virgulle: elektrikli arac,sarj istasyonu")

@@ -73,3 +73,19 @@ def test_cli_accepts_topic_and_until(monkeypatch):
     cli.main(["--topic", "elektrikli_arac", "collect", "eksi", "--until", "2026-08-14"])
     assert seen["topic"] == "elektrikli_arac" and str(seen["until"]) == "2026-08-14"
     config.use_topic("kargo")
+
+
+def test_run_creates_topic_then_collects_and_analyzes(tmp_path, monkeypatch):
+    import shutil
+    from trend import cli
+    for f in config.TOPICS_DIR.glob("*.json"):
+        shutil.copy(f, tmp_path / f.name)
+    monkeypatch.setattr(config, "TOPICS_DIR", tmp_path)
+    calls = []
+    monkeypatch.setattr(cli, "cmd_collect", lambda a: calls.append(("collect", config.TOPIC, a.source)))
+    monkeypatch.setattr(cli, "cmd_analyze", lambda a: calls.append(("analyze", config.TOPIC, a.sources)))
+    cli.main(["run", "Filtre Kahve", "--brands", "Starbucks,Kahve Dünyası", "--collect", "eksi,x"])
+    assert (tmp_path / "filtre_kahve.json").exists()
+    assert calls == [("collect", "filtre_kahve", "eksi"), ("collect", "filtre_kahve", "x"),
+                     ("analyze", "filtre_kahve", "eksi,x")]
+    config.use_topic("kargo")
