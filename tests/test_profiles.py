@@ -37,3 +37,8 @@ def test_masking_is_stable_and_irreversible():
     assert "ayse" not in mask_user("ayse_k", "s")
     assert "@ayse_k" not in mask_mentions("merhaba @ayse_k nasılsın", "s")
     assert handle_has_digit_suffix("mehmet48213") and not handle_has_digit_suffix("mehmet48")
+
+
+def test_phone_numbers_masked():
+    out = mask_mentions("WhatsApp: 0531 302 41 22 veya +90 552 393 31 09, sipariş no 123456")
+    assert "302" not in out and "393" not in out and out.count("[tel]") == 2 and "123456" in out

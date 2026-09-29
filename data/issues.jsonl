@@ -119,3 +119,17 @@
 {"at": "2026-09-29T20:18:59+00:00", "source": "x", "kind": "profil_bos", "detail": "u_40cfa10347 | görülen GraphQL işlemleri: ['CreatorStudioTabBarItemQuery', 'DataSaverMode', 'ExploreSidebar', 'ProfileSeasonSchedule', 'ProfileSpotlightsQuery', 'ProfileTeamRoster', 'SidebarUserRecommendations', 'UserByScreenName', 'UserOriginalsTimeline', 'ViewerBadgeCounts']", "handling": "önceki paylaşımlar alınamadı"}
 {"at": "2026-09-29T20:21:30+00:00", "source": "x", "kind": "off_day", "detail": "1601 tweet/yanıt", "handling": "istenen gün dışında, o günün kotasına sayılmadı"}
 {"at": "2026-09-29T20:21:30+00:00", "source": "x", "kind": "irrelevant", "detail": "2 tweet/yanıt", "handling": "metinde kargo bağlamı yok, elendi"}
+{"at": "2026-09-29T20:45:04+00:00", "source": "tiktok", "kind": "bos_sorgu", "detail": "https://www.tiktok.com/search/video?q=kargo%20gecikti", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:46:11+00:00", "source": "tiktok", "kind": "bos_sorgu", "detail": "https://www.tiktok.com/search/video?q=kolay%20gelsin%20kargo", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:46:59+00:00", "source": "tiktok", "kind": "bos_sorgu", "detail": "https://www.tiktok.com/search/video?q=ptt%20kargo", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:47:20+00:00", "source": "tiktok", "kind": "bos_sorgu", "detail": "https://www.tiktok.com/search/video?q=yurti%C3%A7i%20kargo", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:48:11+00:00", "source": "tiktok", "kind": "eski_icerik", "detail": "172 oge 14 gunden eski", "handling": "arama sonucu tarihe gore degil alakaya gore siralaniyor; eski icerik elendi"}
+{"at": "2026-09-29T20:49:20+00:00", "source": "instagram", "kind": "bos_sorgu", "detail": "https://www.instagram.com/explore/tags/kargo/", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:49:31+00:00", "source": "instagram", "kind": "login_duvari", "detail": "https://www.instagram.com/accounts/login/", "handling": "giris gerekli, sorgu atlandi"}
+{"at": "2026-09-29T20:49:38+00:00", "source": "instagram", "kind": "login_duvari", "detail": "https://www.instagram.com/accounts/login/", "handling": "giris gerekli, sorgu atlandi"}
+{"at": "2026-09-29T20:49:45+00:00", "source": "instagram", "kind": "login_duvari", "detail": "https://www.instagram.com/accounts/login/", "handling": "giris gerekli, sorgu atlandi"}
+{"at": "2026-09-29T20:50:05+00:00", "source": "instagram", "kind": "bos_sorgu", "detail": "https://www.instagram.com/explore/tags/hepsijet/", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:50:29+00:00", "source": "instagram", "kind": "bos_sorgu", "detail": "https://www.instagram.com/explore/tags/pttkargo/", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:55:51+00:00", "source": "instagram", "kind": "bos_sorgu", "detail": "https://www.instagram.com/explore/tags/kargogecikmesi/", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:56:12+00:00", "source": "instagram", "kind": "bos_sorgu", "detail": "https://www.instagram.com/explore/tags/kargosikayet/", "handling": "api yaniti yok ya da son gunlerde icerik yok"}
+{"at": "2026-09-29T20:57:24+00:00", "source": "instagram", "kind": "eski_icerik", "detail": "366 oge 14 gunden eski", "handling": "arama sonucu tarihe gore degil alakaya gore siralaniyor; eski icerik elendi"}

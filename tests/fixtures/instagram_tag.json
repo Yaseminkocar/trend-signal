@@ -1,0 +1,28 @@
+{
+ "data": {
+  "top": {
+   "sections": [
+    {
+     "layout_content": {
+      "medias": [
+       {
+        "media": {
+         "code": "DAbc123",
+         "taken_at": 1790450000,
+         "caption": {
+          "text": "Yurtiçi kargo paketimi ezik getirdi #kargo"
+         },
+         "user": {
+          "username": "mehmet_1"
+         },
+         "like_count": 4,
+         "comment_count": 1
+        }
+       }
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

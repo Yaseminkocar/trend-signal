@@ -144,3 +144,23 @@ def test_graphql_op_parsing_never_raises():
     assert graphql_op("https://x.com/i/api/graphql/abc") is None
     assert graphql_op("https://x.com/i/api/graphql/") is None
     assert graphql_op("https://abs.twimg.com/x.js") is None
+
+
+def test_tiktok_items():
+    from trend.collectors.social import parse_tiktok_items
+    data = json.loads((FIX / "tiktok_search.json").read_text(encoding="utf-8"))
+    recs = parse_tiktok_items(data, COLLECTED, "kargo")
+    assert len(recs) == 2
+    r = recs[0]
+    assert r.url == "https://tiktok.com/@/video/7555000000000000001"
+    assert r.published_at.endswith("+00:00")
+    assert r.author == mask_user("ayse.k") and "kargocu" not in r.text
+
+
+def test_instagram_items():
+    from trend.collectors.social import parse_instagram_items
+    data = json.loads((FIX / "instagram_tag.json").read_text(encoding="utf-8"))
+    [r] = parse_instagram_items(data, COLLECTED, "kargo")
+    assert r.url == "https://instagram.com/p/DAbc123"
+    assert r.author == mask_user("mehmet_1")
+    assert r.published_at is not None

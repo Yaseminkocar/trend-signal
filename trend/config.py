@@ -31,6 +31,21 @@ X_QUERIES = [
     'kargom lang:tr -filter:retweets',
     'kargo (gelmedi OR gecikti OR kayboldu OR hasarlı OR "teslim edildi") lang:tr -filter:retweets',
 ]
+TIKTOK_QUERIES = [
+    "kargo gecikti",
+    "kargom gelmedi",
+    "kargo şikayet",
+    "kolay gelsin kargo",
+    "hepsijet",
+    "ptt kargo",
+    "yurtiçi kargo",
+    "aras kargo",
+    "trendyol express kargo",
+]
+INSTAGRAM_TAGS = ["kargo", "kargogecikmesi", "kargosikayet", "yurtiçikargo", "hepsijet", "pttkargo"]
+
+SIGNAL_SOURCES = ("eksi", "x")
+
 X_TWEETS_PER_DAY = 25
 X_PROFILE_HISTORY = 20
 
@@ -65,7 +80,7 @@ CARRIERS: dict[str, list[str]] = {
     "surat": ["sürat kargo", "surat kargo", "sürat "],
     "trendyol_express": ["trendyol express", "trendyolexpress", "tex "],
     "hepsijet": ["hepsijet", "hepsi jet"],
-    "kolay_gelsin": ["kolay gelsin", "kolaygelsin"],
+    "kolay_gelsin": ["kolay gelsin kargo", "kolaygelsin", "kolay gelsin firma", "kolay gelsin şube", "kolay gelsin kurye"],
     "cargox": ["cargox"],
 }
 CARRIER_SLUGS: dict[str, str] = {

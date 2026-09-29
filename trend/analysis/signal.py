@@ -78,7 +78,7 @@ def coverage(records: list[Record], asof: datetime) -> dict[str, dict[str, int]]
     return out
 
 
-SAMPLED_SOURCES = {"x"}
+SAMPLED_SOURCES = {"x", "tiktok", "instagram"}
 
 
 def coverage_check(cov: dict[str, dict[str, int]]) -> Check:
@@ -94,7 +94,7 @@ def balance_sampled(records: list[Record], cap: int) -> tuple[list[Record], int]
     groups: dict[tuple, list[Record]] = defaultdict(list)
     keep: list[Record] = []
     for r in records:
-        if r.source == "x" and r.published_at:
+        if r.source in SAMPLED_SOURCES and r.published_at:
             groups[(r.query, r.published_dt.astimezone(config.TR_TZ).date())].append(r)
         else:
             keep.append(r)

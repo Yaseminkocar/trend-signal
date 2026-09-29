@@ -33,11 +33,11 @@
     {
       "group": "firma:kolay_gelsin",
       "raw_current": 8,
-      "raw_previous": 2,
+      "raw_previous": 1,
       "unique_current": 8,
-      "unique_previous": 2,
-      "raw_score": 1.585,
-      "clean_score": 1.585,
+      "unique_previous": 1,
+      "raw_score": 2.17,
+      "clean_score": 2.17,
       "duplicate_effect": 0.0,
       "authors_current": 7,
       "sources_current": [
@@ -762,11 +762,11 @@
     {
       "group": "firma:firma_belirsiz",
       "raw_current": 107,
-      "raw_previous": 104,
+      "raw_previous": 105,
       "unique_current": 107,
-      "unique_previous": 102,
-      "raw_score": 0.041,
-      "clean_score": 0.068,
+      "unique_previous": 103,
+      "raw_score": 0.027,
+      "clean_score": 0.054,
       "duplicate_effect": -0.027,
       "authors_current": 105,
       "sources_current": [

@@ -28,6 +28,8 @@ def cmd_collect(a) -> None:
             added_total += store.upsert(config.RAW_PATH, batch)[0]
             f.close()
         print(f"[eksi] yeni kayıt: {added_total}")
+    elif a.source in ("tiktok", "instagram"):
+        _collect_social(a)
     elif a.source == "x":
         from .collectors import x
         skip = frozenset()
@@ -52,6 +54,17 @@ def _debug_dir(a):
     d = config.DATA_DIR / "debug"
     d.mkdir(parents=True, exist_ok=True)
     return d
+
+
+def _collect_social(a) -> None:
+    from .collectors import social
+    sink = lambda rs: store.upsert(config.RAW_PATH, rs)
+    if a.source == "tiktok":
+        recs = social.collect_tiktok(days=a.days, headless=not a.headful, sink=sink)
+    else:
+        recs = social.collect_instagram(days=a.days, headless=not a.headful, sink=sink)
+    added, dup = store.upsert(config.RAW_PATH, recs)
+    print(f"[{a.source}] {len(recs)} kayit ({added} yeni, {dup} zaten vardi)")
 
 
 def _upsert_profiles(profiles: list[AccountProfile]) -> None:
@@ -79,28 +92,43 @@ def cmd_analyze(a) -> None:
     from .analysis.signal import analyze
     from .report import write
     records = store.load(config.RAW_PATH)
+    sources = tuple(a.sources.split(",")) if a.sources else config.SIGNAL_SOURCES
+    skipped = sum(r.source not in sources for r in records)
+    records = [r for r in records if r.source in sources]
+    if skipped:
+        print(f"kaynaklar: {', '.join(sources)} ({skipped} kayit diger kaynaklardan, analize alinmadi)")
     if not records:
         raise SystemExit(f"{config.RAW_PATH} boş. Önce 'python -m trend collect ...' çalıştırın.")
     from .collectors.x import is_relevant
     before = len(records)
-    records = [r for r in records if r.source != "x" or is_relevant(r.text)]
+    records = [r for r in records if r.source == "eksi" or is_relevant(r.text)]
     if before != len(records):
-        print(f"[analyze] metninde kargo bağlamı olmayan {before - len(records)} X kaydı analiz dışı bırakıldı")
+        print(f"kargo ile ilgisiz {before - len(records)} kayit cikarildi")
     asof = datetime.fromisoformat(a.asof) if a.asof else datetime.now(config.TR_TZ).replace(microsecond=0)
     verdicts = [score_profile(p, asof) for p in load_profiles()]
     bots = {v.author for v in verdicts if v.label == "bot_olasi"}
     from .analysis.signal import balance_sampled
     records, dropped = balance_sampled(records, config.X_TWEETS_PER_DAY)
     if dropped:
-        print(f"[analyze] X örneklem dengesi: (sorgu, gün) başına en fazla {config.X_TWEETS_PER_DAY}; {dropped} fazla kayıt analiz dışı")
+        print(f"gunluk ust sinir ({config.X_TWEETS_PER_DAY}) asildigi icin {dropped} kayit cikarildi")
     from .analysis.signal import drop_unbalanced_queries
     records, excluded = drop_unbalanced_queries(records, asof)
     for q, why in excluded.items():
-        print(f"[analyze] dengesiz kapsamalı sorgu analiz dışı: {q} ({why})")
+        print(f"sorgu disarida birakildi ({why}): {q}")
     result = analyze(records, asof, bots=bots)
     result["excluded_queries"] = excluded
     md = write(result, verdicts, config.OUTPUT_DIR)
-    print(md.read_text(encoding="utf-8"))
+    t = result["totals"]
+    print(f"\nanaliz: {result['asof']}")
+    print(f"kayit: {t['records']}  son 7 gun: {t['current']}  onceki 7 gun: {t['previous']}")
+    print(f"{'grup':32} {'onceki':>7} {'son':>5} {'puan':>6}  durum")
+    for g in result["groups"]:
+        if g.status == "yukselis_yok" and g.group != "TUMU":
+            continue
+        print(f"{g.group:32} {g.unique_previous:>7} {g.unique_current:>5} {g.clean_score:>+6.2f}  {g.status}")
+        if g.missing:
+            print(f"{'':32} eksik: {'; '.join(g.missing)}")
+    print(f"\ndetayli rapor: {md.relative_to(config.ROOT)}")
 
 
 def cmd_stats(a) -> None:
@@ -117,7 +145,7 @@ def cmd_stats(a) -> None:
 def main(argv=None) -> None:
     p = argparse.ArgumentParser(prog="trend")
     sub = p.add_subparsers(dest="cmd", required=True)
-    c = sub.add_parser("collect"); c.add_argument("source", choices=["eksi", "x"])
+    c = sub.add_parser("collect"); c.add_argument("source", choices=["eksi", "x", "tiktok", "instagram"])
     c.add_argument("--backend", default="scrapling", choices=["requests", "scrapling", "playwright"])
     c.add_argument("--days", type=int, default=config.EKSI_DAYS)
     c.add_argument("--per-day", type=int, default=config.X_TWEETS_PER_DAY)
@@ -130,7 +158,8 @@ def main(argv=None) -> None:
     c.add_argument("--no-discover", action="store_true", help="Ekşi aramasıyla başlık keşfini kapat")
     c.add_argument("--save-html", action="store_true", help="hata ayıklama için ham HTML'i data/debug/ altına kaydet")
     c.set_defaults(fn=cmd_collect)
-    an = sub.add_parser("analyze"); an.add_argument("--asof", default=None); an.set_defaults(fn=cmd_analyze)
+    an = sub.add_parser("analyze"); an.add_argument("--asof", default=None)
+    an.add_argument("--sources", default=None); an.set_defaults(fn=cmd_analyze)
     st = sub.add_parser("stats"); st.set_defaults(fn=cmd_stats)
     a = p.parse_args(argv)
     a.fn(a)

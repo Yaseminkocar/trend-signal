@@ -1,0 +1,38 @@
+{
+ "status_code": 0,
+ "item_list": [
+  {
+   "id": "7555000000000000001",
+   "desc": "Kolay Gelsin kargom 5 gündür gelmedi @kargocu",
+   "createTime": 1790500000,
+   "author": {
+    "uniqueId": "ayse.k",
+    "id": "1"
+   },
+   "stats": {
+    "diggCount": 10,
+    "commentCount": 2,
+    "playCount": 300
+   },
+   "authorStats": {
+    "followerCount": 50
+   }
+  },
+  {
+   "id": "7555000000000000002",
+   "desc": "",
+   "createTime": 1790500000,
+   "author": {
+    "uniqueId": "x"
+   }
+  },
+  {
+   "id": "7555000000000000003",
+   "desc": "yeni dans videosu",
+   "createTime": 1790400000,
+   "author": {
+    "uniqueId": "y"
+   }
+  }
+ ]
+}

@@ -18,5 +18,9 @@ def mask_user(username: str | None, salt: str | None = None) -> str | None:
 _MENTION = re.compile(r"@\w{1,30}")
 
 
+_PHONE = re.compile(r"(?<!\d)(?:\+?90[\s-]?)?0?5\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}(?!\d)")
+
+
 def mask_mentions(text: str, salt: str | None = None) -> str:
+    text = _PHONE.sub("[tel]", text)
     return _MENTION.sub(lambda m: "@" + (mask_user(m.group(0), salt) or ""), text)

@@ -142,3 +142,9 @@ def test_query_present_only_in_current_period_is_excluded():
     kept, excluded = drop_unbalanced_queries(full + late, ASOF)
     assert "x:kargo gecikti" in excluded and "x:kargom" not in excluded
     assert len(kept) == 13
+
+
+def test_kolay_gelsin_greeting_is_not_the_carrier():
+    from trend.analysis.grouping import assign_carrier
+    assert assign_carrier(rec(1, 1, text="Kolay gelsin herkese, sipariş için DM, PTT kargo ile gönderiyorum")) == "ptt"
+    assert assign_carrier(rec(2, 1, text="Kolay gelsin kargo 12 gündür paketimi teslim edemedi")) == "kolay_gelsin"
