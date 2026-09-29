@@ -13,6 +13,7 @@ TR_TZ = ZoneInfo("Europe/Istanbul")
 EKSI_DAYS = 14
 EKSI_MAX_PAGES_PER_TOPIC = 30
 SIGNAL_SOURCES = ("eksi", "x")
+AD_FILTER_SOURCES = ("instagram", "tiktok")
 X_TWEETS_PER_DAY = 25
 X_PROFILE_HISTORY = 20
 

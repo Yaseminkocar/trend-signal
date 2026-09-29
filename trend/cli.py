@@ -106,7 +106,12 @@ def cmd_analyze(a) -> None:
     before = len(records)
     records = [r for r in records if r.source == "eksi" or is_relevant(r.text)]
     if before != len(records):
-        print(f"kargo ile ilgisiz {before - len(records)} kayit cikarildi")
+        print(f"konu ile ilgisiz {before - len(records)} kayit cikarildi")
+    from .analysis.ads import is_ad
+    ads = Counter(r.source for r in records if r.source in config.AD_FILTER_SOURCES and is_ad(r.text)[0])
+    records = [r for r in records if not (r.source in config.AD_FILTER_SOURCES and is_ad(r.text)[0])]
+    for src, n in ads.items():
+        print(f"{src}: {n} ilan/kurumsal gonderi cikarildi")
     asof = datetime.fromisoformat(a.asof) if a.asof else datetime.now(config.TR_TZ).replace(microsecond=0)
     verdicts = [score_profile(p, asof) for p in load_profiles()]
     bots = {v.author for v in verdicts if v.label == "bot_olasi"}
@@ -120,6 +125,7 @@ def cmd_analyze(a) -> None:
         print(f"sorgu disarida birakildi ({why}): {q}")
     result = analyze(records, asof, bots=bots)
     result["excluded_queries"] = excluded
+    result["ads_excluded"] = dict(ads)
     md = write(result, verdicts, config.OUTPUT_DIR)
     t = result["totals"]
     print(f"\nanaliz: {result['asof']}")

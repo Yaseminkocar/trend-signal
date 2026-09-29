@@ -45,18 +45,21 @@ python -m trend analyze
 ```
 
 Instagram girişsiz çalışmaz; `.env` içindeki `IG_SESSIONID` ile yan hesabın oturumu kullanılır. TikTok ve Instagram
-verisi toplanır ama sinyal hesabı varsayılan olarak yalnız Ekşi + X ile yapılır (gerekçe: RAPOR.md §5). Tüm kaynaklarla:
+verisi toplanır ama sinyal hesabı varsayılan olarak yalnız Ekşi + X ile yapılır (gerekçe: RAPOR.md §5). Bu iki kaynaktaki
+satış ilanı ve kurumsal paylaşımlar analizden önce `trend/analysis/ads.py` ile ayıklanır. Tüm kaynaklarla:
 
 ```bash
 python -m trend analyze --asof 2026-09-30T00:00:00+03:00 --sources eksi,x,instagram,tiktok
 ```
 
-**4) Araç karşılaştırması ve TikTok/Instagram denemesi** — sonuçlar `bench/results.md` ve `bench/social_probe.md`:
+**4) Araç karşılaştırması, TikTok/Instagram denemesi, ilan filtresi ölçümü** — sonuçlar `bench/results.md`,
+`bench/social_probe.md` ve `bench/ad_filter_eval.md`:
 
 ```bash
 pip install -r requirements-bench.txt
 python bench/compare_tools.py
 python bench/probe_social.py
+python bench/eval_ads.py
 ```
 
 Aynı toplama komutunu tekrar çalıştırmak kayıtları çoğaltmaz: anahtar `sha1(kaynak | kanonik URL)`.
@@ -105,6 +108,7 @@ artırılmalı. X ve Instagram hesap oturumu ister.
 | `data/kargo/sample.csv` | Küçük örnek: 25 Ekşi + 25 X kaydı |
 | `data/kargo/profiles.jsonl` | 48 X hesap profili (hesap yaşı, sayaçlar, son 20 tweet) |
 | `data/kargo/issues.jsonl` | Otomatik sorun günlüğü |
+| `data/kargo/ad_labels.csv` | 99 Instagram/TikTok gönderisi için ticari/bireysel etiketleri (ilan filtresi ölçümü) |
 
 ## Yapı
 
@@ -116,11 +120,11 @@ trend/
   fetchers.py      requests | scrapling | playwright, aynı arayüz
   collectors/      eksi.py (HTML), x.py (GraphQL yanıt dinleme; twikit yedek), social.py (TikTok, Instagram)
   profiles.py      açıklanabilir bot puanı
-  analysis/        grouping.py (tema/firma + yakın-tekrar), signal.py (7/7 kıyas, kontroller)
+  analysis/        grouping.py (tema/firma + yakın-tekrar), signal.py (7/7 kıyas, kontroller), ads.py (ilan filtresi)
   topics.py        konu dosyası üretimi (init-topic)
   report.py, cli.py
 topics/            konu ayarları (kargo.json, elektrikli_arac.json)
-tests/             47 offline test + fixture'lar
+tests/             56 offline test + fixture'lar
 bench/             araç karşılaştırması, TikTok/IG denemesi
 ```
 

@@ -38,6 +38,8 @@ class GroupSignal:
     checks: list[Check] = field(default_factory=list)
     missing: list[str] = field(default_factory=list)
     evidence: list[dict] = field(default_factory=list)
+    share_previous: Optional[float] = None
+    share_current: Optional[float] = None
 
 
 def log_ratio(cur: int, prev: int) -> float:
@@ -125,8 +127,25 @@ def drop_unbalanced_queries(records: list[Record], asof: datetime) -> tuple[list
     return kept, excluded
 
 
+def sampled_totals(records: list[Record], asof: datetime) -> tuple[int, int]:
+    cur, prev, _, _ = split_periods([r for r in records if r.source in SAMPLED_SOURCES], asof)
+    return len(cur), len(prev)
+
+
+def share_check(cur: list[Record], prev: list[Record], totals: tuple[int, int]):
+    g_cur = sum(r.source in SAMPLED_SOURCES for r in cur)
+    g_prev = sum(r.source in SAMPLED_SOURCES for r in prev)
+    t_cur, t_prev = totals
+    if not (g_cur or g_prev) or not (t_cur and t_prev):
+        return None, None, None
+    s_cur, s_prev = round(g_cur / t_cur, 3), round(g_prev / t_prev, 3)
+    return s_prev, s_cur, Check("ornek_payi", s_cur > s_prev,
+                                f"örneklenen kaynaklarda pay %{s_prev*100:.0f} -> %{s_cur*100:.0f}")
+
+
 def analyze_group(name: str, records: list[Record], asof: datetime,
-                  cluster: dict[str, str], bots: set[str], extra_checks: Optional[list[Check]] = None) -> GroupSignal:
+                  cluster: dict[str, str], bots: set[str], extra_checks: Optional[list[Check]] = None,
+                  sampled: Optional[tuple[int, int]] = None) -> GroupSignal:
     cur, prev, _, _ = split_periods(records, asof)
     u_cur, u_prev = _unique_count(cur, cluster, bots), _unique_count(prev, cluster, bots)
     raw_s, clean_s = log_ratio(len(cur), len(prev)), log_ratio(u_cur, u_prev)
@@ -150,6 +169,11 @@ def analyze_group(name: str, records: list[Record], asof: datetime,
               f"kaynaklar: {', '.join(sources) or '-'} (en az {config.MIN_SOURCES})"),
     ]
     checks += list(extra_checks or [])
+    s_prev = s_cur = None
+    if sampled and name != "TUMU":
+        s_prev, s_cur, chk = share_check(cur, prev, sampled)
+        if chk:
+            checks.append(chk)
     failed = [c for c in checks if not c.passed]
 
     if clean_s < config.RISE_THRESHOLD:
@@ -181,7 +205,7 @@ def analyze_group(name: str, records: list[Record], asof: datetime,
         daily_current=dict(sorted(days.items())),
         status=status, confidence=conf, checks=checks,
         missing=[c.detail for c in failed] if status != "yukselis_yok" else [],
-        evidence=ev[:5],
+        evidence=ev[:5], share_previous=s_prev, share_current=s_cur,
     )
 
 
@@ -204,7 +228,8 @@ def analyze(records: list[Record], asof: datetime,
 
     cov = coverage(records, asof)
     extra = [coverage_check(cov)]
-    results = [analyze_group(g, rs, asof, cluster, bots, extra) for g, rs in groups.items()]
+    sampled = sampled_totals(records, asof)
+    results = [analyze_group(g, rs, asof, cluster, bots, extra, sampled) for g, rs in groups.items()]
     results.append(analyze_group("TUMU", records, asof, cluster, bots, extra))
     order = {"yukselis_adayi": 0, "dogrulanamadi": 1, "yukselis_yok": 2}
     results.sort(key=lambda s: (order[s.status], -sum(c.passed for c in s.checks), -s.clean_score, s.group))

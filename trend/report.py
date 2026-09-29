@@ -27,6 +27,8 @@ def write(result: dict, verdicts: list[BotVerdict], out_dir: Path) -> Path:
              f"{k} {v['previous_days']}/{v['current_days']}" for k, v in sorted(result.get("coverage", {}).items())),
          "- Dengesiz kapsama yüzünden analiz dışı bırakılan sorgular: " + (", ".join(
              f"`{k}` ({v})" for k, v in result.get("excluded_queries", {}).items()) or "yok"),
+         "- İlan/kurumsal diye çıkarılan gönderi: " + (", ".join(
+             f"{k} {v}" for k, v in result.get("ads_excluded", {}).items()) or "yok"),
          "", "| Grup | Önceki->Son (ham) | Önceki->Son (tekil) | Ham puan | Temiz puan | Tekrar etkisi | Yazar | Gün | Kaynak | Durum | Güven |",
          "|---|---|---|---|---|---|---|---|---|---|---|"]
     for g in result["groups"]:
