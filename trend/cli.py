@@ -177,10 +177,20 @@ def cmd_run(a) -> None:
         print(f"yeni konu: topics/{name}.json")
     else:
         print(f"mevcut konu kullaniliyor: topics/{name}.json")
-    sources = [s.strip() for s in a.collect.split(",") if s.strip()]
-    for src in sources:
+    sources = []
+    for src in [s.strip() for s in a.collect.split(",") if s.strip()]:
         print(f"\n== {src} ==")
-        main(["--topic", name, "collect", src, "--days", str(a.days)])
+        try:
+            main(["--topic", name, "collect", src, "--days", str(a.days)])
+            sources.append(src)
+        except SystemExit as e:
+            print(f"{src} atlandi: {e}")
+        except Exception as e:
+            print(f"{src} atlandi: {type(e).__name__}: {e}")
+    if not sources:
+        raise SystemExit("hicbir kaynaktan veri toplanamadi")
+    if len(sources) < config.MIN_SOURCES:
+        print(f"\nuyari: yalniz {', '.join(sources)} ile analiz ediliyor; tek kaynakla sonuc en fazla 'dogrulanamadi' olabilir")
     args = ["--topic", name, "analyze", "--sources", ",".join(sources)]
     if a.asof:
         args += ["--asof", a.asof]
@@ -216,7 +226,7 @@ def main(argv=None) -> None:
     rn.add_argument("--name", default=None)
     rn.add_argument("--keywords", default=None, help="virgulle; verilmezse konu adi kullanilir")
     rn.add_argument("--brands", default="")
-    rn.add_argument("--collect", default="eksi", help="virgulle: eksi,x,tiktok,instagram")
+    rn.add_argument("--collect", default="eksi,x", help="virgulle: eksi,x,tiktok,instagram")
     rn.add_argument("--days", type=int, default=config.EKSI_DAYS)
     rn.add_argument("--asof", default=None)
     rn.set_defaults(fn=cmd_run)

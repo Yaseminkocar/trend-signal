@@ -70,11 +70,11 @@ Konuya özgü her şey (Ekşi başlıkları, X/TikTok/Instagram sorguları, alak
 `topics/<konu>.json` dosyasında. Kod konudan bağımsız; her konunun verisi `data/<konu>/`, çıktısı `output/<konu>/` altına yazılır.
 Varsayılan konu `kargo`. Örnek ikinci konu: `topics/elektrikli_arac.json`.
 
-**Tek komutla:** konu dosyası yoksa oluşturur, veriyi toplar (varsayılan: yalnız Ekşi, giriş gerektirmez) ve analiz eder:
+**Tek komutla:** konu dosyası yoksa oluşturur, veriyi Ekşi ve X'ten toplar ve analiz eder. `.env` içinde X cookie'leri yoksa ya da X hata verirse X atlanır, analiz Ekşi ile devam eder:
 
 ```bash
 python -m trend run "elektrikli scooter"
-python -m trend run "Kahve zincirleri" --keywords "filtre kahve,kahve fiyatı" --brands "Starbucks,Kahve Dünyası" --collect eksi,x
+python -m trend run "Kahve zincirleri" --keywords "filtre kahve,kahve fiyatı" --brands "Starbucks,Kahve Dünyası" --collect eksi,x,tiktok
 ```
 
 Sonuçları iyileştirmek için oluşan `topics/<konu>.json` dosyasındaki sorgular ve temalar gözden geçirilip komut tekrar çalıştırılır

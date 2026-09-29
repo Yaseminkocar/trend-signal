@@ -230,6 +230,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
     from playwright.sync_api import sync_playwright
     from ..fetchers import UA
 
+    cookies = _cookies()
     records: dict[str, Record] = {}
     users: dict[str, dict] = {}
     profiles: list[AccountProfile] = []
@@ -294,7 +295,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
         browser = pw.chromium.launch(headless=headless)
         ctx = browser.new_context(user_agent=UA, locale="tr-TR", viewport={"width": 1280, "height": 900})
         ctx.add_cookies([{"name": k, "value": v, "domain": ".x.com", "path": "/", "secure": True,
-                          "httpOnly": k == "auth_token", "sameSite": "None"} for k, v in _cookies().items()])
+                          "httpOnly": k == "auth_token", "sameSite": "None"} for k, v in cookies.items()])
         page = ctx.new_page()
         page.on("response", on_response)
 
