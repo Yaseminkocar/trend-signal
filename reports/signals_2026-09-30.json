@@ -1,0 +1,2532 @@
+{
+  "asof": "2026-09-30T00:00:00+03:00",
+  "periods": {
+    "current": [
+      "2026-09-23T00:00:00+03:00",
+      "2026-09-30T00:00:00+03:00"
+    ],
+    "previous": [
+      "2026-09-16T00:00:00+03:00",
+      "2026-09-23T00:00:00+03:00"
+    ]
+  },
+  "coverage": {
+    "eksi": {
+      "current_days": 6,
+      "previous_days": 7
+    },
+    "x": {
+      "current_days": 6,
+      "previous_days": 6
+    }
+  },
+  "totals": {
+    "records": 423,
+    "current": 143,
+    "previous": 135,
+    "undated": 0,
+    "outside_windows": 145,
+    "unique_clusters": 420,
+    "bot_authors_excluded": 0
+  },
+  "groups": [
+    {
+      "group": "firma:kolay_gelsin",
+      "raw_current": 8,
+      "raw_previous": 2,
+      "unique_current": 8,
+      "unique_previous": 2,
+      "raw_score": 1.585,
+      "clean_score": 1.585,
+      "duplicate_effect": 0.0,
+      "authors_current": 7,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 5,
+      "max_day_share": 0.38,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-25": 1,
+        "2026-09-27": 3,
+        "2026-09-28": 1,
+        "2026-09-29": 2
+      },
+      "status": "dogrulanamadi",
+      "confidence": "dusuk",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 8 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "7 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "5 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %38 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [
+        "kaynaklar: eksi (en az 2)"
+      ],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186621157",
+          "published_at": "2026-09-23T18:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "zaten son zamanlarda dağıtıma çıkan kaegoları 2 3 günde teslim ediyorlardı bugun 4 yıldır sipariş verdiğim tek ve sabit adresime adres hatalı denilip iadeye yön"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186656826",
+          "published_at": "2026-09-25T11:02:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "bunlar da ciddi bozgun içinde görünüyor. iki tane öldüğümüz bozuyor. amazon ile kendilerini gösterdiler elbette, ancak amazon'un bunlara teslim ettiği kargoyu o"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186716346",
+          "published_at": "2026-09-27T21:14:00+03:00",
+          "collected_at": "2026-09-29T18:34:24+00:00",
+          "text": "kuryelerin müşterilerin geri dönüş yorumlarına ve şikateylerine doğrudan ulaşabildiği ve olumsuz durumlar sonucu müşterilerin hizmet için yaptıkları değerlendir"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186717045",
+          "published_at": "2026-09-27T21:40:00+03:00",
+          "collected_at": "2026-09-29T18:34:24+00:00",
+          "text": "sebepsiz yere müşterilere trip atan kendini bir sik zanneden bir elemanları var bunların. adını da yakında açık açık yazıcam. değerlendirmede bu durumun rahatsı"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186718120",
+          "published_at": "2026-09-27T22:22:00+03:00",
+          "collected_at": "2026-09-29T18:34:10+00:00",
+          "text": "kutuları paramparça ederek teslim etmekte pek mahirler."
+        }
+      ]
+    },
+    {
+      "group": "tema:ucret_zam",
+      "raw_current": 2,
+      "raw_previous": 0,
+      "unique_current": 2,
+      "unique_previous": 0,
+      "raw_score": 1.585,
+      "clean_score": 1.585,
+      "duplicate_effect": 0.0,
+      "authors_current": 2,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 2,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-25": 1,
+        "2026-09-28": 1
+      },
+      "status": "dogrulanamadi",
+      "confidence": "dusuk",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 2 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "2 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "2 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [
+        "son 7 günde 2 tekil içerik (en az 5)",
+        "2 farklı yazar (en az 3)",
+        "2 farklı gün (en az 3)"
+      ],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103547331207421989",
+          "published_at": "2026-09-25T18:09:00+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "@u_c91d7d2f6e @u_6ad9d36eea Yaklaşık 50 kere arayıp kıyameti kopardıktan sonra geldi ama daha önce hiç gelmeyen ve aldığım yerden ücret iadesi aldığım kargom ol"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186733856",
+          "published_at": "2026-09-28T16:01:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "her bölgeye göre değişiyor yorumlarda gördüğümüz o. bizim burda kaç tane dağıtıcı değişsede aşağı yukarı hizmet güzel özellikle hepsiburadanın sepette ne olursa"
+        }
+      ]
+    },
+    {
+      "group": "firma:coklu_firma",
+      "raw_current": 2,
+      "raw_previous": 0,
+      "unique_current": 2,
+      "unique_previous": 0,
+      "raw_score": 1.585,
+      "clean_score": 1.585,
+      "duplicate_effect": 0.0,
+      "authors_current": 2,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 1,
+      "max_day_share": 1.0,
+      "daily_current": {
+        "2026-09-28": 2
+      },
+      "status": "dogrulanamadi",
+      "confidence": "dusuk",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 2 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "2 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "1 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": false,
+          "detail": "en yoğun gün payı %100 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [
+        "son 7 günde 2 tekil içerik (en az 5)",
+        "2 farklı yazar (en az 3)",
+        "1 farklı gün (en az 3)",
+        "en yoğun gün payı %100 (en fazla %60)",
+        "kaynaklar: eksi (en az 2)"
+      ],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186736721",
+          "published_at": "2026-09-28T18:32:00+03:00",
+          "collected_at": "2026-09-29T18:34:20+00:00",
+          "text": "eskiden sürat kargo idi, ama artık biraz toparladı ve sondan ikincilikte arasla yarışır hale geldi. sonunculukta ise net biçimde son bir senedir jet bir düşüş y"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186736859",
+          "published_at": "2026-09-28T18:40:00+03:00",
+          "collected_at": "2026-09-29T18:34:18+00:00",
+          "text": "bakın ptt falan kötü ama bunlar çok başka seviye kötü. (bkz: cargox kargo )"
+        }
+      ]
+    },
+    {
+      "group": "firma:ptt",
+      "raw_current": 13,
+      "raw_previous": 9,
+      "unique_current": 13,
+      "unique_previous": 9,
+      "raw_score": 0.485,
+      "clean_score": 0.485,
+      "duplicate_effect": 0.0,
+      "authors_current": 13,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 5,
+      "max_day_share": 0.38,
+      "daily_current": {
+        "2026-09-23": 2,
+        "2026-09-25": 3,
+        "2026-09-26": 1,
+        "2026-09-28": 5,
+        "2026-09-29": 2
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 13 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "13 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "5 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %38 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186614222",
+          "published_at": "2026-09-23T12:01:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "iğrenç. berbat. rezil."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102740340918911458",
+          "published_at": "2026-09-23T12:42:18+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "PTT’ye kargom verilince sinirlerim bozuluyor😅"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186658372",
+          "published_at": "2026-09-25T12:28:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "günler süren \"il içi aktarma\"nıza sokayım. genel kamu düzenine uygun olarak saldım çayıra mevlam kayıra iş yapan oluşum."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103507674466009334",
+          "published_at": "2026-09-25T15:31:25+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_99acb93cf8 Benm de bugun dagıtım da olan ptt kargom bir türlü dolanmaktan gelemedi araya haftasonu girdi iyi mi"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186671070",
+          "published_at": "2026-09-25T22:40:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "sayın firmalar, paketin ulaşacağı yer mağara, ağaç kovuğu yurdun en ücra köşesi ya da dağ başında olan bir yer değilse bu firmayla nasıl bir motivasyonla paket "
+        }
+      ]
+    },
+    {
+      "group": "tema:gecikme",
+      "raw_current": 21,
+      "raw_previous": 16,
+      "unique_current": 21,
+      "unique_previous": 16,
+      "raw_score": 0.372,
+      "clean_score": 0.372,
+      "duplicate_effect": 0.0,
+      "authors_current": 21,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.24,
+      "daily_current": {
+        "2026-09-23": 2,
+        "2026-09-25": 4,
+        "2026-09-26": 4,
+        "2026-09-27": 3,
+        "2026-09-28": 5,
+        "2026-09-29": 3
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 21 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "21 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %24 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102748120689881381",
+          "published_at": "2026-09-23T13:13:13+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Yeğenim tabletimi balkondan atmış. Notlarım içindeydi, kargom vardı bugün gelmesi gerekiyordu gelmedi takip edemiyorum. Delirmeme ramak kaldı"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102769755862057377",
+          "published_at": "2026-09-23T14:39:12+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Kargom dağıtıma çıktı mesajı gelince evde rehin alınmış gibi kapının dibinde oturup bekliyorum, o zili kaçırma korkusu başka hiçbir şeye benzemiyor"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186658372",
+          "published_at": "2026-09-25T12:28:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "günler süren \"il içi aktarma\"nıza sokayım. genel kamu düzenine uygun olarak saldım çayıra mevlam kayıra iş yapan oluşum."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103500765700710862",
+          "published_at": "2026-09-25T15:03:58+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_5fd866a06e Bu nasıl bir hizmet anlayışı? Kargom 2 gündür “dağıtımda” görünüyor, saatlerce evde bekliyorum, kargo gelmiyor. Sonra da utanmadan “şubeden gelip "
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103509149925454076",
+          "published_at": "2026-09-25T15:37:17+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_64014d8f44 Ya bisey daha olmuştu kargom dağıtıma çıktı gösterildiği halde iki gün fln gelmedi bende müşteri hizmetlerini aradım fln neyse son dakika geldi yi"
+        }
+      ]
+    },
+    {
+      "group": "tema:musteri_hizmetleri",
+      "raw_current": 6,
+      "raw_previous": 5,
+      "unique_current": 6,
+      "unique_previous": 5,
+      "raw_score": 0.222,
+      "clean_score": 0.222,
+      "duplicate_effect": 0.0,
+      "authors_current": 6,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 4,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-25": 3,
+        "2026-09-26": 1,
+        "2026-09-28": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 6 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "6 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "4 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186621157",
+          "published_at": "2026-09-23T18:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "zaten son zamanlarda dağıtıma çıkan kaegoları 2 3 günde teslim ediyorlardı bugun 4 yıldır sipariş verdiğim tek ve sabit adresime adres hatalı denilip iadeye yön"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186660652",
+          "published_at": "2026-09-25T14:34:00+03:00",
+          "collected_at": "2026-09-29T18:34:00+00:00",
+          "text": "\"tex express\" müşteri hizmetlerinden arandım biraz önce. \"barkodlama yardımı için arıyoruz\" diyor. tek sorun;benim ulaşmaya çalıştıkları firma olmamam ve muhtem"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103549605589954564",
+          "published_at": "2026-09-25T18:18:02+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "Bugün teslim edilmesi gereken kargom 3 gündür aynı yerde bekliyor. Trendyol canlı destek “yardımcı olacağız” dedi ama hiçbir şey yapmadı. Kendi kargonuzun nered"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103566701912822124",
+          "published_at": "2026-09-25T19:25:58+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "@u_6a360bbce3 @u_677bd19eca @u_70e4353960 Kuryenet kadar rezil bir firma görmedim . Müşteri hizmetleri yok sadece otomatik mesaj veriyor. Bu zaten başlı başına "
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103832760985030976",
+          "published_at": "2026-09-26T13:03:12+00:00",
+          "collected_at": "2026-09-29T19:11:54+00:00",
+          "text": "@u_5fd866a06e 3 seferdir Bodrum Yokuşbaşı şubesi beni mağdur ediyor. Hem müşteriye hitap hemde ürün teslim etmemekten. 1. Defa ürünümü teslim etmeden habersiz g"
+        }
+      ]
+    },
+    {
+      "group": "tema:teslim_sorunu",
+      "raw_current": 6,
+      "raw_previous": 5,
+      "unique_current": 6,
+      "unique_previous": 5,
+      "raw_score": 0.222,
+      "clean_score": 0.222,
+      "duplicate_effect": 0.0,
+      "authors_current": 6,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 4,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-23": 3,
+        "2026-09-25": 1,
+        "2026-09-26": 1,
+        "2026-09-28": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 6 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "6 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "4 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102766796331798982",
+          "published_at": "2026-09-23T14:27:26+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_6ad9d36eea Kargo görevlisi geldi, bina kapısını açtık ancak gönderiyi yukarı çıkarmadan “evde bulunamadı” kaydı oluşturdu. Evde olduğumuz halde kargom teslim"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102809794973175860",
+          "published_at": "2026-09-23T17:18:18+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_7bba9b3bb7 \nTrendyol siparişimin teslimat kodu için arandım ve kodu verdim. Bina girişine bırakıldı olarak mesaj geldi. Fakat kargom yok. Hatta kamera kayıtl"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102822862377689502",
+          "published_at": "2026-09-23T18:10:13+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_6ad9d36eea  kargom teslim edilmiş görünüyor fakat teslim almadım konu ile ilgili bu saatte ulaşabileceğim bir müşteri hizmetleri biriminiz yok ama bu saatte "
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103498019358507360",
+          "published_at": "2026-09-25T14:53:03+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_5fd866a06e Kargom 2 gündür dağıtımda görünüyor ve hâlâ TESLİM EDİLMEDİ! Bugün sabah 09.00’da dağıtıma çıkarıldı, saat 17.00 oldu. İnsanları bütün gün evde be"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103843273299116371",
+          "published_at": "2026-09-26T13:44:58+00:00",
+          "collected_at": "2026-09-29T19:11:54+00:00",
+          "text": "Kargom teslim edilmedi ama teslim edildi gözüküyor. Müşteri hizmetlerinden bilgi alamadım. @u_d1c7f9aacd"
+        }
+      ]
+    },
+    {
+      "group": "TUMU",
+      "raw_current": 143,
+      "raw_previous": 135,
+      "unique_current": 143,
+      "unique_previous": 133,
+      "raw_score": 0.082,
+      "clean_score": 0.104,
+      "duplicate_effect": -0.022,
+      "authors_current": 139,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.2,
+      "daily_current": {
+        "2026-09-23": 23,
+        "2026-09-25": 26,
+        "2026-09-26": 24,
+        "2026-09-27": 23,
+        "2026-09-28": 28,
+        "2026-09-29": 19
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 143 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "139 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %20 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186614222",
+          "published_at": "2026-09-23T12:01:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "iğrenç. berbat. rezil."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102736026863317390",
+          "published_at": "2026-09-23T12:25:10+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "kıyafet kargom geldi ama acıp denemeye hevesim yok öyle iste"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102740340918911458",
+          "published_at": "2026-09-23T12:42:18+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "PTT’ye kargom verilince sinirlerim bozuluyor😅"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102747171133223256",
+          "published_at": "2026-09-23T13:09:27+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_3f39178f2a @u_189062077e Bir kaç yıl önce esas işinden dolayı beni engelledi kendisi, kargom nerede diye sorduğum için. Çok iyi olmuş erişim engeli."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102748120689881381",
+          "published_at": "2026-09-23T13:13:13+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Yeğenim tabletimi balkondan atmış. Notlarım içindeydi, kargom vardı bugün gelmesi gerekiyordu gelmedi takip edemiyorum. Delirmeme ramak kaldı"
+        }
+      ]
+    },
+    {
+      "group": "firma:firma_belirsiz",
+      "raw_current": 107,
+      "raw_previous": 104,
+      "unique_current": 107,
+      "unique_previous": 102,
+      "raw_score": 0.041,
+      "clean_score": 0.068,
+      "duplicate_effect": -0.027,
+      "authors_current": 105,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.19,
+      "daily_current": {
+        "2026-09-23": 18,
+        "2026-09-25": 19,
+        "2026-09-26": 20,
+        "2026-09-27": 18,
+        "2026-09-28": 18,
+        "2026-09-29": 14
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 107 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "105 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %19 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102736026863317390",
+          "published_at": "2026-09-23T12:25:10+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "kıyafet kargom geldi ama acıp denemeye hevesim yok öyle iste"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102747171133223256",
+          "published_at": "2026-09-23T13:09:27+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_3f39178f2a @u_189062077e Bir kaç yıl önce esas işinden dolayı beni engelledi kendisi, kargom nerede diye sorduğum için. Çok iyi olmuş erişim engeli."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102748120689881381",
+          "published_at": "2026-09-23T13:13:13+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Yeğenim tabletimi balkondan atmış. Notlarım içindeydi, kargom vardı bugün gelmesi gerekiyordu gelmedi takip edemiyorum. Delirmeme ramak kaldı"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102762036270862389",
+          "published_at": "2026-09-23T14:08:31+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Kargom geldi https://t.co/M8xK98MXSZ"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102766796331798982",
+          "published_at": "2026-09-23T14:27:26+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_6ad9d36eea Kargo görevlisi geldi, bina kapısını açtık ancak gönderiyi yukarı çıkarmadan “evde bulunamadı” kaydı oluşturdu. Evde olduğumuz halde kargom teslim"
+        }
+      ]
+    },
+    {
+      "group": "tema:diger",
+      "raw_current": 93,
+      "raw_previous": 95,
+      "unique_current": 93,
+      "unique_previous": 93,
+      "raw_score": -0.03,
+      "clean_score": 0.0,
+      "duplicate_effect": -0.03,
+      "authors_current": 93,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.19,
+      "daily_current": {
+        "2026-09-23": 15,
+        "2026-09-25": 14,
+        "2026-09-26": 14,
+        "2026-09-27": 17,
+        "2026-09-28": 18,
+        "2026-09-29": 15
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 93 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "93 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %19 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102736026863317390",
+          "published_at": "2026-09-23T12:25:10+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "kıyafet kargom geldi ama acıp denemeye hevesim yok öyle iste"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102740340918911458",
+          "published_at": "2026-09-23T12:42:18+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "PTT’ye kargom verilince sinirlerim bozuluyor😅"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102747171133223256",
+          "published_at": "2026-09-23T13:09:27+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_3f39178f2a @u_189062077e Bir kaç yıl önce esas işinden dolayı beni engelledi kendisi, kargom nerede diye sorduğum için. Çok iyi olmuş erişim engeli."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102762036270862389",
+          "published_at": "2026-09-23T14:08:31+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Kargom geldi https://t.co/M8xK98MXSZ"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102773854166745451",
+          "published_at": "2026-09-23T14:55:29+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_81962891aa deme abı yolda kargom"
+        }
+      ]
+    },
+    {
+      "group": "tema:hasar_kayip",
+      "raw_current": 6,
+      "raw_previous": 3,
+      "unique_current": 6,
+      "unique_previous": 3,
+      "raw_score": 0.807,
+      "clean_score": 0.807,
+      "duplicate_effect": 0.0,
+      "authors_current": 6,
+      "sources_current": [
+        "x"
+      ],
+      "active_days_current": 4,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-25": 1,
+        "2026-09-26": 3,
+        "2026-09-27": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 6 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "6 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "4 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102794095479459869",
+          "published_at": "2026-09-23T16:15:55+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Sayın @u_1b9530fcea, internet sitenizden aldığım sipariş eksik teslim edildi, Kargo paketi ve teslim aldığım ürünlerin fotoğrafları mevcuttur. Eksik ürünümün ta"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103511506239332661",
+          "published_at": "2026-09-25T15:46:39+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_5fd866a06e 2 gün teslimat şubesinde kargoyu beklettiniz şimdi başka bir şehre göndermişsiniz rezalet bir daha sizinle alışveriş yapılmaz resmen kargom kaybol"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103860236540883187",
+          "published_at": "2026-09-26T14:52:22+00:00",
+          "collected_at": "2026-09-29T19:11:54+00:00",
+          "text": "bugun hem kargom kayboldu hem cipsimi caldirdim asiri kotu bir gun oluyor"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103882726562566407",
+          "published_at": "2026-09-26T16:21:44+00:00",
+          "collected_at": "2026-09-29T19:11:54+00:00",
+          "text": "Kargom yeni geldi diyebileceğim tek şey hayal kırıklığı. Bayadır JBC'den yeni baskılar için alışveriş yapmıyordum,daha önceden bastıklarını alıyordum. Kompakt e"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103951351235404122",
+          "published_at": "2026-09-26T20:54:26+00:00",
+          "collected_at": "2026-09-29T19:11:51+00:00",
+          "text": "Kargomu bugün paketleyip apartman girişine bıraktım evden çıkmak zorunda kaldım sonra eve geldim kargom yok scooter vardı ya sardım sarmaladım bana gelen mesaj "
+        }
+      ]
+    },
+    {
+      "group": "firma:hepsijet",
+      "raw_current": 5,
+      "raw_previous": 4,
+      "unique_current": 5,
+      "unique_previous": 4,
+      "raw_score": 0.263,
+      "clean_score": 0.263,
+      "duplicate_effect": 0.0,
+      "authors_current": 5,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 3,
+      "max_day_share": 0.4,
+      "daily_current": {
+        "2026-09-25": 1,
+        "2026-09-27": 2,
+        "2026-09-28": 2
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 5 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "5 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "3 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %40 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186664473",
+          "published_at": "2026-09-25T18:12:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "asla kullanmayın. asla diyorum size. bir kargo yollayacaklar bana ulaşma zahmetinde bulunmadan iptal ediyorlar: allah gani gani belalarını versin."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186699357",
+          "published_at": "2026-09-27T01:36:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "1 haftadır ürünüm varış şubesinde. dağıtıma çıkmıyor. şikayet ettim yine bir şey yok. önceden böyle olmamıştı hiç. ürünü kaybettiklerinden şüpheleniyorum."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186718086",
+          "published_at": "2026-09-27T22:20:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "olumsuz bir durumda kurye tarafından aranılarak taciz edilmeniz muhtemel olan bir oluşumdur kendileri."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186733702",
+          "published_at": "2026-09-28T15:53:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "koca 165 ekran televizyonu sokağa bırakıp kaçan şeref yoksunu elemanları olan şirket.(bkz: hepsiburada.com ) bir daha mı tövbe, almayın aldırmayın."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186733856",
+          "published_at": "2026-09-28T16:01:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "her bölgeye göre değişiyor yorumlarda gördüğümüz o. bizim burda kaç tane dağıtıcı değişsede aşağı yukarı hizmet güzel özellikle hepsiburadanın sepette ne olursa"
+        }
+      ]
+    },
+    {
+      "group": "firma:surat",
+      "raw_current": 3,
+      "raw_previous": 3,
+      "unique_current": 3,
+      "unique_previous": 3,
+      "raw_score": 0.0,
+      "clean_score": 0.0,
+      "duplicate_effect": 0.0,
+      "authors_current": 3,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 3,
+      "max_day_share": 0.33,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-26": 1,
+        "2026-09-29": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 3 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "3 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "3 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %33 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186620984",
+          "published_at": "2026-09-23T18:04:00+03:00",
+          "collected_at": "2026-09-29T18:33:54+00:00",
+          "text": "bu kargo şirketini seçeneksiz sunan hiçbir alışveriş sitesinden satıcıdan alışveriş yapmama kararı aldım. dağıtıma çıkar çıkar teslim edilemez, şubeye almaya gi"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186691921",
+          "published_at": "2026-09-26T20:57:00+03:00",
+          "collected_at": "2026-09-29T18:33:54+00:00",
+          "text": "iskenderpaşa şubesinde insanlarla konuşmayı bilmeyen sarışın bir orospu çocuğu çalışıyor. senin yedi ceddini sikiyim. şikayet oluşturayım diyorsun sitede şube g"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2104979915611279492",
+          "published_at": "2026-09-29T17:01:35+00:00",
+          "collected_at": "2026-09-29T19:11:06+00:00",
+          "text": "Sürat kargo pişmanlıktır ya dün dağıtım şubesinde bekleyen kargom bugün dağıtıma çıkarıldı şimdi de mesaj atmışlar şubeden al diye tamam kral hemen geliyorum 2 "
+        }
+      ]
+    },
+    {
+      "group": "tema:kurye_davranisi",
+      "raw_current": 4,
+      "raw_previous": 4,
+      "unique_current": 4,
+      "unique_previous": 4,
+      "raw_score": 0.0,
+      "clean_score": 0.0,
+      "duplicate_effect": 0.0,
+      "authors_current": 4,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 3,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-26": 1,
+        "2026-09-27": 2,
+        "2026-09-29": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 4 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "4 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "3 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186679427",
+          "published_at": "2026-09-26T08:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:28+00:00",
+          "text": "eve kurye çağırdık. kurye kendi hattından arıyor. açılmayınca eve gelmeden evde yoktunuz mesajı gönderiliyor. ben elin adamının şahsi numarasını açıp “evdeyim” "
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186716346",
+          "published_at": "2026-09-27T21:14:00+03:00",
+          "collected_at": "2026-09-29T18:34:24+00:00",
+          "text": "kuryelerin müşterilerin geri dönüş yorumlarına ve şikateylerine doğrudan ulaşabildiği ve olumsuz durumlar sonucu müşterilerin hizmet için yaptıkları değerlendir"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186718086",
+          "published_at": "2026-09-27T22:20:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "olumsuz bir durumda kurye tarafından aranılarak taciz edilmeniz muhtemel olan bir oluşumdur kendileri."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186764579",
+          "published_at": "2026-09-29T17:31:00+03:00",
+          "collected_at": "2026-09-29T18:34:10+00:00",
+          "text": "berbat bir kargo firmasıdır, başka seçenek var ise kesinlikle başka seçenek ile ilerlenmelidir. cumartesi kapıma getirdikleri ürünü, kurye hatası sebebiyle ipta"
+        }
+      ]
+    },
+    {
+      "group": "tema:genel_memnuniyetsizlik",
+      "raw_current": 4,
+      "raw_previous": 5,
+      "unique_current": 4,
+      "unique_previous": 5,
+      "raw_score": -0.263,
+      "clean_score": -0.263,
+      "duplicate_effect": 0.0,
+      "authors_current": 4,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 3,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-25": 2,
+        "2026-09-28": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 4 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "4 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "3 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186614222",
+          "published_at": "2026-09-23T12:01:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "iğrenç. berbat. rezil."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186661207",
+          "published_at": "2026-09-25T15:07:00+03:00",
+          "collected_at": "2026-09-29T18:33:39+00:00",
+          "text": "rezalet ötesi kargo firması. kendimce sadece bu kargo firmasıyla çalışıp gönderim yapan yerlerden alışveriş yapmiyordum ama bu durumu daha da genişletip bu karg"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186664473",
+          "published_at": "2026-09-25T18:12:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "asla kullanmayın. asla diyorum size. bir kargo yollayacaklar bana ulaşma zahmetinde bulunmadan iptal ediyorlar: allah gani gani belalarını versin."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186736262",
+          "published_at": "2026-09-28T18:05:00+03:00",
+          "collected_at": "2026-09-29T18:34:20+00:00",
+          "text": "ptt kargonun olduğu ortamda ancak ve ancak en kötü 2. kargo şirketi anketi yapılabilir."
+        }
+      ]
+    },
+    {
+      "group": "firma:aras",
+      "raw_current": 2,
+      "raw_previous": 3,
+      "unique_current": 2,
+      "unique_previous": 3,
+      "raw_score": -0.415,
+      "clean_score": -0.415,
+      "duplicate_effect": 0.0,
+      "authors_current": 2,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 2,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-23": 1,
+        "2026-09-25": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 2 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "2 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "2 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102809794973175860",
+          "published_at": "2026-09-23T17:18:18+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_7bba9b3bb7 \nTrendyol siparişimin teslimat kodu için arandım ve kodu verdim. Bina girişine bırakıldı olarak mesaj geldi. Fakat kargom yok. Hatta kamera kayıtl"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186661207",
+          "published_at": "2026-09-25T15:07:00+03:00",
+          "collected_at": "2026-09-29T18:33:39+00:00",
+          "text": "rezalet ötesi kargo firması. kendimce sadece bu kargo firmasıyla çalışıp gönderim yapan yerlerden alışveriş yapmiyordum ama bu durumu daha da genişletip bu karg"
+        }
+      ]
+    },
+    {
+      "group": "firma:mng",
+      "raw_current": 0,
+      "raw_previous": 0,
+      "unique_current": 0,
+      "unique_previous": 0,
+      "raw_score": 0.0,
+      "clean_score": 0.0,
+      "duplicate_effect": 0.0,
+      "authors_current": 0,
+      "sources_current": [],
+      "active_days_current": 0,
+      "max_day_share": 0.0,
+      "daily_current": {},
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 0 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "0 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "0 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %0 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: - (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": []
+    },
+    {
+      "group": "firma:trendyol_express",
+      "raw_current": 2,
+      "raw_previous": 3,
+      "unique_current": 2,
+      "unique_previous": 3,
+      "raw_score": -0.415,
+      "clean_score": -0.415,
+      "duplicate_effect": 0.0,
+      "authors_current": 2,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 2,
+      "max_day_share": 0.5,
+      "daily_current": {
+        "2026-09-25": 1,
+        "2026-09-26": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 2 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "2 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "2 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %50 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186660652",
+          "published_at": "2026-09-25T14:34:00+03:00",
+          "collected_at": "2026-09-29T18:34:00+00:00",
+          "text": "\"tex express\" müşteri hizmetlerinden arandım biraz önce. \"barkodlama yardımı için arıyoruz\" diyor. tek sorun;benim ulaşmaya çalıştıkları firma olmamam ve muhtem"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186689577",
+          "published_at": "2026-09-26T18:55:00+03:00",
+          "collected_at": "2026-09-29T18:33:58+00:00",
+          "text": "istanbuldan yola çıkan kargom antalyaya gelmesi gerekirken ankaraya gitmiş. gör götüm yolları."
+        }
+      ]
+    },
+    {
+      "group": "firma:cargox",
+      "raw_current": 0,
+      "raw_previous": 6,
+      "unique_current": 0,
+      "unique_previous": 6,
+      "raw_score": -2.807,
+      "clean_score": -2.807,
+      "duplicate_effect": 0.0,
+      "authors_current": 0,
+      "sources_current": [],
+      "active_days_current": 0,
+      "max_day_share": 0.0,
+      "daily_current": {},
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 0 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "0 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "0 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %0 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: - (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": []
+    },
+    {
+      "group": "firma:yurtici",
+      "raw_current": 1,
+      "raw_previous": 1,
+      "unique_current": 1,
+      "unique_previous": 1,
+      "raw_score": 0.0,
+      "clean_score": 0.0,
+      "duplicate_effect": 0.0,
+      "authors_current": 1,
+      "sources_current": [
+        "eksi"
+      ],
+      "active_days_current": 1,
+      "max_day_share": 1.0,
+      "daily_current": {
+        "2026-09-26": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 1 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "1 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "1 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": false,
+          "detail": "en yoğun gün payı %100 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: eksi (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186679427",
+          "published_at": "2026-09-26T08:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:28+00:00",
+          "text": "eve kurye çağırdık. kurye kendi hattından arıyor. açılmayınca eve gelmeden evde yoktunuz mesajı gönderiliyor. ben elin adamının şahsi numarasını açıp “evdeyim” "
+        }
+      ]
+    },
+    {
+      "group": "tema:olumlu_deneyim",
+      "raw_current": 1,
+      "raw_previous": 2,
+      "unique_current": 1,
+      "unique_previous": 2,
+      "raw_score": -0.585,
+      "clean_score": -0.585,
+      "duplicate_effect": 0.0,
+      "authors_current": 1,
+      "sources_current": [
+        "x"
+      ],
+      "active_days_current": 1,
+      "max_day_share": 1.0,
+      "daily_current": {
+        "2026-09-28": 1
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": false,
+          "detail": "son 7 günde 1 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": false,
+          "detail": "1 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": false,
+          "detail": "1 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": false,
+          "detail": "en yoğun gün payı %100 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2104548913545953573",
+          "published_at": "2026-09-28T12:28:56+00:00",
+          "collected_at": "2026-09-29T19:11:20+00:00",
+          "text": "@u_0ea1d7b70f Beni aramadan direk kargocuların  kargoları bıraktığı aynı zamanda trendyolun gel al noktası olan markete bırakmışlar diğer trendyol kargom da bug"
+        }
+      ]
+    }
+  ],
+  "excluded_queries": {
+    "x:kargo (gelmedi OR gecikti OR kayboldu OR hasarlı OR \"teslim edildi\") lang:tr -filter:retweets": "önceki 4 gün / son 7 gün",
+    "x:(kargom OR kargoyu OR \"kargo firması\") (gelmedi OR gecikti OR kayboldu OR \"teslim edildi\" OR hasarlı) lang:tr -filter:retweets": "önceki 0 gün / son 2 gün",
+    "x:(kargo OR kargom OR kargoyu) (yurtiçi OR aras OR mng OR ptt OR sürat OR hepsijet OR \"trendyol express\" OR \"kolay gelsin\") lang:tr -filter:retweets": "önceki 0 gün / son 1 gün",
+    "x:(hepsijet OR \"kolay gelsin\" OR \"trendyol express\" OR \"yurtiçi kargo\" OR \"aras kargo\") lang:tr -filter:retweets": "önceki 0 gün / son 1 gün"
+  },
+  "bot_verdicts": [
+    {
+      "author": "u_05005d0d57",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2082,
+        "lifetime_posts_per_day": 6.0,
+        "recent_posts_per_day": 0.2,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 11062,
+        "following": 2642,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_0736191981",
+      "score": 2,
+      "label": "supheli",
+      "reasons": [
+        "hesap çok yeni (25 gün)"
+      ],
+      "features": {
+        "account_age_days": 25,
+        "lifetime_posts_per_day": 1.0,
+        "recent_posts_per_day": 1.9,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 8,
+        "following": 16,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_0e832fb4dd",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 5634,
+        "lifetime_posts_per_day": 0.3,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 913,
+        "following": 159
+      }
+    },
+    {
+      "author": "u_13186dfec4",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2892,
+        "lifetime_posts_per_day": 1.4,
+        "recent_posts_per_day": 0.5,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 457,
+        "following": 343
+      }
+    },
+    {
+      "author": "u_14dfddea90",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 202,
+        "lifetime_posts_per_day": 3.1,
+        "followers": 20,
+        "following": 3,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_16ec00e76e",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1295,
+        "lifetime_posts_per_day": 6.7,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 720,
+        "following": 394
+      }
+    },
+    {
+      "author": "u_1eaa7ae707",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2760,
+        "lifetime_posts_per_day": 2.9,
+        "recent_posts_per_day": 0.4,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 472,
+        "following": 139
+      }
+    },
+    {
+      "author": "u_24c925755c",
+      "score": 2,
+      "label": "supheli",
+      "reasons": [
+        "hesap yeni (84 gün)",
+        "ömür boyu günde 21 paylaşım"
+      ],
+      "features": {
+        "account_age_days": 84,
+        "lifetime_posts_per_day": 20.6,
+        "recent_posts_per_day": 10.2,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 12,
+        "following": 12
+      }
+    },
+    {
+      "author": "u_277bf06e48",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2506,
+        "lifetime_posts_per_day": 0.1,
+        "recent_posts_per_day": 1.3,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 265,
+        "following": 57
+      }
+    },
+    {
+      "author": "u_28dc2a8412",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1894,
+        "lifetime_posts_per_day": 0.4,
+        "recent_posts_per_day": 1.8,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 49,
+        "following": 113
+      }
+    },
+    {
+      "author": "u_30328d638b",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 4046,
+        "lifetime_posts_per_day": 0.4,
+        "recent_posts_per_day": 0.1,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 365,
+        "following": 199
+      }
+    },
+    {
+      "author": "u_3075e58a88",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1172,
+        "lifetime_posts_per_day": 6.4,
+        "recent_posts_per_day": 0.1,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 88,
+        "following": 143
+      }
+    },
+    {
+      "author": "u_364f62aa92",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 4402,
+        "lifetime_posts_per_day": 0.5,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 591,
+        "following": 228
+      }
+    },
+    {
+      "author": "u_3f3f0142f2",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 393,
+        "lifetime_posts_per_day": 4.4,
+        "recent_posts_per_day": 3.9,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 189,
+        "following": 199
+      }
+    },
+    {
+      "author": "u_40cfa10347",
+      "score": 2,
+      "label": "supheli",
+      "reasons": [
+        "varsayılan profil fotoğrafı",
+        "kullanıcı adı uzun rakam dizisiyle bitiyor"
+      ],
+      "features": {
+        "account_age_days": 3370,
+        "lifetime_posts_per_day": 0.1,
+        "followers": 23,
+        "following": 194
+      }
+    },
+    {
+      "author": "u_439f943788",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "hesap yeni (143 gün)"
+      ],
+      "features": {
+        "account_age_days": 143,
+        "lifetime_posts_per_day": 3.8,
+        "recent_posts_per_day": 0.5,
+        "recent_duplicate_ratio": 0.1,
+        "followers": 4,
+        "following": 1
+      }
+    },
+    {
+      "author": "u_483e3a4699",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1666,
+        "lifetime_posts_per_day": 0.4,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 22,
+        "following": 107
+      }
+    },
+    {
+      "author": "u_4c8e5d4d35",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 3107,
+        "lifetime_posts_per_day": 0.0,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.2,
+        "followers": 54,
+        "following": 639
+      }
+    },
+    {
+      "author": "u_4d23b43d06",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1771,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_50b8c6854d",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2042,
+        "lifetime_posts_per_day": 3.6,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.15,
+        "followers": 684,
+        "following": 363
+      }
+    },
+    {
+      "author": "u_5344cd30f6",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "ömür boyu günde 28 paylaşım"
+      ],
+      "features": {
+        "account_age_days": 577,
+        "lifetime_posts_per_day": 27.8,
+        "recent_posts_per_day": 0.1,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 478,
+        "following": 516
+      }
+    },
+    {
+      "author": "u_5365cad1fe",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1616,
+        "lifetime_posts_per_day": 1.9,
+        "recent_posts_per_day": 1.6,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 60,
+        "following": 277
+      }
+    },
+    {
+      "author": "u_55e01c9270",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "ömür boyu günde 24 paylaşım"
+      ],
+      "features": {
+        "account_age_days": 5120,
+        "lifetime_posts_per_day": 23.6,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 3773,
+        "following": 824
+      }
+    },
+    {
+      "author": "u_5b5944eae3",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2967,
+        "lifetime_posts_per_day": 19.7,
+        "recent_posts_per_day": 0.3,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 461,
+        "following": 411
+      }
+    },
+    {
+      "author": "u_60fb4829cb",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1111,
+        "lifetime_posts_per_day": 1.2,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.1,
+        "followers": 847,
+        "following": 76
+      }
+    },
+    {
+      "author": "u_741f2efba5",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1233,
+        "lifetime_posts_per_day": 2.0,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 23,
+        "following": 24
+      }
+    },
+    {
+      "author": "u_8941edef3b",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "hesap yeni (76 gün)"
+      ],
+      "features": {
+        "account_age_days": 76,
+        "lifetime_posts_per_day": 5.2,
+        "recent_posts_per_day": 2.4,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 24,
+        "following": 46
+      }
+    },
+    {
+      "author": "u_8af800eba1",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 713,
+        "lifetime_posts_per_day": 2.3,
+        "recent_posts_per_day": 0.7,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 105,
+        "following": 153
+      }
+    },
+    {
+      "author": "u_8fdb851cb6",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1195,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_92ff980e98",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 4307
+      }
+    },
+    {
+      "author": "u_93a7c536a4",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "kullanıcı adı uzun rakam dizisiyle bitiyor"
+      ],
+      "features": {
+        "account_age_days": 3891,
+        "lifetime_posts_per_day": 0.8,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 29,
+        "following": 456
+      }
+    },
+    {
+      "author": "u_9a5108684d",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "kullanıcı adı uzun rakam dizisiyle bitiyor"
+      ],
+      "features": {
+        "account_age_days": 1290,
+        "lifetime_posts_per_day": 2.1,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.2,
+        "followers": 641,
+        "following": 532
+      }
+    },
+    {
+      "author": "u_9de67c14f2",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "kullanıcı adı uzun rakam dizisiyle bitiyor"
+      ],
+      "features": {
+        "account_age_days": 1032,
+        "lifetime_posts_per_day": 7.0,
+        "recent_posts_per_day": 0.9,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 23,
+        "following": 19
+      }
+    },
+    {
+      "author": "u_9eacae198c",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 367,
+        "lifetime_posts_per_day": 1.2,
+        "recent_posts_per_day": 0.2,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 201,
+        "following": 60
+      }
+    },
+    {
+      "author": "u_a24ad98180",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2331,
+        "lifetime_posts_per_day": 5.5,
+        "recent_posts_per_day": 0.6,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 1149,
+        "following": 490
+      }
+    },
+    {
+      "author": "u_a6403c9b1f",
+      "score": 1,
+      "label": "gercek_olasi",
+      "reasons": [
+        "hesap yeni (146 gün)"
+      ],
+      "features": {
+        "account_age_days": 146,
+        "lifetime_posts_per_day": 7.1,
+        "recent_posts_per_day": 1.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 288,
+        "following": 154
+      }
+    },
+    {
+      "author": "u_ba257442d4",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 431,
+        "lifetime_posts_per_day": 0.6,
+        "recent_posts_per_day": 0.2,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 12,
+        "following": 11
+      }
+    },
+    {
+      "author": "u_bb9139332e",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 615,
+        "lifetime_posts_per_day": 3.6,
+        "recent_posts_per_day": 0.2,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 693,
+        "following": 773
+      }
+    },
+    {
+      "author": "u_bc5438492e",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 430,
+        "lifetime_posts_per_day": 5.6,
+        "recent_posts_per_day": 0.1,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 189,
+        "following": 182
+      }
+    },
+    {
+      "author": "u_d23b1e30ef",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 6420,
+        "lifetime_posts_per_day": 7.9,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 4215,
+        "following": 1927,
+        "verified": true
+      }
+    },
+    {
+      "author": "u_dc339deb10",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 6057,
+        "lifetime_posts_per_day": 0.0,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 275,
+        "following": 397
+      }
+    },
+    {
+      "author": "u_df96d1f0e8",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 1772,
+        "lifetime_posts_per_day": 2.4,
+        "recent_posts_per_day": 0.1,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 1025,
+        "following": 853
+      }
+    },
+    {
+      "author": "u_e1e8e53b83",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 4195,
+        "lifetime_posts_per_day": 0.1,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.15,
+        "followers": 7,
+        "following": 130
+      }
+    },
+    {
+      "author": "u_e66a5b5113",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 5863,
+        "lifetime_posts_per_day": 1.4,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 4838,
+        "following": 251
+      }
+    },
+    {
+      "author": "u_eb4f758392",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 3827,
+        "lifetime_posts_per_day": 0.5,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 468,
+        "following": 379
+      }
+    },
+    {
+      "author": "u_f72de48ef7",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 5022,
+        "lifetime_posts_per_day": 15.8,
+        "recent_posts_per_day": 4.1,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 24530,
+        "following": 21068
+      }
+    },
+    {
+      "author": "u_fcef1e6b96",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 5673,
+        "lifetime_posts_per_day": 0.9,
+        "recent_posts_per_day": 0.0,
+        "recent_duplicate_ratio": 0.05,
+        "followers": 269,
+        "following": 678
+      }
+    },
+    {
+      "author": "u_ffb77ea816",
+      "score": 0,
+      "label": "gercek_olasi",
+      "reasons": [
+        "belirgin bot işareti yok"
+      ],
+      "features": {
+        "account_age_days": 2103,
+        "lifetime_posts_per_day": 2.3,
+        "recent_posts_per_day": 3.0,
+        "recent_duplicate_ratio": 0.0,
+        "followers": 18,
+        "following": 96
+      }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+[
+ {
+  "__typename": "Tweet",
+  "rest_id": "1971000000000000001",
+  "core": {
+   "user_results": {
+    "result": {
+     "__typename": "User",
+     "rest_id": "991971000000000000001",
+     "is_blue_verified": false,
+     "core": {
+      "screen_name": "ali_veli",
+      "created_at": "Mon Jan 10 10:00:00 +0000 2015"
+     },
+     "avatar": {
+      "image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+     },
+     "legacy": {
+      "followers_count": 3,
+      "friends_count": 450,
+      "statuses_count": 900
+     }
+    }
+   }
+  },
+  "legacy": {
+   "id_str": "1971000000000000001",
+   "full_text": "@yurticikargo paketim 5 gündür gelmedi https://t.co/x",
+   "created_at": "Sat Sep 26 08:15:00 +0000 2026",
+   "lang": "tr",
+   "favorite_count": 1,
+   "retweet_count": 0,
+   "reply_count": 0,
+   "is_quote_status": false
+  }
+ },
+ {
+  "__typename": "TweetWithVisibilityResults",
+  "tweet": {
+   "__typename": "Tweet",
+   "rest_id": "1971000000000000002",
+   "core": {
+    "user_results": {
+     "result": {
+      "__typename": "User",
+      "rest_id": "991971000000000000002",
+      "is_blue_verified": false,
+      "core": {},
+      "avatar": {
+       "image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+      },
+      "legacy": {
+       "followers_count": 3,
+       "friends_count": 450,
+       "statuses_count": 900,
+       "screen_name": "bot12345678",
+       "created_at": "Fri Sep 18 10:00:00 +0000 2026"
+      }
+     }
+    }
+   },
+   "legacy": {
+    "id_str": "1971000000000000002",
+    "full_text": "aras kargo teslim edildi yazıyor ama gelmedi",
+    "created_at": "Sun Sep 27 21:40:00 +0000 2026",
+    "lang": "tr",
+    "favorite_count": 1,
+    "retweet_count": 0,
+    "reply_count": 0,
+    "is_quote_status": false
+   }
+  }
+ },
+ {
+  "__typename": "Tweet",
+  "rest_id": "1971000000000000003",
+  "core": {
+   "user_results": {
+    "result": {
+     "__typename": "User",
+     "rest_id": "991971000000000000003",
+     "is_blue_verified": false,
+     "core": {
+      "screen_name": "x",
+      "created_at": "Fri Sep 18 10:00:00 +0000 2026"
+     },
+     "avatar": {
+      "image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+     },
+     "legacy": {
+      "followers_count": 3,
+      "friends_count": 450,
+      "statuses_count": 900
+     }
+    }
+   }
+  },
+  "legacy": {
+   "id_str": "1971000000000000003",
+   "full_text": "RT metni",
+   "created_at": "Sun Sep 27 21:40:00 +0000 2026",
+   "lang": "tr",
+   "favorite_count": 1,
+   "retweet_count": 0,
+   "reply_count": 0,
+   "is_quote_status": false,
+   "retweeted_status_result": {
+    "result": {}
+   }
+  }
+ }
+]

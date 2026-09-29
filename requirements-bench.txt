@@ -1,0 +1,3 @@
+# Sadece araç karşılaştırması (bench/compare_tools.py) için ek bağımlılıklar.
+-r requirements.txt
+crawl4ai==0.9.4
