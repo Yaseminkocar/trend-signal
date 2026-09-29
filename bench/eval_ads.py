@@ -21,7 +21,7 @@ def main() -> None:
         records[r["url"]] = r["text"]
     cm, errors = Counter(), []
     with open(ROOT / "data/kargo/ad_labels.csv", encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
+        rows = [r for r in csv.DictReader(f) if r["url"]]
     for row in rows:
         pred, why = is_ad(records[row["url"]])
         gold = row["etiket"] == "ticari"

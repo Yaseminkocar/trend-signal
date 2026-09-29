@@ -60,6 +60,8 @@ def test_hand_labels_accuracy():
     tp = fp = fn = 0
     with open(ROOT / "data/kargo/ad_labels.csv", encoding="utf-8") as f:
         for row in csv.DictReader(f):
+            if not row["url"]:
+                continue
             pred, gold = is_ad(records[row["url"]])[0], row["etiket"] == "ticari"
             tp += pred and gold
             fp += pred and not gold
