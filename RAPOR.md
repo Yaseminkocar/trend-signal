@@ -6,26 +6,33 @@ Tekrar üretmek için: `python -m trend analyze --asof 2026-09-30T00:00:00+03:00
 
 ## 1. Sonuç
 
-Doğrulanmış bir yükseliş yok. Genel hacim düz: önceki hafta 135, son hafta 143 tekil içerik (temiz puan +0.10).
-En güçlü aday Kolay Gelsin. Ekşi'de önceki hafta 1, son hafta 8 tekil entry var ve bunlar 7 farklı yazardan, 5 farklı günden geliyor. Ancak artış X'te görünmüyor, yani tek kaynaklı. Bu yüzden sonucu doğrulanamadı olarak işaretledim.
+Genel hacim düz: önceki hafta 135, son hafta 143 tekil içerik (temiz puan +0.10). Ama iki şikayet türü belirgin şekilde artmış:
 
-Bu çalışmadaki en önemli bulgu, toplama sürecinin kendisinin iki kez sahte yükseliş üretmesi ve bunu yakalayıp kurala bağlamam oldu (5. bölüm).
-
-| Aday | Önceki | Son | Temiz puan | Durum | Neden aday, eksik olan ne |
+| Aday | Önceki | Son | Temiz puan | Durum | Neden aday, dikkat edilecek ne |
 |---|---|---|---|---|---|
-| Firma: Kolay Gelsin | 1 | 8 | +2.17 | Doğrulanamadı | 7 yazar, 5 gün, en yoğun gün %38. Eksik: ikinci kaynak. X örnekleminde (236 tweet) bu firma son 7 günde hiç geçmiyor. |
-| Tema: ücret/zam | 0 | 2 | +1.58 | Doğrulanamadı | Oran yüksek ama sadece 2 içerik, 2 yazar, 2 gün. Eksik: hacim. |
-| Tema: gecikme | 16 | 21 | +0.37 | Yükseliş yok | En büyük şikayet teması, ama artış 1.3 kat ve eşik 2 kat. |
+| Tema: hasar/kayıp | 3 | 12 | +1.70 | Yükseliş adayı | 12 farklı yazar, 5 gün, en yoğun gün %25, Ekşi ve X. 12 içeriğin hepsini okudum; hepsi kaybolan, çalınan, eksik ya da hasarlı gelen kargo anlatıyor. İlk kelime listesiyle sayınca da artış eşiğin üstünde (2'den 7'ye). |
+| Tema: müşteri hizmetleri | 7 | 17 | +1.17 | Yükseliş adayı, temkinli | 17 yazar, 6 gün, Ekşi ve X. Ancak ilk kelime listesiyle artış eşiğin altında kalıyor (6'dan 11'e); adaylık sonradan eklediğim "cevap vermiyor", "yardımcı olmadı" gibi ifadelere bağlı. 17 içerikten 2'si zayıf eşleşme. |
+| Firma: Kolay Gelsin | 1 | 8 | +2.17 | Doğrulanamadı | 7 yazar, 5 gün, ama sadece Ekşi'de. X örnekleminde (236 tweet) bu firma son 7 günde hiç geçmiyor. Eksik: ikinci kaynak. |
 
-Kolay Gelsin kanıtları (Ekşi, tarih İstanbul saati, veri zamanı 29.09.2026):
-[186621157](https://eksisozluk.com/entry/186621157) 23.09 18:15,
-[186656826](https://eksisozluk.com/entry/186656826) 25.09 11:02,
-[186716346](https://eksisozluk.com/entry/186716346) 27.09 21:14,
-[186717045](https://eksisozluk.com/entry/186717045) 27.09 21:40,
-[186718120](https://eksisozluk.com/entry/186718120) 27.09 22:22.
-Entry'lerde "ciddi bozgun", kurye tavrı, "kutuları paramparça" gibi ifadeler var; tek bir olaydan çok genel bir hizmet düşüşünü anlatıyorlar. Instagram'da 24.09 tarihli tek bir tüketici şikayeti de aynı yönde ([DdrApuSoNpz](https://instagram.com/p/DdrApuSoNpz)).
+Hasar/kayıp kanıtları (tarih İstanbul saati, veri zamanı 29.09.2026):
+[X](https://x.com/i/status/2102837067227034021) 23.09 22:06 "kargom kaybolmuş ve kimse yardımcı olmadı",
+[X](https://x.com/i/status/2102794095479459869) 23.09 19:15 "sipariş eksik teslim edildi",
+[Ekşi 186656826](https://eksisozluk.com/entry/186656826) 25.09 11:02 "teslim ettiği kargoyu ortadan yok ettiler",
+[X](https://x.com/i/status/2103954330126819540) 27.09 00:06 "çalışanları tarafından çalındı, kargom kayıp",
+[Ekşi 186718120](https://eksisozluk.com/entry/186718120) 27.09 22:22 "kutuları paramparça ederek teslim etmekte".
 
-Sonraki adım: Kolay Gelsin'i X'te tek terimli bir sorguyla (`"kolay gelsin" kargo`) 14 gün boyunca ayrıca toplamak. Artış X'te de görülürse aday "yükseliş adayı" olur, görülmezse Ekşi'ye özgü bir tartışma olarak kapanır.
+Müşteri hizmetleri kanıtları:
+[X](https://x.com/i/status/2103566701912822124) 25.09 22:25 "müşteri hizmetleri yok, sadece otomatik mesaj",
+[X](https://x.com/i/status/2103843273299116371) 26.09 16:44 "teslim edildi gözüküyor, müşteri hizmetlerinden bilgi alamadım",
+[Ekşi 186699357](https://eksisozluk.com/entry/186699357) 27.09 01:36 "şikayet ettim yine bir şey yok",
+[X](https://x.com/i/status/2104567881966948416) 28.09 16:44 "şubeniz hiçbir şekilde telefona cevap vermiyor",
+[X](https://x.com/i/status/2104665228298551557) 28.09 23:11 "ilgili birimi arıyorum, kimse cevap vermiyor".
+
+İki tema birbirine bağlı görünüyor: kargosu kaybolan kişi firmaya ulaşamadığını da yazıyor. Kolay Gelsin'in Ekşi entry'leri ("ciddi bozgun", "kutuları paramparça") de aynı dönemde; firma bazında ikinci kaynak olmadığı için doğrulanamadı olarak bıraktım.
+
+Bu çalışmada yükseliş bulmak kadar önemli olan, sahte yükselişleri ayıklamaktı. Toplama süreci iki kez, tema sözlüğünü değiştirmem bir kez sahte artış üretti; üçünü de yakalayıp kurala bağladım (4. ve 5. bölüm).
+
+Sonraki adım: Hasar/kayıp için X'te "kayboldu", "kayıp", "çalındı" sorgularını 14 gün boyunca dengeli toplayıp firma kırılımına bakmak. Müşteri hizmetleri için bu temadaki içerikleri elle etiketleyip sözlükten bağımsız bir sayım yapmak. Kolay Gelsin'i X'te tek terimli bir sorguyla (`"kolay gelsin" kargo`) ayrıca toplamak.
 
 ## 2. Kaynaklar
 
@@ -74,14 +81,16 @@ Sorun günlüğü. Otomatik kayıtlar `data/kargo/issues.jsonl` dosyasında. Kar
 | Instagram'daki gönderilerin çoğu satış ilanı | Instagram | Açıklanabilir bir ilan filtresi yazdım ve 99 gönderiyi elle etiketleyip filtrenin başarısını ölçtüm (5. bölüm). |
 | "bmw 3" yazınca Ekşi'deki "bmw 3 serisi" başlığı bulunmadı | Ekşi | Canlı denemede fark ettim. Her anahtar kelimeyi ayrı arıyorum; tam ifade sonuç vermezse en uzun kelimeyle arayıp bütün kelimeleri içeren başlıkları alıyorum ("bmw 3" ile "bmw 3 serisi" eşleşiyor, "bmw x5" eşleşmiyor). |
 | Yeni konuda X toplaması 30-40 dakika sürdü | X | Neyin zaman aldığını ölçtüm (boş günlerde bekleme, profil sayısı). Arayüze hızlı toplama modu ekledim; çok uzun toplamalar için tarayıcıya bağlı olmayan komut satırını öneriyorum. |
+| İçeriğin %68'i hiçbir temaya girmiyor, "diğer"de kalıyordu | Tümü | "Diğer"e düşen 188 içeriği tek tek okudum. Çoğu "kargom geldi" gibi şikayet içermeyen paylaşımlardı; bunlar için iki nötr tema ekledim. Geri kalanlar sözlükte olmayan ifadelerle yazılmış gerçek şikayetlerdi ("dağıtımda", "şehir turu", "evde yoktunuz"). Sözlüğü genişletince "diğer" %19'a indi. |
+| Sözlüğü genişletince müşteri hizmetleri 1'den 9'a çıktı, ama bu gerçek değildi | Tümü | Sonuca güvenmeden eski ve yeni sözlüğü karşılaştırdım. Her kayıt tek bir temaya atandığı için önceki haftadaki şikayetler yeni gecikme kelimeleriyle başka temaya kaymıştı. Bir kaydı eşleştiği bütün temalara saymaya geçtim ve bunu testle korudum. "Kırıkkale" kelimesinin "kırık" diye hasar sayılması gibi hataları da bu kontrol sırasında buldum. |
 
 Hesap profili ve bot tahmini (`trend/profiles.py`): Kurallarla puanlıyorum ve her kural bir gerekçe yazıyor: hesap yaşı (30 günden genç +2, 180 günden genç +1), günlük paylaşım sayısı (20'den fazla +1, 50'den fazla +2), son 20 paylaşımda tekrar oranı (%30 üstü +1, %50 üstü +2), takipçisi 10'dan az ve takip ettiği 200'den fazla (+1), varsayılan profil fotoğrafı (+1), 4 haneli rakamla biten kullanıcı adı (+1). 4 ve üstü "bot olası", 2-3 "şüpheli". 48 hesabın 45'i gerçek olası, 3'ü şüpheli çıktı, bot olası hesap çıkmadı. Bot olası hesaplar analizde otomatik dışlanıyor. Sınır: Bu kurallar kaba spam'i yakalar, normal görünen koordineli hesapları yakalamaz.
 
 ## 5. Sinyal yöntemi ve belirsizlik
 
-Gruplama: Her kaydı iki açıdan grupluyorum. *Tema* için 8 temalı bir kelime kökü sözlüğü kullanıyorum; kelime başından eşleştirdiğim için "zam" kökü "zaman" kelimesini yakalamıyor. *Firma* Ekşi'de başlıktan, X'te metinden çıkıyor. Olası yanlış birleşmeler: PTT başlığında başka firmayı anan entry PTT'ye yazılıyor; içeriğin %65'i belirli bir sorun söylemediği için "diğer" temasında kalıyor.
+Gruplama: Her kaydı iki açıdan grupluyorum. *Tema* için 10 temalı bir kelime kökü sözlüğü kullanıyorum; kelime başından eşleştirdiğim için "zam" kökü "zaman" kelimesini yakalamıyor. Bir kayıt eşleştiği her temaya sayılıyor: "3 gündür bekliyor, canlı destek yardımcı olmadı" hem gecikme hem müşteri hizmetleri. "Kargom geldi" gibi şikayet içermeyen paylaşımlar için "teslim alındı" ve "bekleniyor" diye iki nötr tema var. *Firma* Ekşi'de başlıktan, X'te metinden çıkıyor. Olası yanlış birleşmeler: PTT başlığında başka firmayı anan entry PTT'ye yazılıyor; "muhatap olmadan" gibi bir öneri cümlesi müşteri hizmetleri sayılabiliyor; içeriğin %19'u hala "diğer"de.
 
-Puan: temiz puan = log2((son + 1) / (önceki + 1)). Sayımda neredeyse aynı içerikler tek sayılıyor ve bot olası hesaplar çıkarılıyor. tekrar etkisi = ham puan - temiz puan, yani artışın ne kadarının kopyalardan geldiği. Temiz puan 1'in üstündeyse (yaklaşık 2 kat) grup aday oluyor.
+Puan: temiz puan = log2((son + 1) / (önceki + 1)). Sayımda neredeyse aynı içerikler tek sayılıyor ve bot olası hesaplar çıkarılıyor. Tekrar etkisi = ham puan - temiz puan, yani artışın ne kadarının kopyalardan geldiği. Temiz puan 1'in üstündeyse (yaklaşık 2 kat) grup aday oluyor.
 
 Filtreleme yaklaşımım: "Yükseliş var" demeden önce veriyi üç aşamada ayıklıyorum ve her aşama neyi neden çıkardığını gösteriyor. Toplarken tarih dışı, konu dışı ve ilgisiz içerik ayrılıyor. Analizden önce ilanlar, günlük üst sınırı aşan kayıtlar, iki dönemi eşit kapsamayan sorgular, kopyalar ve bot olası hesaplar çıkıyor. Karar verirken de şu kontroller aranıyor: en az 5 tekil içerik, en az 3 yazar, en az 3 gün, hiçbir günün payı %60'ı geçmemeli, en az 2 kaynak, dönemler dengeli kapsanmış olmalı. Biri eksikse sonuç doğrulanamadı oluyor ve eksik olan yazılıyor. Arayüzde her filtre açılıp kapatılabiliyor.
 
@@ -94,7 +103,7 @@ Sahte yükseliş 2: Instagram. Instagram ve TikTok'u eklediğimde 4 grup "yükse
 - Etkisi: 4 sahte aday 0'a indi (`reports/signals_2026-09-30_tum_kaynaklar.md`). Filtreden sonra Instagram'da 20, TikTok'ta 9 gönderi kalıyor; bu kaynaklar artık sonucu bozmuyor ama katkı vermek için de az. Bu yüzden varsayılan sinyal X ve Ekşi.
 - Pay kontrolü: X, Instagram ve TikTok örnek verdiği için bu kaynaklarda sayıya değil grubun o dönemdeki payına da bakıyorum. Toplam sayı yeni gönderilere kaydığı için artsa bile payı artmayan grup aday olamıyor.
 
-Testler: 62 test, internet gerektirmiyor (`python -m pytest`). Tekrar kayıt, eksik tarih, dönem sınırları, 30 kopya spam'in sahte artış yaratmaması, bot hesabın dışlanması, tek kaynak ve tek günün "doğrulanamadı" vermesi, kaydedilmiş sayfalarla parser'lar, ilan filtresi ve başlık eşleştirme test ediliyor.
+Testler: 64 test, internet gerektirmiyor (`python -m pytest`). Tekrar kayıt, eksik tarih, dönem sınırları, 30 kopya spam'in sahte artış yaratmaması, bot hesabın dışlanması, tek kaynak ve tek günün "doğrulanamadı" vermesi, kaydedilmiş sayfalarla parser'lar, ilan filtresi, başlık eşleştirme ve bir kaydın birden çok temaya sayılması test ediliyor.
 
 Sonraki adımlar: Instagram ve TikTok'u her gün aynı saatte toplamak; TikTok'ta açıklama yerine yorumları toplamak; video sesini Whisper, üzerindeki yazıyı OCR ile metne çevirmek; ilan filtresini etiketli veriyle ölçülen küçük bir LLM sınıflandırıcıyla karşılaştırmak.
 
@@ -111,9 +120,8 @@ Canlı denemeler (30 Eylül). Sistemi gündemdeki konularla arayüzden denedim:
 
 - *BMW 3 serisi:* Ekşi'de önceki hafta 1, son hafta 277 entry, ama 271'i tek günde (yeni modelin tanıtımı). Sonuç doğrulanamadı, eksik "tek güne yığılma %98".
 - *Akaryakıt zammı:* fiyat/zam teması 9'dan 58'e çıktı, 58 yazar, Ekşi ve X. Eksik yine tek gün: içeriğin %72'si zam günü olan 25 Eylül'de.
-- *iPhone 18 Pro, 21 günlük kıyas:* X'te yükseliş adayı çıktı (önceki [ÖNCEKİ], son [SON], temiz puan [PUAN]).
 
-İlk iki konu gerçek olaylardı ve sistem onları yakaladı, ama tek günlük bir tepkiyi trend saymadı; iPhone'da ise konuşma günlere yayıldığı için aday çıktı. Bu denemeler iki eksik de gösterdi ve ikisini düzelttim: "bmw 3" başlığı bulamıyordu (4. bölüm), X'te tek sorgu kalınca pay kontrolü anlamsız biçimde "eksik" diyordu.
+İki konu da gerçek olaylardı ve sistem onları yakaladı, ama tek günlük bir tepkiyi trend saymadı; konuşma birkaç güne yayılırsa aynı arama "yükseliş adayı" verebilir. Bu denemeler iki eksik de gösterdi ve düzelttim: "bmw 3" başlığı bulunamıyordu (4. bölüm); X'te tek sorgu kalınca pay kontrolü anlamsız biçimde "eksik" diyordu. Ayrıca filtrelerden sonra analize kayıt kalmadığında arayüz bunun nedenini sadece kapalı bir kutuda gösteriyordu; artık ekranın başında yazıyor.
 
 Sınırlar: İyi bir tema sözlüğü alan bilgisi istiyor, otomatik üretilen konu dosyası bir başlangıç. Instagram ilanları, "kolay gelsin" gibi günlük ifadeler ve X'in tarih filtresi her yeni konuda yeniden kontrol edilmeli.
 
@@ -121,7 +129,7 @@ Sınırlar: İyi bir tema sözlüğü alan bilgisi istiyor, otomatik üretilen k
 
 LangGraph, toplama ve karar akışını adım adım bir graf olarak kurmak için uygun: topla, kapsamayı kontrol et, eksik günleri yeniden topla, grupla, puanla, aday varsa ikinci kaynakta hedefli sorgu at, raporla. Bugün elle yaptığım "Kolay Gelsin'i X'te ayrıca ara" adımı koşullu bir dal olarak otomatikleşir.
 
-RAG iki yerde işe yarar. Gruplamada, kelime sözlüğü yerine benzer şikayetleri geçmiş etiketli örneklerle eşleştirip "diğer" temasındaki %65'i anlamlı gruplara ayırabilir. Raporda, aday bir sinyal için geçmiş haftaların benzer konuşmalarını getirip "bu yeni mi, mevsimsel mi" sorusuna kanıtla cevap verebilir. İki durumda da son karar bugünkü açıklanabilir eşiklerle verilmeli ve kanıt URL'si olmayan bir LLM çıktısı kabul edilmemeli.
+RAG iki yerde işe yarar. Gruplamada, kelime sözlüğü yerine benzer şikayetleri geçmiş etiketli örneklerle eşleştirip "diğer" temasında kalan %19'u da anlamlı gruplara ayırabilir. Raporda, aday bir sinyal için geçmiş haftaların benzer konuşmalarını getirip "bu yeni mi, mevsimsel mi" sorusuna kanıtla cevap verebilir. İki durumda da son karar bugünkü açıklanabilir eşiklerle verilmeli ve kanıt URL'si olmayan bir LLM çıktısı kabul edilmemeli.
 
 ## 8. AI ile çalışma
 

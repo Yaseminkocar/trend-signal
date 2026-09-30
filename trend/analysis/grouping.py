@@ -28,6 +28,13 @@ def assign_theme(text: str, themes: dict[str, list[str]] | None = None) -> tuple
     return best, best_hits
 
 
+def assign_themes(text: str, themes: dict[str, list[str]] | None = None) -> list[str]:
+    themes = themes or config.THEMES
+    norm = normalize_text(text)
+    found = [name for name, kws in themes.items() if _match(norm, kws)]
+    return found or ["diger"]
+
+
 def detect_brands(text: str) -> list[str]:
     norm = normalize_text(text)
     return [name for name, kws in config.BRANDS.items() if _match(norm, kws)]

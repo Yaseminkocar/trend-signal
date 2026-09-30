@@ -1,0 +1,98 @@
+{
+  "label": "araba",
+  "generated": true,
+  "brand_labels": [
+    "audi"
+  ],
+  "relevance_words": [
+    "audi"
+  ],
+  "eksi_topics": [
+    "audi",
+    "audi"
+  ],
+  "eksi_search_keyword": "audi",
+  "eksi_search_keywords": [
+    "audi"
+  ],
+  "eksi_exclude_slug": null,
+  "x_queries": [
+    "audi lang:tr -filter:retweets"
+  ],
+  "tiktok_queries": [
+    "audi",
+    "audi"
+  ],
+  "instagram_tags": [
+    "audi",
+    "audi"
+  ],
+  "themes": {
+    "fiyat_zam": [
+      "zam ",
+      "zamlan",
+      "zamm",
+      "fiyat",
+      "pahalı",
+      "ücret",
+      "kampanya",
+      "indirim"
+    ],
+    "ariza_kalite": [
+      "arıza",
+      "bozul",
+      "çalışmıyor",
+      "sorun",
+      "hata",
+      "kalitesiz",
+      "kırık",
+      "hasar"
+    ],
+    "musteri_hizmetleri": [
+      "müşteri hizmet",
+      "çağrı merkez",
+      "ulaşamıyorum",
+      "ulaşılamıyor",
+      "servis",
+      "şikayet ettim",
+      "şikayetvar",
+      "muhatap",
+      "kimse ilgilenm",
+      "iade"
+    ],
+    "bekleme_teslimat": [
+      "gecik",
+      "gelmedi",
+      "bekliyorum",
+      "günlerdir",
+      "haftadır",
+      "teslim",
+      "stok"
+    ],
+    "olumlu_deneyim": [
+      "memnun",
+      "teşekkür",
+      "sorunsuz",
+      "başarılı",
+      "tavsiye ederim",
+      "harika"
+    ],
+    "genel_memnuniyetsizlik": [
+      "rezil",
+      "rezalet",
+      "berbat",
+      "en kötü",
+      "sakın",
+      "kullanmayın",
+      "felaket"
+    ]
+  },
+  "brands": {
+    "audi": [
+      "audi"
+    ]
+  },
+  "brand_slugs": {
+    "audi": "audi"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "label": "telefon",
+  "generated": true,
+  "brand_labels": [
+    "apple"
+  ],
+  "relevance_words": [
+    "iPhone 18 pro max"
+  ],
+  "eksi_topics": [
+    "apple",
+    "iPhone 18 pro max"
+  ],
+  "eksi_search_keyword": "iPhone 18 pro max",
+  "eksi_search_keywords": [
+    "iPhone 18 pro max"
+  ],
+  "eksi_exclude_slug": null,
+  "x_queries": [
+    "\"iPhone 18 pro max\" lang:tr -filter:retweets"
+  ],
+  "tiktok_queries": [
+    "iPhone 18 pro max",
+    "apple"
+  ],
+  "instagram_tags": [
+    "iPhone18promax",
+    "apple"
+  ],
+  "themes": {
+    "fiyat_zam": [
+      "zam ",
+      "zamlan",
+      "zamm",
+      "fiyat",
+      "pahalı",
+      "ücret",
+      "kampanya",
+      "indirim"
+    ],
+    "ariza_kalite": [
+      "arıza",
+      "bozul",
+      "çalışmıyor",
+      "sorun",
+      "hata",
+      "kalitesiz",
+      "kırık",
+      "hasar"
+    ],
+    "musteri_hizmetleri": [
+      "müşteri hizmet",
+      "çağrı merkez",
+      "ulaşamıyorum",
+      "ulaşılamıyor",
+      "servis",
+      "şikayet ettim",
+      "şikayetvar",
+      "muhatap",
+      "kimse ilgilenm",
+      "iade"
+    ],
+    "bekleme_teslimat": [
+      "gecik",
+      "gelmedi",
+      "bekliyorum",
+      "günlerdir",
+      "haftadır",
+      "teslim",
+      "stok"
+    ],
+    "olumlu_deneyim": [
+      "memnun",
+      "teşekkür",
+      "sorunsuz",
+      "başarılı",
+      "tavsiye ederim",
+      "harika"
+    ],
+    "genel_memnuniyetsizlik": [
+      "rezil",
+      "rezalet",
+      "berbat",
+      "en kötü",
+      "sakın",
+      "kullanmayın",
+      "felaket"
+    ]
+  },
+  "brands": {
+    "apple": [
+      "apple"
+    ]
+  },
+  "brand_slugs": {
+    "apple": "apple"
+  }
+}

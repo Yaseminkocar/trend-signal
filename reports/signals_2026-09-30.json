@@ -1,5 +1,6 @@
 {
   "asof": "2026-09-30T00:00:00+03:00",
+  "window_days": 7,
   "periods": {
     "current": [
       "2026-09-23T00:00:00+03:00",
@@ -30,6 +31,213 @@
     "bot_authors_excluded": 0
   },
   "groups": [
+    {
+      "group": "tema:hasar_kayip",
+      "raw_current": 12,
+      "raw_previous": 3,
+      "unique_current": 12,
+      "unique_previous": 3,
+      "raw_score": 1.7,
+      "clean_score": 1.7,
+      "duplicate_effect": 0.0,
+      "authors_current": 12,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 5,
+      "max_day_share": 0.25,
+      "daily_current": {
+        "2026-09-23": 3,
+        "2026-09-25": 2,
+        "2026-09-26": 2,
+        "2026-09-27": 3,
+        "2026-09-29": 2
+      },
+      "status": "yukselis_adayi",
+      "confidence": "yuksek",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 12 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "12 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "5 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %25 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": true,
+          "detail": "örneklenen kaynaklarda pay %3 -> %8"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102794095479459869",
+          "published_at": "2026-09-23T16:15:55+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Sayın @u_1b9530fcea, internet sitenizden aldığım sipariş eksik teslim edildi, Kargo paketi ve teslim aldığım ürünlerin fotoğrafları mevcuttur. Eksik ürünümün ta"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102826557308113184",
+          "published_at": "2026-09-23T18:24:54+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "Surekli babacim hayatimda ol hep diyorum bi sekilde bana hep isaret gonder diyorum, kargom geldi yanlis urun gondermisler uzerinde de babamin adi yazili babamin"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102837067227034021",
+          "published_at": "2026-09-23T19:06:40+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "Trendyoldan sipariş yaptım kargom kaybolmuş ve kimse yardımcı olmadı \n@u_b15304b89d"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186656826",
+          "published_at": "2026-09-25T11:02:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "bunlar da ciddi bozgun içinde görünüyor. iki tane öldüğümüz bozuyor. amazon ile kendilerini gösterdiler elbette, ancak amazon'un bunlara teslim ettiği kargoyu o"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103511506239332661",
+          "published_at": "2026-09-25T15:46:39+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_5fd866a06e 2 gün teslimat şubesinde kargoyu beklettiniz şimdi başka bir şehre göndermişsiniz rezalet bir daha sizinle alışveriş yapılmaz resmen kargom kaybol"
+        }
+      ],
+      "share_previous": 0.028,
+      "share_current": 0.083
+    },
+    {
+      "group": "tema:musteri_hizmetleri",
+      "raw_current": 17,
+      "raw_previous": 7,
+      "unique_current": 17,
+      "unique_previous": 7,
+      "raw_score": 1.17,
+      "clean_score": 1.17,
+      "duplicate_effect": 0.0,
+      "authors_current": 17,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.24,
+      "daily_current": {
+        "2026-09-23": 4,
+        "2026-09-25": 4,
+        "2026-09-26": 2,
+        "2026-09-27": 2,
+        "2026-09-28": 4,
+        "2026-09-29": 1
+      },
+      "status": "yukselis_adayi",
+      "confidence": "yuksek",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 17 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "17 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %24 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": true,
+          "detail": "örneklenen kaynaklarda pay %3 -> %11"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186621157",
+          "published_at": "2026-09-23T18:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "zaten son zamanlarda dağıtıma çıkan kaegoları 2 3 günde teslim ediyorlardı bugun 4 yıldır sipariş verdiğim tek ve sabit adresime adres hatalı denilip iadeye yön"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102822862377689502",
+          "published_at": "2026-09-23T18:10:13+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_6ad9d36eea  kargom teslim edilmiş görünüyor fakat teslim almadım konu ile ilgili bu saatte ulaşabileceğim bir müşteri hizmetleri biriminiz yok ama bu saatte "
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102834514007638452",
+          "published_at": "2026-09-23T18:56:31+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_6ad9d36eea Sorunum hala çözülmedi, kargom hala ortada yok, nerde olduğuna dair kimsenin bir fikri yok. Yarın BTK' ya şikayet edeceğim."
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102837067227034021",
+          "published_at": "2026-09-23T19:06:40+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "Trendyoldan sipariş yaptım kargom kaybolmuş ve kimse yardımcı olmadı \n@u_b15304b89d"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186660652",
+          "published_at": "2026-09-25T14:34:00+03:00",
+          "collected_at": "2026-09-29T18:34:00+00:00",
+          "text": "\"tex express\" müşteri hizmetlerinden arandım biraz önce. \"barkodlama yardımı için arıyoruz\" diyor. tek sorun;benim ulaşmaya çalıştıkları firma olmamam ve muhtem"
+        }
+      ],
+      "share_previous": 0.028,
+      "share_current": 0.11
+    },
     {
       "group": "firma:kolay_gelsin",
       "raw_current": 8,
@@ -130,89 +338,6 @@
       "share_current": null
     },
     {
-      "group": "tema:ucret_zam",
-      "raw_current": 2,
-      "raw_previous": 0,
-      "unique_current": 2,
-      "unique_previous": 0,
-      "raw_score": 1.585,
-      "clean_score": 1.585,
-      "duplicate_effect": 0.0,
-      "authors_current": 2,
-      "sources_current": [
-        "eksi",
-        "x"
-      ],
-      "active_days_current": 2,
-      "max_day_share": 0.5,
-      "daily_current": {
-        "2026-09-25": 1,
-        "2026-09-28": 1
-      },
-      "status": "dogrulanamadi",
-      "confidence": "dusuk",
-      "checks": [
-        {
-          "name": "yeterli_kayit",
-          "passed": false,
-          "detail": "son 7 günde 2 tekil içerik (en az 5)"
-        },
-        {
-          "name": "yazar_cesitliligi",
-          "passed": false,
-          "detail": "2 farklı yazar (en az 3)"
-        },
-        {
-          "name": "gunlere_yayilim",
-          "passed": false,
-          "detail": "2 farklı gün (en az 3)"
-        },
-        {
-          "name": "tek_gune_yigilmama",
-          "passed": true,
-          "detail": "en yoğun gün payı %50 (en fazla %60)"
-        },
-        {
-          "name": "kaynak_cesitliligi",
-          "passed": true,
-          "detail": "kaynaklar: eksi, x (en az 2)"
-        },
-        {
-          "name": "kapsama_dengesi",
-          "passed": true,
-          "detail": "dönemler arası gün kapsaması dengeli"
-        },
-        {
-          "name": "ornek_payi",
-          "passed": true,
-          "detail": "örneklenen kaynaklarda pay %0 -> %1"
-        }
-      ],
-      "missing": [
-        "son 7 günde 2 tekil içerik (en az 5)",
-        "2 farklı yazar (en az 3)",
-        "2 farklı gün (en az 3)"
-      ],
-      "evidence": [
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103547331207421989",
-          "published_at": "2026-09-25T18:09:00+00:00",
-          "collected_at": "2026-09-29T19:12:03+00:00",
-          "text": "@u_c91d7d2f6e @u_6ad9d36eea Yaklaşık 50 kere arayıp kıyameti kopardıktan sonra geldi ama daha önce hiç gelmeyen ve aldığım yerden ücret iadesi aldığım kargom ol"
-        },
-        {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186733856",
-          "published_at": "2026-09-28T16:01:00+03:00",
-          "collected_at": "2026-09-29T18:34:04+00:00",
-          "text": "her bölgeye göre değişiyor yorumlarda gördüğümüz o. bizim burda kaç tane dağıtıcı değişsede aşağı yukarı hizmet güzel özellikle hepsiburadanın sepette ne olursa"
-        }
-      ],
-      "share_previous": 0.0,
-      "share_current": 0.009
-    },
-    {
       "group": "firma:coklu_firma",
       "raw_current": 2,
       "raw_previous": 0,
@@ -291,28 +416,27 @@
       "share_current": null
     },
     {
-      "group": "tema:gecikme",
-      "raw_current": 21,
-      "raw_previous": 16,
-      "unique_current": 21,
-      "unique_previous": 16,
-      "raw_score": 0.372,
-      "clean_score": 0.372,
+      "group": "tema:genel_memnuniyetsizlik",
+      "raw_current": 19,
+      "raw_previous": 14,
+      "unique_current": 19,
+      "unique_previous": 14,
+      "raw_score": 0.415,
+      "clean_score": 0.415,
       "duplicate_effect": 0.0,
-      "authors_current": 21,
+      "authors_current": 19,
       "sources_current": [
         "eksi",
         "x"
       ],
-      "active_days_current": 6,
-      "max_day_share": 0.24,
+      "active_days_current": 5,
+      "max_day_share": 0.32,
       "daily_current": {
         "2026-09-23": 2,
-        "2026-09-25": 4,
-        "2026-09-26": 4,
-        "2026-09-27": 3,
+        "2026-09-25": 6,
+        "2026-09-26": 2,
         "2026-09-28": 5,
-        "2026-09-29": 3
+        "2026-09-29": 4
       },
       "status": "yukselis_yok",
       "confidence": "-",
@@ -320,22 +444,22 @@
         {
           "name": "yeterli_kayit",
           "passed": true,
-          "detail": "son 7 günde 21 tekil içerik (en az 5)"
+          "detail": "son 7 günde 19 tekil içerik (en az 5)"
         },
         {
           "name": "yazar_cesitliligi",
           "passed": true,
-          "detail": "21 farklı yazar (en az 3)"
+          "detail": "19 farklı yazar (en az 3)"
         },
         {
           "name": "gunlere_yayilim",
           "passed": true,
-          "detail": "6 farklı gün (en az 3)"
+          "detail": "5 farklı gün (en az 3)"
         },
         {
           "name": "tek_gune_yigilmama",
           "passed": true,
-          "detail": "en yoğun gün payı %24 (en fazla %60)"
+          "detail": "en yoğun gün payı %32 (en fazla %60)"
         },
         {
           "name": "kaynak_cesitliligi",
@@ -350,11 +474,226 @@
         {
           "name": "ornek_payi",
           "passed": true,
-          "detail": "örneklenen kaynaklarda pay %13 -> %16"
+          "detail": "örneklenen kaynaklarda pay %6 -> %6"
         }
       ],
       "missing": [],
       "evidence": [
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186614222",
+          "published_at": "2026-09-23T12:01:00+03:00",
+          "collected_at": "2026-09-29T18:33:49+00:00",
+          "text": "iğrenç. berbat. rezil."
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186620984",
+          "published_at": "2026-09-23T18:04:00+03:00",
+          "collected_at": "2026-09-29T18:33:54+00:00",
+          "text": "bu kargo şirketini seçeneksiz sunan hiçbir alışveriş sitesinden satıcıdan alışveriş yapmama kararı aldım. dağıtıma çıkar çıkar teslim edilemez, şubeye almaya gi"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186656826",
+          "published_at": "2026-09-25T11:02:00+03:00",
+          "collected_at": "2026-09-29T18:34:12+00:00",
+          "text": "bunlar da ciddi bozgun içinde görünüyor. iki tane öldüğümüz bozuyor. amazon ile kendilerini gösterdiler elbette, ancak amazon'un bunlara teslim ettiği kargoyu o"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186661207",
+          "published_at": "2026-09-25T15:07:00+03:00",
+          "collected_at": "2026-09-29T18:33:39+00:00",
+          "text": "rezalet ötesi kargo firması. kendimce sadece bu kargo firmasıyla çalışıp gönderim yapan yerlerden alışveriş yapmiyordum ama bu durumu daha da genişletip bu karg"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103498019358507360",
+          "published_at": "2026-09-25T14:53:03+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_5fd866a06e Kargom 2 gündür dağıtımda görünüyor ve hâlâ TESLİM EDİLMEDİ! Bugün sabah 09.00’da dağıtıma çıkarıldı, saat 17.00 oldu. İnsanları bütün gün evde be"
+        }
+      ],
+      "share_previous": 0.056,
+      "share_current": 0.064
+    },
+    {
+      "group": "tema:teslim_sorunu",
+      "raw_current": 16,
+      "raw_previous": 14,
+      "unique_current": 16,
+      "unique_previous": 14,
+      "raw_score": 0.181,
+      "clean_score": 0.181,
+      "duplicate_effect": 0.0,
+      "authors_current": 16,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.31,
+      "daily_current": {
+        "2026-09-23": 5,
+        "2026-09-25": 4,
+        "2026-09-26": 2,
+        "2026-09-27": 1,
+        "2026-09-28": 2,
+        "2026-09-29": 2
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 16 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "16 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %31 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": true,
+          "detail": "örneklenen kaynaklarda pay %6 -> %9"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102766796331798982",
+          "published_at": "2026-09-23T14:27:26+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_6ad9d36eea Kargo görevlisi geldi, bina kapısını açtık ancak gönderiyi yukarı çıkarmadan “evde bulunamadı” kaydı oluşturdu. Evde olduğumuz halde kargom teslim"
+        },
+        {
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186620984",
+          "published_at": "2026-09-23T18:04:00+03:00",
+          "collected_at": "2026-09-29T18:33:54+00:00",
+          "text": "bu kargo şirketini seçeneksiz sunan hiçbir alışveriş sitesinden satıcıdan alışveriş yapmama kararı aldım. dağıtıma çıkar çıkar teslim edilemez, şubeye almaya gi"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102807030528725465",
+          "published_at": "2026-09-23T17:07:19+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_d1c7f9aacd Şanlıurfa El ruha şubeniz de kargom vardı sabah msj geldi dağıtıma çıktı diye akşam 19 30 da msj geldi geldik yoktunuz diye gelip kendiniz alın di"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102809794973175860",
+          "published_at": "2026-09-23T17:18:18+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_7bba9b3bb7 \nTrendyol siparişimin teslimat kodu için arandım ve kodu verdim. Bina girişine bırakıldı olarak mesaj geldi. Fakat kargom yok. Hatta kamera kayıtl"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102822862377689502",
+          "published_at": "2026-09-23T18:10:13+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_6ad9d36eea  kargom teslim edilmiş görünüyor fakat teslim almadım konu ile ilgili bu saatte ulaşabileceğim bir müşteri hizmetleri biriminiz yok ama bu saatte "
+        }
+      ],
+      "share_previous": 0.065,
+      "share_current": 0.092
+    },
+    {
+      "group": "tema:gecikme",
+      "raw_current": 39,
+      "raw_previous": 35,
+      "unique_current": 39,
+      "unique_previous": 35,
+      "raw_score": 0.152,
+      "clean_score": 0.152,
+      "duplicate_effect": 0.0,
+      "authors_current": 38,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.31,
+      "daily_current": {
+        "2026-09-23": 7,
+        "2026-09-25": 12,
+        "2026-09-26": 6,
+        "2026-09-27": 4,
+        "2026-09-28": 5,
+        "2026-09-29": 5
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 39 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "38 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %31 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": true,
+          "detail": "örneklenen kaynaklarda pay %28 -> %29"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102747171133223256",
+          "published_at": "2026-09-23T13:09:27+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_3f39178f2a @u_189062077e Bir kaç yıl önce esas işinden dolayı beni engelledi kendisi, kargom nerede diye sorduğum için. Çok iyi olmuş erişim engeli."
+        },
         {
           "source": "x",
           "url": "https://x.com/i/status/2102748120689881381",
@@ -371,232 +710,21 @@
         },
         {
           "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186658372",
-          "published_at": "2026-09-25T12:28:00+03:00",
-          "collected_at": "2026-09-29T18:33:49+00:00",
-          "text": "günler süren \"il içi aktarma\"nıza sokayım. genel kamu düzenine uygun olarak saldım çayıra mevlam kayıra iş yapan oluşum."
+          "url": "https://eksisozluk.com/entry/186620984",
+          "published_at": "2026-09-23T18:04:00+03:00",
+          "collected_at": "2026-09-29T18:33:54+00:00",
+          "text": "bu kargo şirketini seçeneksiz sunan hiçbir alışveriş sitesinden satıcıdan alışveriş yapmama kararı aldım. dağıtıma çıkar çıkar teslim edilemez, şubeye almaya gi"
         },
         {
           "source": "x",
-          "url": "https://x.com/i/status/2103500765700710862",
-          "published_at": "2026-09-25T15:03:58+00:00",
-          "collected_at": "2026-09-29T19:12:08+00:00",
-          "text": "@u_5fd866a06e Bu nasıl bir hizmet anlayışı? Kargom 2 gündür “dağıtımda” görünüyor, saatlerce evde bekliyorum, kargo gelmiyor. Sonra da utanmadan “şubeden gelip "
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103509149925454076",
-          "published_at": "2026-09-25T15:37:17+00:00",
-          "collected_at": "2026-09-29T19:12:08+00:00",
-          "text": "@u_64014d8f44 Ya bisey daha olmuştu kargom dağıtıma çıktı gösterildiği halde iki gün fln gelmedi bende müşteri hizmetlerini aradım fln neyse son dakika geldi yi"
-        }
-      ],
-      "share_previous": 0.131,
-      "share_current": 0.156
-    },
-    {
-      "group": "tema:musteri_hizmetleri",
-      "raw_current": 6,
-      "raw_previous": 5,
-      "unique_current": 6,
-      "unique_previous": 5,
-      "raw_score": 0.222,
-      "clean_score": 0.222,
-      "duplicate_effect": 0.0,
-      "authors_current": 6,
-      "sources_current": [
-        "eksi",
-        "x"
-      ],
-      "active_days_current": 4,
-      "max_day_share": 0.5,
-      "daily_current": {
-        "2026-09-23": 1,
-        "2026-09-25": 3,
-        "2026-09-26": 1,
-        "2026-09-28": 1
-      },
-      "status": "yukselis_yok",
-      "confidence": "-",
-      "checks": [
-        {
-          "name": "yeterli_kayit",
-          "passed": true,
-          "detail": "son 7 günde 6 tekil içerik (en az 5)"
-        },
-        {
-          "name": "yazar_cesitliligi",
-          "passed": true,
-          "detail": "6 farklı yazar (en az 3)"
-        },
-        {
-          "name": "gunlere_yayilim",
-          "passed": true,
-          "detail": "4 farklı gün (en az 3)"
-        },
-        {
-          "name": "tek_gune_yigilmama",
-          "passed": true,
-          "detail": "en yoğun gün payı %50 (en fazla %60)"
-        },
-        {
-          "name": "kaynak_cesitliligi",
-          "passed": true,
-          "detail": "kaynaklar: eksi, x (en az 2)"
-        },
-        {
-          "name": "kapsama_dengesi",
-          "passed": true,
-          "detail": "dönemler arası gün kapsaması dengeli"
-        },
-        {
-          "name": "ornek_payi",
-          "passed": true,
-          "detail": "örneklenen kaynaklarda pay %2 -> %3"
-        }
-      ],
-      "missing": [],
-      "evidence": [
-        {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186621157",
-          "published_at": "2026-09-23T18:15:00+03:00",
-          "collected_at": "2026-09-29T18:34:12+00:00",
-          "text": "zaten son zamanlarda dağıtıma çıkan kaegoları 2 3 günde teslim ediyorlardı bugun 4 yıldır sipariş verdiğim tek ve sabit adresime adres hatalı denilip iadeye yön"
-        },
-        {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186660652",
-          "published_at": "2026-09-25T14:34:00+03:00",
-          "collected_at": "2026-09-29T18:34:00+00:00",
-          "text": "\"tex express\" müşteri hizmetlerinden arandım biraz önce. \"barkodlama yardımı için arıyoruz\" diyor. tek sorun;benim ulaşmaya çalıştıkları firma olmamam ve muhtem"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103549605589954564",
-          "published_at": "2026-09-25T18:18:02+00:00",
-          "collected_at": "2026-09-29T19:12:03+00:00",
-          "text": "Bugün teslim edilmesi gereken kargom 3 gündür aynı yerde bekliyor. Trendyol canlı destek “yardımcı olacağız” dedi ama hiçbir şey yapmadı. Kendi kargonuzun nered"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103566701912822124",
-          "published_at": "2026-09-25T19:25:58+00:00",
-          "collected_at": "2026-09-29T19:12:03+00:00",
-          "text": "@u_6a360bbce3 @u_677bd19eca @u_70e4353960 Kuryenet kadar rezil bir firma görmedim . Müşteri hizmetleri yok sadece otomatik mesaj veriyor. Bu zaten başlı başına "
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103832760985030976",
-          "published_at": "2026-09-26T13:03:12+00:00",
-          "collected_at": "2026-09-29T19:11:54+00:00",
-          "text": "@u_5fd866a06e 3 seferdir Bodrum Yokuşbaşı şubesi beni mağdur ediyor. Hem müşteriye hitap hemde ürün teslim etmemekten. 1. Defa ürünümü teslim etmeden habersiz g"
-        }
-      ],
-      "share_previous": 0.019,
-      "share_current": 0.028
-    },
-    {
-      "group": "tema:teslim_sorunu",
-      "raw_current": 6,
-      "raw_previous": 5,
-      "unique_current": 6,
-      "unique_previous": 5,
-      "raw_score": 0.222,
-      "clean_score": 0.222,
-      "duplicate_effect": 0.0,
-      "authors_current": 6,
-      "sources_current": [
-        "eksi",
-        "x"
-      ],
-      "active_days_current": 4,
-      "max_day_share": 0.5,
-      "daily_current": {
-        "2026-09-23": 3,
-        "2026-09-25": 1,
-        "2026-09-26": 1,
-        "2026-09-28": 1
-      },
-      "status": "yukselis_yok",
-      "confidence": "-",
-      "checks": [
-        {
-          "name": "yeterli_kayit",
-          "passed": true,
-          "detail": "son 7 günde 6 tekil içerik (en az 5)"
-        },
-        {
-          "name": "yazar_cesitliligi",
-          "passed": true,
-          "detail": "6 farklı yazar (en az 3)"
-        },
-        {
-          "name": "gunlere_yayilim",
-          "passed": true,
-          "detail": "4 farklı gün (en az 3)"
-        },
-        {
-          "name": "tek_gune_yigilmama",
-          "passed": true,
-          "detail": "en yoğun gün payı %50 (en fazla %60)"
-        },
-        {
-          "name": "kaynak_cesitliligi",
-          "passed": true,
-          "detail": "kaynaklar: eksi, x (en az 2)"
-        },
-        {
-          "name": "kapsama_dengesi",
-          "passed": true,
-          "detail": "dönemler arası gün kapsaması dengeli"
-        },
-        {
-          "name": "ornek_payi",
-          "passed": true,
-          "detail": "örneklenen kaynaklarda pay %0 -> %5"
-        }
-      ],
-      "missing": [],
-      "evidence": [
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102766796331798982",
-          "published_at": "2026-09-23T14:27:26+00:00",
+          "url": "https://x.com/i/status/2102793158870602001",
+          "published_at": "2026-09-23T16:12:11+00:00",
           "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "@u_6ad9d36eea Kargo görevlisi geldi, bina kapısını açtık ancak gönderiyi yukarı çıkarmadan “evde bulunamadı” kaydı oluşturdu. Evde olduğumuz halde kargom teslim"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102809794973175860",
-          "published_at": "2026-09-23T17:18:18+00:00",
-          "collected_at": "2026-09-29T19:12:36+00:00",
-          "text": "@u_7bba9b3bb7 \nTrendyol siparişimin teslimat kodu için arandım ve kodu verdim. Bina girişine bırakıldı olarak mesaj geldi. Fakat kargom yok. Hatta kamera kayıtl"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102822862377689502",
-          "published_at": "2026-09-23T18:10:13+00:00",
-          "collected_at": "2026-09-29T19:12:36+00:00",
-          "text": "@u_6ad9d36eea  kargom teslim edilmiş görünüyor fakat teslim almadım konu ile ilgili bu saatte ulaşabileceğim bir müşteri hizmetleri biriminiz yok ama bu saatte "
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103498019358507360",
-          "published_at": "2026-09-25T14:53:03+00:00",
-          "collected_at": "2026-09-29T19:12:08+00:00",
-          "text": "@u_5fd866a06e Kargom 2 gündür dağıtımda görünüyor ve hâlâ TESLİM EDİLMEDİ! Bugün sabah 09.00’da dağıtıma çıkarıldı, saat 17.00 oldu. İnsanları bütün gün evde be"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2103843273299116371",
-          "published_at": "2026-09-26T13:44:58+00:00",
-          "collected_at": "2026-09-29T19:11:54+00:00",
-          "text": "Kargom teslim edilmedi ama teslim edildi gözüküyor. Müşteri hizmetlerinden bilgi alamadım. @u_d1c7f9aacd"
+          "text": "@u_f5163ee457 E-ticaret yapıyorum. Gördüğüm en en en ilginç şey ürün alıp adres kısmına e-posta adresini yazan müşteriydi. Ayrıca bunlar tırı vırı şeyler değil,"
         }
       ],
-      "share_previous": 0.0,
-      "share_current": 0.046
+      "share_previous": 0.28,
+      "share_current": 0.294
     },
     {
       "group": "firma:firma_belirsiz",
@@ -703,25 +831,27 @@
       "share_current": 0.963
     },
     {
-      "group": "tema:hasar_kayip",
-      "raw_current": 6,
-      "raw_previous": 3,
-      "unique_current": 6,
-      "unique_previous": 3,
-      "raw_score": 0.807,
-      "clean_score": 0.807,
+      "group": "tema:kurye_davranisi",
+      "raw_current": 8,
+      "raw_previous": 5,
+      "unique_current": 8,
+      "unique_previous": 5,
+      "raw_score": 0.585,
+      "clean_score": 0.585,
       "duplicate_effect": 0.0,
-      "authors_current": 6,
+      "authors_current": 7,
       "sources_current": [
+        "eksi",
         "x"
       ],
-      "active_days_current": 4,
-      "max_day_share": 0.5,
+      "active_days_current": 5,
+      "max_day_share": 0.38,
       "daily_current": {
-        "2026-09-23": 1,
         "2026-09-25": 1,
-        "2026-09-26": 3,
-        "2026-09-27": 1
+        "2026-09-26": 1,
+        "2026-09-27": 3,
+        "2026-09-28": 2,
+        "2026-09-29": 1
       },
       "status": "yukselis_yok",
       "confidence": "-",
@@ -729,27 +859,27 @@
         {
           "name": "yeterli_kayit",
           "passed": true,
-          "detail": "son 7 günde 6 tekil içerik (en az 5)"
+          "detail": "son 7 günde 8 tekil içerik (en az 5)"
         },
         {
           "name": "yazar_cesitliligi",
           "passed": true,
-          "detail": "6 farklı yazar (en az 3)"
+          "detail": "7 farklı yazar (en az 3)"
         },
         {
           "name": "gunlere_yayilim",
           "passed": true,
-          "detail": "4 farklı gün (en az 3)"
+          "detail": "5 farklı gün (en az 3)"
         },
         {
           "name": "tek_gune_yigilmama",
           "passed": true,
-          "detail": "en yoğun gün payı %50 (en fazla %60)"
+          "detail": "en yoğun gün payı %38 (en fazla %60)"
         },
         {
           "name": "kaynak_cesitliligi",
-          "passed": false,
-          "detail": "kaynaklar: x (en az 2)"
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
         },
         {
           "name": "kapsama_dengesi",
@@ -758,50 +888,50 @@
         },
         {
           "name": "ornek_payi",
-          "passed": true,
-          "detail": "örneklenen kaynaklarda pay %3 -> %6"
+          "passed": false,
+          "detail": "örneklenen kaynaklarda pay %1 -> %1"
         }
       ],
       "missing": [],
       "evidence": [
         {
           "source": "x",
-          "url": "https://x.com/i/status/2102794095479459869",
-          "published_at": "2026-09-23T16:15:55+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "Sayın @u_1b9530fcea, internet sitenizden aldığım sipariş eksik teslim edildi, Kargo paketi ve teslim aldığım ürünlerin fotoğrafları mevcuttur. Eksik ürünümün ta"
+          "url": "https://x.com/i/status/2103566701912822124",
+          "published_at": "2026-09-25T19:25:58+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "@u_6a360bbce3 @u_677bd19eca @u_70e4353960 Kuryenet kadar rezil bir firma görmedim . Müşteri hizmetleri yok sadece otomatik mesaj veriyor. Bu zaten başlı başına "
         },
         {
-          "source": "x",
-          "url": "https://x.com/i/status/2103511506239332661",
-          "published_at": "2026-09-25T15:46:39+00:00",
-          "collected_at": "2026-09-29T19:12:08+00:00",
-          "text": "@u_5fd866a06e 2 gün teslimat şubesinde kargoyu beklettiniz şimdi başka bir şehre göndermişsiniz rezalet bir daha sizinle alışveriş yapılmaz resmen kargom kaybol"
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186679427",
+          "published_at": "2026-09-26T08:15:00+03:00",
+          "collected_at": "2026-09-29T18:34:28+00:00",
+          "text": "eve kurye çağırdık. kurye kendi hattından arıyor. açılmayınca eve gelmeden evde yoktunuz mesajı gönderiliyor. ben elin adamının şahsi numarasını açıp “evdeyim” "
         },
         {
-          "source": "x",
-          "url": "https://x.com/i/status/2103860236540883187",
-          "published_at": "2026-09-26T14:52:22+00:00",
-          "collected_at": "2026-09-29T19:11:54+00:00",
-          "text": "bugun hem kargom kayboldu hem cipsimi caldirdim asiri kotu bir gun oluyor"
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186716346",
+          "published_at": "2026-09-27T21:14:00+03:00",
+          "collected_at": "2026-09-29T18:34:24+00:00",
+          "text": "kuryelerin müşterilerin geri dönüş yorumlarına ve şikateylerine doğrudan ulaşabildiği ve olumsuz durumlar sonucu müşterilerin hizmet için yaptıkları değerlendir"
         },
         {
-          "source": "x",
-          "url": "https://x.com/i/status/2103882726562566407",
-          "published_at": "2026-09-26T16:21:44+00:00",
-          "collected_at": "2026-09-29T19:11:54+00:00",
-          "text": "Kargom yeni geldi diyebileceğim tek şey hayal kırıklığı. Bayadır JBC'den yeni baskılar için alışveriş yapmıyordum,daha önceden bastıklarını alıyordum. Kompakt e"
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186717045",
+          "published_at": "2026-09-27T21:40:00+03:00",
+          "collected_at": "2026-09-29T18:34:24+00:00",
+          "text": "sebepsiz yere müşterilere trip atan kendini bir sik zanneden bir elemanları var bunların. adını da yakında açık açık yazıcam. değerlendirmede bu durumun rahatsı"
         },
         {
-          "source": "x",
-          "url": "https://x.com/i/status/2103951351235404122",
-          "published_at": "2026-09-26T20:54:26+00:00",
-          "collected_at": "2026-09-29T19:11:51+00:00",
-          "text": "Kargomu bugün paketleyip apartman girişine bıraktım evden çıkmak zorunda kaldım sonra eve geldim kargom yok scooter vardı ya sardım sarmaladım bana gelen mesaj "
+          "source": "eksi",
+          "url": "https://eksisozluk.com/entry/186718086",
+          "published_at": "2026-09-27T22:20:00+03:00",
+          "collected_at": "2026-09-29T18:34:04+00:00",
+          "text": "olumsuz bir durumda kurye tarafından aranılarak taciz edilmeniz muhtemel olan bir oluşumdur kendileri."
         }
       ],
-      "share_previous": 0.028,
-      "share_current": 0.055
+      "share_previous": 0.009,
+      "share_current": 0.009
     },
     {
       "group": "firma:ptt",
@@ -907,6 +1037,110 @@
       "share_current": 0.018
     },
     {
+      "group": "tema:diger",
+      "raw_current": 29,
+      "raw_previous": 25,
+      "unique_current": 29,
+      "unique_previous": 25,
+      "raw_score": 0.206,
+      "clean_score": 0.206,
+      "duplicate_effect": 0.0,
+      "authors_current": 29,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 6,
+      "max_day_share": 0.28,
+      "daily_current": {
+        "2026-09-23": 4,
+        "2026-09-25": 2,
+        "2026-09-26": 8,
+        "2026-09-27": 5,
+        "2026-09-28": 8,
+        "2026-09-29": 2
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 29 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "29 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %28 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": false,
+          "detail": "örneklenen kaynaklarda pay %19 -> %18"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102740340918911458",
+          "published_at": "2026-09-23T12:42:18+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "PTT’ye kargom verilince sinirlerim bozuluyor😅"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102773854166745451",
+          "published_at": "2026-09-23T14:55:29+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_81962891aa deme abı yolda kargom"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102830398858473687",
+          "published_at": "2026-09-23T18:40:10+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "Of kargom ne zaman yola çıkar (5dakika önce sipariş verdim)"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102833826124775428",
+          "published_at": "2026-09-23T18:53:47+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "babam evdeyken 5 kargom da ayni gunde geldi  https://t.co/4mRD6l2GPp"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103507674466009334",
+          "published_at": "2026-09-25T15:31:25+00:00",
+          "collected_at": "2026-09-29T19:12:08+00:00",
+          "text": "@u_99acb93cf8 Benm de bugun dagıtım da olan ptt kargom bir türlü dolanmaktan gelemedi araya haftasonu girdi iyi mi"
+        }
+      ],
+      "share_previous": 0.187,
+      "share_current": 0.183
+    },
+    {
       "group": "TUMU",
       "raw_current": 143,
       "raw_previous": 135,
@@ -1004,110 +1238,6 @@
       ],
       "share_previous": null,
       "share_current": null
-    },
-    {
-      "group": "tema:diger",
-      "raw_current": 93,
-      "raw_previous": 95,
-      "unique_current": 93,
-      "unique_previous": 93,
-      "raw_score": -0.03,
-      "clean_score": 0.0,
-      "duplicate_effect": -0.03,
-      "authors_current": 93,
-      "sources_current": [
-        "eksi",
-        "x"
-      ],
-      "active_days_current": 6,
-      "max_day_share": 0.19,
-      "daily_current": {
-        "2026-09-23": 15,
-        "2026-09-25": 14,
-        "2026-09-26": 14,
-        "2026-09-27": 17,
-        "2026-09-28": 18,
-        "2026-09-29": 15
-      },
-      "status": "yukselis_yok",
-      "confidence": "-",
-      "checks": [
-        {
-          "name": "yeterli_kayit",
-          "passed": true,
-          "detail": "son 7 günde 93 tekil içerik (en az 5)"
-        },
-        {
-          "name": "yazar_cesitliligi",
-          "passed": true,
-          "detail": "93 farklı yazar (en az 3)"
-        },
-        {
-          "name": "gunlere_yayilim",
-          "passed": true,
-          "detail": "6 farklı gün (en az 3)"
-        },
-        {
-          "name": "tek_gune_yigilmama",
-          "passed": true,
-          "detail": "en yoğun gün payı %19 (en fazla %60)"
-        },
-        {
-          "name": "kaynak_cesitliligi",
-          "passed": true,
-          "detail": "kaynaklar: eksi, x (en az 2)"
-        },
-        {
-          "name": "kapsama_dengesi",
-          "passed": true,
-          "detail": "dönemler arası gün kapsaması dengeli"
-        },
-        {
-          "name": "ornek_payi",
-          "passed": false,
-          "detail": "örneklenen kaynaklarda pay %79 -> %70"
-        }
-      ],
-      "missing": [],
-      "evidence": [
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102736026863317390",
-          "published_at": "2026-09-23T12:25:10+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "kıyafet kargom geldi ama acıp denemeye hevesim yok öyle iste"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102740340918911458",
-          "published_at": "2026-09-23T12:42:18+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "PTT’ye kargom verilince sinirlerim bozuluyor😅"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102747171133223256",
-          "published_at": "2026-09-23T13:09:27+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "@u_3f39178f2a @u_189062077e Bir kaç yıl önce esas işinden dolayı beni engelledi kendisi, kargom nerede diye sorduğum için. Çok iyi olmuş erişim engeli."
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102762036270862389",
-          "published_at": "2026-09-23T14:08:31+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "Kargom geldi https://t.co/M8xK98MXSZ"
-        },
-        {
-          "source": "x",
-          "url": "https://x.com/i/status/2102773854166745451",
-          "published_at": "2026-09-23T14:55:29+00:00",
-          "collected_at": "2026-09-29T19:12:38+00:00",
-          "text": "@u_81962891aa deme abı yolda kargom"
-        }
-      ],
-      "share_previous": 0.794,
-      "share_current": 0.697
     },
     {
       "group": "firma:hepsijet",
@@ -1292,52 +1422,55 @@
       "share_current": 0.009
     },
     {
-      "group": "tema:kurye_davranisi",
-      "raw_current": 4,
-      "raw_previous": 4,
-      "unique_current": 4,
-      "unique_previous": 4,
-      "raw_score": 0.0,
-      "clean_score": 0.0,
-      "duplicate_effect": 0.0,
-      "authors_current": 4,
+      "group": "tema:teslim_alindi",
+      "raw_current": 29,
+      "raw_previous": 32,
+      "unique_current": 29,
+      "unique_previous": 30,
+      "raw_score": -0.138,
+      "clean_score": -0.047,
+      "duplicate_effect": -0.091,
+      "authors_current": 29,
       "sources_current": [
-        "eksi"
+        "x"
       ],
-      "active_days_current": 3,
-      "max_day_share": 0.5,
+      "active_days_current": 6,
+      "max_day_share": 0.21,
       "daily_current": {
-        "2026-09-26": 1,
-        "2026-09-27": 2,
-        "2026-09-29": 1
+        "2026-09-23": 5,
+        "2026-09-25": 5,
+        "2026-09-26": 3,
+        "2026-09-27": 6,
+        "2026-09-28": 5,
+        "2026-09-29": 5
       },
       "status": "yukselis_yok",
       "confidence": "-",
       "checks": [
         {
           "name": "yeterli_kayit",
-          "passed": false,
-          "detail": "son 7 günde 4 tekil içerik (en az 5)"
+          "passed": true,
+          "detail": "son 7 günde 29 tekil içerik (en az 5)"
         },
         {
           "name": "yazar_cesitliligi",
           "passed": true,
-          "detail": "4 farklı yazar (en az 3)"
+          "detail": "29 farklı yazar (en az 3)"
         },
         {
           "name": "gunlere_yayilim",
           "passed": true,
-          "detail": "3 farklı gün (en az 3)"
+          "detail": "6 farklı gün (en az 3)"
         },
         {
           "name": "tek_gune_yigilmama",
           "passed": true,
-          "detail": "en yoğun gün payı %50 (en fazla %60)"
+          "detail": "en yoğun gün payı %21 (en fazla %60)"
         },
         {
           "name": "kaynak_cesitliligi",
           "passed": false,
-          "detail": "kaynaklar: eksi (en az 2)"
+          "detail": "kaynaklar: x (en az 2)"
         },
         {
           "name": "kapsama_dengesi",
@@ -1347,61 +1480,171 @@
         {
           "name": "ornek_payi",
           "passed": false,
-          "detail": "örneklenen kaynaklarda pay %1 -> %0"
+          "detail": "örneklenen kaynaklarda pay %30 -> %27"
         }
       ],
       "missing": [],
       "evidence": [
         {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186679427",
-          "published_at": "2026-09-26T08:15:00+03:00",
-          "collected_at": "2026-09-29T18:34:28+00:00",
-          "text": "eve kurye çağırdık. kurye kendi hattından arıyor. açılmayınca eve gelmeden evde yoktunuz mesajı gönderiliyor. ben elin adamının şahsi numarasını açıp “evdeyim” "
+          "source": "x",
+          "url": "https://x.com/i/status/2102736026863317390",
+          "published_at": "2026-09-23T12:25:10+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "kıyafet kargom geldi ama acıp denemeye hevesim yok öyle iste"
         },
         {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186716346",
-          "published_at": "2026-09-27T21:14:00+03:00",
-          "collected_at": "2026-09-29T18:34:24+00:00",
-          "text": "kuryelerin müşterilerin geri dönüş yorumlarına ve şikateylerine doğrudan ulaşabildiği ve olumsuz durumlar sonucu müşterilerin hizmet için yaptıkları değerlendir"
+          "source": "x",
+          "url": "https://x.com/i/status/2102762036270862389",
+          "published_at": "2026-09-23T14:08:31+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Kargom geldi https://t.co/M8xK98MXSZ"
         },
         {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186718086",
-          "published_at": "2026-09-27T22:20:00+03:00",
-          "collected_at": "2026-09-29T18:34:04+00:00",
-          "text": "olumsuz bir durumda kurye tarafından aranılarak taciz edilmeniz muhtemel olan bir oluşumdur kendileri."
+          "source": "x",
+          "url": "https://x.com/i/status/2102822862377689502",
+          "published_at": "2026-09-23T18:10:13+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "@u_6ad9d36eea  kargom teslim edilmiş görünüyor fakat teslim almadım konu ile ilgili bu saatte ulaşabileceğim bir müşteri hizmetleri biriminiz yok ama bu saatte "
         },
         {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186764579",
-          "published_at": "2026-09-29T17:31:00+03:00",
-          "collected_at": "2026-09-29T18:34:10+00:00",
-          "text": "berbat bir kargo firmasıdır, başka seçenek var ise kesinlikle başka seçenek ile ilerlenmelidir. cumartesi kapıma getirdikleri ürünü, kurye hatası sebebiyle ipta"
+          "source": "x",
+          "url": "https://x.com/i/status/2102826557308113184",
+          "published_at": "2026-09-23T18:24:54+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "Surekli babacim hayatimda ol hep diyorum bi sekilde bana hep isaret gonder diyorum, kargom geldi yanlis urun gondermisler uzerinde de babamin adi yazili babamin"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102861653641458048",
+          "published_at": "2026-09-23T20:44:22+00:00",
+          "collected_at": "2026-09-29T19:12:36+00:00",
+          "text": "bugün kargocu abiyi dolabdırıcı sandıgım icin hem yuzune kapattım hem de bagrınıverdim kimi kandırıyosun sen die meger gercekten kargom gelmis saat 8de artık bi"
         }
       ],
-      "share_previous": 0.009,
-      "share_current": 0.0
+      "share_previous": 0.299,
+      "share_current": 0.266
     },
     {
-      "group": "tema:genel_memnuniyetsizlik",
-      "raw_current": 4,
-      "raw_previous": 5,
-      "unique_current": 4,
-      "unique_previous": 5,
-      "raw_score": -0.263,
-      "clean_score": -0.263,
+      "group": "tema:bekleniyor",
+      "raw_current": 15,
+      "raw_previous": 24,
+      "unique_current": 15,
+      "unique_previous": 24,
+      "raw_score": -0.644,
+      "clean_score": -0.644,
       "duplicate_effect": 0.0,
-      "authors_current": 4,
+      "authors_current": 15,
       "sources_current": [
-        "eksi"
+        "x"
       ],
-      "active_days_current": 3,
+      "active_days_current": 6,
+      "max_day_share": 0.27,
+      "daily_current": {
+        "2026-09-23": 3,
+        "2026-09-25": 1,
+        "2026-09-26": 3,
+        "2026-09-27": 4,
+        "2026-09-28": 1,
+        "2026-09-29": 3
+      },
+      "status": "yukselis_yok",
+      "confidence": "-",
+      "checks": [
+        {
+          "name": "yeterli_kayit",
+          "passed": true,
+          "detail": "son 7 günde 15 tekil içerik (en az 5)"
+        },
+        {
+          "name": "yazar_cesitliligi",
+          "passed": true,
+          "detail": "15 farklı yazar (en az 3)"
+        },
+        {
+          "name": "gunlere_yayilim",
+          "passed": true,
+          "detail": "6 farklı gün (en az 3)"
+        },
+        {
+          "name": "tek_gune_yigilmama",
+          "passed": true,
+          "detail": "en yoğun gün payı %27 (en fazla %60)"
+        },
+        {
+          "name": "kaynak_cesitliligi",
+          "passed": false,
+          "detail": "kaynaklar: x (en az 2)"
+        },
+        {
+          "name": "kapsama_dengesi",
+          "passed": true,
+          "detail": "dönemler arası gün kapsaması dengeli"
+        },
+        {
+          "name": "ornek_payi",
+          "passed": false,
+          "detail": "örneklenen kaynaklarda pay %22 -> %14"
+        }
+      ],
+      "missing": [],
+      "evidence": [
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102748120689881381",
+          "published_at": "2026-09-23T13:13:13+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Yeğenim tabletimi balkondan atmış. Notlarım içindeydi, kargom vardı bugün gelmesi gerekiyordu gelmedi takip edemiyorum. Delirmeme ramak kaldı"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102774643270566120",
+          "published_at": "2026-09-23T14:58:37+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "Yurda geldiğimdendir her Allah'ın günü kargom geliyor babam görse cildirir (kargocu nefreti var)"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2102807030528725465",
+          "published_at": "2026-09-23T17:07:19+00:00",
+          "collected_at": "2026-09-29T19:12:38+00:00",
+          "text": "@u_d1c7f9aacd Şanlıurfa El ruha şubeniz de kargom vardı sabah msj geldi dağıtıma çıktı diye akşam 19 30 da msj geldi geldik yoktunuz diye gelip kendiniz alın di"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103589698925125992",
+          "published_at": "2026-09-25T20:57:21+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "@u_e79a1ff1dc tüm gün bir de kargom gelecek diye bekliyorsun ve gelmiyor"
+        },
+        {
+          "source": "x",
+          "url": "https://x.com/i/status/2103771925151363374",
+          "published_at": "2026-09-26T09:01:27+00:00",
+          "collected_at": "2026-09-29T19:11:54+00:00",
+          "text": "@u_e71806b95d @u_b15304b89d günlerdir bekledigim kargom nerede belli değil, sonuç alabilecek bir muhattapa ulasamiyorum.. yapay zekayla iletisim kurmaktan yorul"
+        }
+      ],
+      "share_previous": 0.215,
+      "share_current": 0.138
+    },
+    {
+      "group": "tema:ucret_zam",
+      "raw_current": 2,
+      "raw_previous": 1,
+      "unique_current": 2,
+      "unique_previous": 1,
+      "raw_score": 0.585,
+      "clean_score": 0.585,
+      "duplicate_effect": 0.0,
+      "authors_current": 2,
+      "sources_current": [
+        "eksi",
+        "x"
+      ],
+      "active_days_current": 2,
       "max_day_share": 0.5,
       "daily_current": {
-        "2026-09-23": 1,
-        "2026-09-25": 2,
+        "2026-09-25": 1,
         "2026-09-28": 1
       },
       "status": "yukselis_yok",
@@ -1410,17 +1653,17 @@
         {
           "name": "yeterli_kayit",
           "passed": false,
-          "detail": "son 7 günde 4 tekil içerik (en az 5)"
+          "detail": "son 7 günde 2 tekil içerik (en az 5)"
         },
         {
           "name": "yazar_cesitliligi",
-          "passed": true,
-          "detail": "4 farklı yazar (en az 3)"
+          "passed": false,
+          "detail": "2 farklı yazar (en az 3)"
         },
         {
           "name": "gunlere_yayilim",
-          "passed": true,
-          "detail": "3 farklı gün (en az 3)"
+          "passed": false,
+          "detail": "2 farklı gün (en az 3)"
         },
         {
           "name": "tek_gune_yigilmama",
@@ -1429,8 +1672,8 @@
         },
         {
           "name": "kaynak_cesitliligi",
-          "passed": false,
-          "detail": "kaynaklar: eksi (en az 2)"
+          "passed": true,
+          "detail": "kaynaklar: eksi, x (en az 2)"
         },
         {
           "name": "kapsama_dengesi",
@@ -1439,43 +1682,29 @@
         },
         {
           "name": "ornek_payi",
-          "passed": false,
-          "detail": "örneklenen kaynaklarda pay %1 -> %0"
+          "passed": true,
+          "detail": "örneklenen kaynaklarda pay %0 -> %1"
         }
       ],
       "missing": [],
       "evidence": [
         {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186614222",
-          "published_at": "2026-09-23T12:01:00+03:00",
-          "collected_at": "2026-09-29T18:33:49+00:00",
-          "text": "iğrenç. berbat. rezil."
+          "source": "x",
+          "url": "https://x.com/i/status/2103547331207421989",
+          "published_at": "2026-09-25T18:09:00+00:00",
+          "collected_at": "2026-09-29T19:12:03+00:00",
+          "text": "@u_c91d7d2f6e @u_6ad9d36eea Yaklaşık 50 kere arayıp kıyameti kopardıktan sonra geldi ama daha önce hiç gelmeyen ve aldığım yerden ücret iadesi aldığım kargom ol"
         },
         {
           "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186661207",
-          "published_at": "2026-09-25T15:07:00+03:00",
-          "collected_at": "2026-09-29T18:33:39+00:00",
-          "text": "rezalet ötesi kargo firması. kendimce sadece bu kargo firmasıyla çalışıp gönderim yapan yerlerden alışveriş yapmiyordum ama bu durumu daha da genişletip bu karg"
-        },
-        {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186664473",
-          "published_at": "2026-09-25T18:12:00+03:00",
+          "url": "https://eksisozluk.com/entry/186733856",
+          "published_at": "2026-09-28T16:01:00+03:00",
           "collected_at": "2026-09-29T18:34:04+00:00",
-          "text": "asla kullanmayın. asla diyorum size. bir kargo yollayacaklar bana ulaşma zahmetinde bulunmadan iptal ediyorlar: allah gani gani belalarını versin."
-        },
-        {
-          "source": "eksi",
-          "url": "https://eksisozluk.com/entry/186736262",
-          "published_at": "2026-09-28T18:05:00+03:00",
-          "collected_at": "2026-09-29T18:34:20+00:00",
-          "text": "ptt kargonun olduğu ortamda ancak ve ancak en kötü 2. kargo şirketi anketi yapılabilir."
+          "text": "her bölgeye göre değişiyor yorumlarda gördüğümüz o. bizim burda kaç tane dağıtıcı değişsede aşağı yukarı hizmet güzel özellikle hepsiburadanın sepette ne olursa"
         }
       ],
-      "share_previous": 0.009,
-      "share_current": 0.0
+      "share_previous": 0.0,
+      "share_current": 0.009
     },
     {
       "group": "firma:aras",

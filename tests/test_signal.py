@@ -166,3 +166,17 @@ def test_min_sources_override():
     cur = [rec(100 + i, 0.5 + (i % 5), source="eksi") for i in range(10)]
     assert _group(analyze(prev + cur, ASOF)).status == "dogrulanamadi"
     assert _group(analyze(prev + cur, ASOF, min_sources=1)).status == "yukselis_adayi"
+
+
+def test_record_counts_under_every_matching_theme():
+    from trend.analysis.grouping import assign_themes
+    text = "kargom 3 gündür bekliyor, canlı destek yardımcı olmadı"
+    themes = assign_themes(text)
+    assert "gecikme" in themes and "musteri_hizmetleri" in themes
+    assert assign_themes("zaman zaman kargo kullanırım") == ["diger"]
+
+
+def test_theme_word_end_avoids_place_names():
+    from trend.analysis.grouping import assign_themes
+    assert "hasar_kayip" not in assign_themes("kargom gelene kadar Kırıkkale'ye kış geldi")
+    assert "hasar_kayip" in assign_themes("bardaklar kırık geldi")

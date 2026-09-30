@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-import io
+import os
+import subprocess
 import sys
-from contextlib import redirect_stdout
+import time as _time
+from collections import deque
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 
@@ -11,7 +13,6 @@ import streamlit as st
 from dotenv import dotenv_values
 
 from trend import config
-from trend.cli import main as cli_main
 from trend.pipeline import Options, run_analysis
 from trend.report import STATUS_TR, write
 from trend.topics import _slug, init_topic, keywords_from_label
@@ -53,20 +54,6 @@ section[data-testid="stSidebar"] h2 {font-size: 1rem; margin-top: .6rem;}
 """
 
 
-class LiveLog(io.StringIO):
-    def __init__(self, box):
-        super().__init__()
-        self.box = box
-
-    def write(self, s: str) -> int:
-        sys.__stdout__.write(s)
-        sys.__stdout__.flush()
-        n = super().write(s)
-        lines = self.getvalue().splitlines()[-15:]
-        self.box.code("\n".join(lines) or " ", language=None)
-        return n
-
-
 def missing_login() -> set[str]:
     env = dotenv_values(config.ROOT / ".env")
     return {src for src, keys in NEEDS_LOGIN.items() if not all(env.get(k) for k in keys)}
@@ -106,6 +93,28 @@ def ensure_topic(name: str, label: str, keywords: str, brands: str) -> str:
     return ""
 
 
+def run_logged(args: list[str], box) -> int:
+    env = dict(os.environ, PYTHONUNBUFFERED="1", PYTHONIOENCODING="utf-8")
+    proc = subprocess.Popen([sys.executable, "-m", "trend"] + args, cwd=config.ROOT, env=env,
+                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8",
+                            errors="replace", bufsize=1)
+    lines: deque[str] = deque(maxlen=15)
+    last = 0.0
+    try:
+        for line in proc.stdout:
+            sys.__stdout__.write(line)
+            lines.append(line.rstrip())
+            if _time.monotonic() - last > 0.5:
+                box.code("\n".join(lines) or " ", language=None)
+                last = _time.monotonic()
+        proc.wait()
+    finally:
+        if proc.poll() is None:
+            proc.terminate()
+    box.code("\n".join(lines) or " ", language=None)
+    return proc.returncode
+
+
 def collect(name: str, sources: list[str], days: int, until: date, fast: bool) -> list[str]:
     done = []
     for src in sources:
@@ -115,15 +124,12 @@ def collect(name: str, sources: list[str], days: int, until: date, fast: bool) -
         if fast and src == "eksi":
             args += ["--delay", "1.0", "--max-discovered", "10"]
         with st.status(f"{SOURCES[src]} toplanıyor...", expanded=True) as box:
-            log = LiveLog(st.empty())
-            try:
-                with redirect_stdout(log):
-                    cli_main(args)
+            code = run_logged(args, st.empty())
+            if code == 0:
                 done.append(src)
                 box.update(label=f"{SOURCES[src]} tamamlandı", state="complete", expanded=False)
-            except (Exception, SystemExit) as e:
-                log.write(f"\n{type(e).__name__}: {e}\n")
-                box.update(label=f"{SOURCES[src]} atlandı: {e}", state="error", expanded=False)
+            else:
+                box.update(label=f"{SOURCES[src]} atlandı (ayrıntı yukarıdaki kayıtta)", state="error", expanded=True)
     return done
 
 
@@ -198,6 +204,14 @@ def show_result(out, window: int) -> None:
     groups = [g for g in result["groups"] if g.group != "TUMU"]
     candidates = [g for g in groups if g.status != "yukselis_yok"][:3]
 
+    important = [n for n in out.notes if "disarida" in n or "ilgisiz" in n or n.startswith("uyari")]
+    if t["records"] == 0:
+        st.error("Filtrelerden sonra analize kayıt kalmadı. Nedenleri:\n\n" + "\n".join(f"- {n}" for n in out.notes))
+        st.caption("Sık görülen nedenler: X'te önceki dönemin günleri boş kaldığı için sorgu analiz dışı bırakıldı "
+                   "(hızlı modu kapatıp tekrar toplayın ya da daha kısa dönem seçin), anahtar kelime değiştiği için "
+                   "eski kayıtlar konu dışı sayıldı ya da Ekşi seçilmedi.")
+    elif important:
+        st.warning("Dikkat:\n\n" + "\n".join(f"- {n}" for n in important))
     st.markdown(f"Genel durum: {pill(tumu.status)}", unsafe_allow_html=True)
     cols = st.columns(4)
     cols[0].metric("Analize giren kayıt", t["records"])

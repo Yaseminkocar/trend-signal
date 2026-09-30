@@ -8,7 +8,7 @@ from typing import Callable, Optional
 
 from .. import config
 from ..schema import Record
-from .grouping import assign_brand, assign_theme, near_duplicate_clusters
+from .grouping import assign_brand, assign_themes, near_duplicate_clusters
 
 
 @dataclass
@@ -212,8 +212,8 @@ def analyze_group(name: str, records: list[Record], asof: datetime,
     )
 
 
-DIMENSIONS: dict[str, Callable[[Record], str]] = {
-    "tema": lambda r: assign_theme(r.text)[0],
+DIMENSIONS: dict[str, Callable[[Record], object]] = {
+    "tema": lambda r: assign_themes(r.text),
     "firma": assign_brand,
 }
 
@@ -228,7 +228,9 @@ def analyze(records: list[Record], asof: datetime,
     groups: dict[str, list[Record]] = defaultdict(list)
     for dim, fn in dimensions.items():
         for r in records:
-            groups[f"{dim}:{fn(r)}"].append(r)
+            value = fn(r)
+            for v in (value if isinstance(value, list) else [value]):
+                groups[f"{dim}:{v}"].append(r)
 
     cov = coverage(records, asof, window)
     extra = [coverage_check(cov)]
