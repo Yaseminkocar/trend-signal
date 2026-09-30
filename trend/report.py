@@ -17,10 +17,11 @@ def write(result: dict, verdicts: list[BotVerdict], out_dir: Path) -> Path:
     (out_dir / "signals.json").write_text(json.dumps(js, ensure_ascii=False, indent=2), encoding="utf-8")
 
     t = result["totals"]
+    w = result.get("window_days", 7)
     L = [f"# Sinyal özeti (asof {result['asof']})", "",
-         f"- Son 7 gün: `{result['periods']['current'][0]}` -> `{result['periods']['current'][1]}`",
-         f"- Önceki 7 gün: `{result['periods']['previous'][0]}` -> `{result['periods']['previous'][1]}`",
-         f"- Kayıt: {t['records']} (son 7g: {t['current']}, önceki 7g: {t['previous']}, "
+         f"- Son {w} gün: `{result['periods']['current'][0]}` -> `{result['periods']['current'][1]}`",
+         f"- Önceki {w} gün: `{result['periods']['previous'][0]}` -> `{result['periods']['previous'][1]}`",
+         f"- Kayıt: {t['records']} (son {w}g: {t['current']}, önceki {w}g: {t['previous']}, "
          f"yayın zamanı yok: {t['undated']}, dönem dışı: {t['outside_windows']}); "
          f"tekil içerik kümesi: {t['unique_clusters']}; hariç tutulan bot-olası hesap: {t['bot_authors_excluded']}",
          "- Gün kapsaması (kaynak: önceki/son): " + ", ".join(
@@ -42,7 +43,7 @@ def write(result: dict, verdicts: list[BotVerdict], out_dir: Path) -> Path:
         L.append("Eşiği geçen grup yok: **yükseliş bulunamadı** (bu da geçerli bir sonuç).")
     for g in cands:
         L += [f"### {g.group} - {STATUS_TR[g.status]} (güven: {g.confidence})",
-              f"- Tekil içerik: önceki 7g **{g.unique_previous}** -> son 7g **{g.unique_current}** "
+              f"- Tekil içerik: önceki {w}g **{g.unique_previous}** -> son {w}g **{g.unique_current}** "
               f"(temiz puan {g.clean_score:+.2f}, ham {g.raw_score:+.2f})",
               f"- Günlere dağılım: {g.daily_current}",
               "- Kontroller: " + "; ".join(("[ok] " if c.passed else "[eksik] ") + c.detail for c in g.checks)]

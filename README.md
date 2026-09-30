@@ -15,7 +15,26 @@ pip install -r requirements.txt
 Yalnız X'ten yeniden veri toplamak için ek olarak `playwright install chromium` çalıştırın ve `cp .env.example .env`
 ile oluşan dosyaya yan hesabın `auth_token` / `ct0` cookie'lerini yazın.
 
-## Çalıştırma
+## Önerilen: arayüzle kullanım
+
+Kolay kullanım için arayüzle çalıştırmanız önerilir. Arayüz isteğe bağlıdır; aşağıdaki komut satırı akışı ve testler
+onsuz da çalışır.
+
+```bash
+pip install -r requirements-ui.txt
+streamlit run app.py
+```
+
+Tarayıcıda açılan sayfada konu yazılır, kaynaklar (Ekşi, X, Instagram, TikTok) ve karşılaştırma dönemi (7, 14 ya da
+21 gün) seçilir, filtreler (konu dışı içerik, ilan/kurumsal paylaşım, bot olası hesap, en az kaynak sayısı) açılıp
+kapatılabilir. İnternet ve hesap gerektirmeden denemek için konu kutusuna `kargo` yazıp "Kayıtlı veriyle analiz et" düğmesine
+basın: repodaki veriyle `reports/signals_2026-09-30.md` ile aynı sonuç görünür. Sonuç ekranında aday sinyaller, kontroller,
+kanıt linkleri, günlere göre içerik grafiği ve tüm grupların tablosu var; rapor `.md` ve `.json` olarak indirilebilir.
+Yeni konuda X toplaması varsayılan olarak hızlı modda çalışır (günde en fazla 10 gönderi, 10 profil, boş gün için bekleme yok;
+birkaç dakika). Hızlı mod kapatılırsa sonuç daha sağlam olur ama toplama 15-30 dakika sürebilir. Komut satırında karşılığı
+`collect x --per-day 10 --profiles 10 --no-retry`.
+
+## Çalıştırma (komut satırı)
 
 **1) Testler** — internet gerekmez, canlı siteye bağlı değil:
 
@@ -89,6 +108,8 @@ python -m trend --topic kahve collect eksi
 python -m trend --topic kahve analyze
 ```
 
+Başka dönem uzunluğu: `--window 14` son 14 günü önceki 14 günle kıyaslar (`analyze` ve `run` komutlarında).
+
 Başka tarih: analizde `--asof` kıyas anını, toplamada `--until` pencerenin son gününü belirler
 (ör. 1-14 Ağustos için `--until 2026-08-14 --days 14`):
 
@@ -122,9 +143,11 @@ trend/
   profiles.py      açıklanabilir bot puanı
   analysis/        grouping.py (tema/firma + yakın-tekrar), signal.py (7/7 kıyas, kontroller), ads.py (ilan filtresi)
   topics.py        konu dosyası üretimi (init-topic)
+  pipeline.py      filtreler + analiz (komut satırı ve arayüz ortak kullanır)
   report.py, cli.py
+app.py             Streamlit arayüzü
 topics/            konu ayarları (kargo.json, elektrikli_arac.json)
-tests/             56 offline test + fixture'lar
+tests/             60 offline test + fixture'lar
 bench/             araç karşılaştırması, TikTok/IG denemesi
 ```
 

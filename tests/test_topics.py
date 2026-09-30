@@ -89,3 +89,10 @@ def test_run_creates_topic_then_collects_and_analyzes(tmp_path, monkeypatch):
     assert calls == [("collect", "filtre_kahve", "eksi"), ("collect", "filtre_kahve", "x"),
                      ("analyze", "filtre_kahve", "eksi,x")]
     config.use_topic("kargo")
+
+
+def test_keywords_from_label():
+    from trend.topics import keywords_from_label
+    assert keywords_from_label("apple ve telefon fiyatları") == ["apple", "telefon fiyatları"]
+    assert keywords_from_label("kahve, çay") == ["kahve", "çay"]
+    assert keywords_from_label("elektrikli scooter") == ["elektrikli scooter"]

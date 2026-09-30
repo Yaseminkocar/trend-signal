@@ -148,3 +148,21 @@ def test_kolay_gelsin_greeting_is_not_the_carrier():
     from trend.analysis.grouping import assign_brand
     assert assign_brand(rec(1, 1, text="Kolay gelsin herkese, sipariş için DM, PTT kargo ile gönderiyorum")) == "ptt"
     assert assign_brand(rec(2, 1, text="Kolay gelsin kargo 12 gündür paketimi teslim edemedi")) == "kolay_gelsin"
+
+
+def test_window_parameter_changes_periods():
+    rs = [rec(1, 2), rec(2, 10), rec(3, 20), rec(4, 25)]
+    cur7, prev7, _, _ = split_periods(rs, ASOF)
+    cur14, prev14, _, _ = split_periods(rs, ASOF, window=14)
+    assert (len(cur7), len(prev7)) == (1, 1)
+    assert (len(cur14), len(prev14)) == (2, 2)
+    res = analyze(rs, ASOF, window=14)
+    assert res["window_days"] == 14
+    assert res["periods"]["previous"][0] == (ASOF - timedelta(days=28)).isoformat()
+
+
+def test_min_sources_override():
+    prev = [rec(i, 9 + i % 4, source="eksi") for i in range(2)]
+    cur = [rec(100 + i, 0.5 + (i % 5), source="eksi") for i in range(10)]
+    assert _group(analyze(prev + cur, ASOF)).status == "dogrulanamadi"
+    assert _group(analyze(prev + cur, ASOF, min_sources=1)).status == "yukselis_adayi"

@@ -46,8 +46,8 @@ def log_ratio(cur: int, prev: int) -> float:
     return round(math.log2((cur + 1) / (prev + 1)), 3)
 
 
-def split_periods(records: list[Record], asof: datetime):
-    cur_start, prev_start = asof - timedelta(days=7), asof - timedelta(days=14)
+def split_periods(records: list[Record], asof: datetime, window: int = 7):
+    cur_start, prev_start = asof - timedelta(days=window), asof - timedelta(days=2 * window)
     cur, prev, undated, older = [], [], [], []
     for r in records:
         t = r.published_dt
@@ -66,8 +66,8 @@ def _unique_count(rs: list[Record], cluster: dict[str, str], bots: set[str]) -> 
     return len({cluster[r.id] for r in rs if not (r.author and r.author in bots)})
 
 
-def coverage(records: list[Record], asof: datetime) -> dict[str, dict[str, int]]:
-    cur, prev, _, _ = split_periods(records, asof)
+def coverage(records: list[Record], asof: datetime, window: int = 7) -> dict[str, dict[str, int]]:
+    cur, prev, _, _ = split_periods(records, asof, window)
     out: dict[str, dict[str, int]] = {}
     for label, rs in (("current_days", cur), ("previous_days", prev)):
         for r in rs:
@@ -107,8 +107,9 @@ def balance_sampled(records: list[Record], cap: int) -> tuple[list[Record], int]
     return keep, dropped
 
 
-def drop_unbalanced_queries(records: list[Record], asof: datetime) -> tuple[list[Record], dict[str, str]]:
-    cur_start, prev_start = asof - timedelta(days=7), asof - timedelta(days=14)
+def drop_unbalanced_queries(records: list[Record], asof: datetime,
+                            window: int = 7) -> tuple[list[Record], dict[str, str]]:
+    cur_start, prev_start = asof - timedelta(days=window), asof - timedelta(days=2 * window)
     days: dict[tuple, dict[str, set]] = defaultdict(lambda: {"cur": set(), "prev": set()})
     for r in records:
         if r.source in SAMPLED_SOURCES and r.published_at:
@@ -127,8 +128,8 @@ def drop_unbalanced_queries(records: list[Record], asof: datetime) -> tuple[list
     return kept, excluded
 
 
-def sampled_totals(records: list[Record], asof: datetime) -> tuple[int, int]:
-    cur, prev, _, _ = split_periods([r for r in records if r.source in SAMPLED_SOURCES], asof)
+def sampled_totals(records: list[Record], asof: datetime, window: int = 7) -> tuple[int, int]:
+    cur, prev, _, _ = split_periods([r for r in records if r.source in SAMPLED_SOURCES], asof, window)
     return len(cur), len(prev)
 
 
@@ -136,7 +137,7 @@ def share_check(cur: list[Record], prev: list[Record], totals: tuple[int, int]):
     g_cur = sum(r.source in SAMPLED_SOURCES for r in cur)
     g_prev = sum(r.source in SAMPLED_SOURCES for r in prev)
     t_cur, t_prev = totals
-    if not (g_cur or g_prev) or not (t_cur and t_prev):
+    if not (g_cur or g_prev) or not (t_cur and t_prev) or (g_cur, g_prev) == (t_cur, t_prev):
         return None, None, None
     s_cur, s_prev = round(g_cur / t_cur, 3), round(g_prev / t_prev, 3)
     return s_prev, s_cur, Check("ornek_payi", s_cur > s_prev,
@@ -145,8 +146,10 @@ def share_check(cur: list[Record], prev: list[Record], totals: tuple[int, int]):
 
 def analyze_group(name: str, records: list[Record], asof: datetime,
                   cluster: dict[str, str], bots: set[str], extra_checks: Optional[list[Check]] = None,
-                  sampled: Optional[tuple[int, int]] = None) -> GroupSignal:
-    cur, prev, _, _ = split_periods(records, asof)
+                  sampled: Optional[tuple[int, int]] = None, window: int = 7,
+                  min_sources: Optional[int] = None) -> GroupSignal:
+    cur, prev, _, _ = split_periods(records, asof, window)
+    min_sources = config.MIN_SOURCES if min_sources is None else min_sources
     u_cur, u_prev = _unique_count(cur, cluster, bots), _unique_count(prev, cluster, bots)
     raw_s, clean_s = log_ratio(len(cur), len(prev)), log_ratio(u_cur, u_prev)
 
@@ -158,15 +161,15 @@ def analyze_group(name: str, records: list[Record], asof: datetime,
 
     checks = [
         Check("yeterli_kayit", u_cur >= config.MIN_UNIQUE_CURRENT,
-              f"son 7 günde {u_cur} tekil içerik (en az {config.MIN_UNIQUE_CURRENT})"),
+              f"son {window} günde {u_cur} tekil içerik (en az {config.MIN_UNIQUE_CURRENT})"),
         Check("yazar_cesitliligi", len(authors) >= config.MIN_AUTHORS_CURRENT,
               f"{len(authors)} farklı yazar (en az {config.MIN_AUTHORS_CURRENT})"),
         Check("gunlere_yayilim", len(days) >= config.MIN_ACTIVE_DAYS_CURRENT,
               f"{len(days)} farklı gün (en az {config.MIN_ACTIVE_DAYS_CURRENT})"),
         Check("tek_gune_yigilmama", max_share <= config.MAX_SINGLE_DAY_SHARE,
               f"en yoğun gün payı %{max_share*100:.0f} (en fazla %{config.MAX_SINGLE_DAY_SHARE*100:.0f})"),
-        Check("kaynak_cesitliligi", len(sources) >= config.MIN_SOURCES,
-              f"kaynaklar: {', '.join(sources) or '-'} (en az {config.MIN_SOURCES})"),
+        Check("kaynak_cesitliligi", len(sources) >= min_sources,
+              f"kaynaklar: {', '.join(sources) or '-'} (en az {min_sources})"),
     ]
     checks += list(extra_checks or [])
     s_prev = s_cur = None
@@ -217,7 +220,8 @@ DIMENSIONS: dict[str, Callable[[Record], str]] = {
 
 def analyze(records: list[Record], asof: datetime,
             bots: Optional[set[str]] = None,
-            dimensions: Optional[dict[str, Callable[[Record], str]]] = None) -> dict:
+            dimensions: Optional[dict[str, Callable[[Record], str]]] = None,
+            window: int = 7, min_sources: Optional[int] = None) -> dict:
     bots = bots or set()
     dimensions = dimensions or DIMENSIONS
     cluster = near_duplicate_clusters(records)
@@ -226,20 +230,23 @@ def analyze(records: list[Record], asof: datetime,
         for r in records:
             groups[f"{dim}:{fn(r)}"].append(r)
 
-    cov = coverage(records, asof)
+    cov = coverage(records, asof, window)
     extra = [coverage_check(cov)]
-    sampled = sampled_totals(records, asof)
-    results = [analyze_group(g, rs, asof, cluster, bots, extra, sampled) for g, rs in groups.items()]
-    results.append(analyze_group("TUMU", records, asof, cluster, bots, extra))
+    sampled = sampled_totals(records, asof, window)
+    results = [analyze_group(g, rs, asof, cluster, bots, extra, sampled, window, min_sources)
+               for g, rs in groups.items()]
+    results.append(analyze_group("TUMU", records, asof, cluster, bots, extra, None, window, min_sources))
     order = {"yukselis_adayi": 0, "dogrulanamadi": 1, "yukselis_yok": 2}
     results.sort(key=lambda s: (order[s.status], -sum(c.passed for c in s.checks), -s.clean_score, s.group))
 
-    cur, prev, undated, older = split_periods(records, asof)
+    cur, prev, undated, older = split_periods(records, asof, window)
+    w = timedelta(days=window)
     return {
         "asof": asof.isoformat(),
+        "window_days": window,
         "periods": {
-            "current": [(asof - timedelta(days=7)).isoformat(), asof.isoformat()],
-            "previous": [(asof - timedelta(days=14)).isoformat(), (asof - timedelta(days=7)).isoformat()],
+            "current": [(asof - w).isoformat(), asof.isoformat()],
+            "previous": [(asof - 2 * w).isoformat(), (asof - w).isoformat()],
         },
         "coverage": cov,
         "totals": {"records": len(records), "current": len(cur), "previous": len(prev),

@@ -68,3 +68,9 @@ def test_hand_labels_accuracy():
             fn += gold and not pred
     assert tp / (tp + fp) >= 0.9
     assert tp / (tp + fn) >= 0.8
+
+
+def test_share_check_skips_group_covering_all_sampled():
+    cur = [rec(i, 2, source="x") for i in range(6)]
+    prev = [rec(100 + i, 9, source="x") for i in range(3)]
+    assert share_check(cur, prev, (6, 3)) == (None, None, None)

@@ -224,7 +224,8 @@ def in_day(rec: Record, day: str) -> bool:
         config.TR_TZ).date().isoformat() == day
 
 
-def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, debug_dir=None, skip=frozenset(), sink=None):
+def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, debug_dir=None, skip=frozenset(), sink=None,
+                retry=True):
     import json as _json
     from urllib.parse import quote
     from playwright.sync_api import sync_playwright
@@ -337,7 +338,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
                     print(f"[x] {day} '{base[:40]}' -> zaten dolu, atlandı")
                     continue
                 n = search_day(base, day, q)
-                if n == 0:
+                if n == 0 and retry:
                     wait = random.randint(60, 90)
                     print(f"[x] {day} boş döndü -> {wait}s bekleyip tekrar deneniyor")
                     page.wait_for_timeout(wait * 1000)
@@ -347,7 +348,8 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
                     log_issue(SOURCE, "doygun_gun", f"{day} {base}", f"üst sınır {per_day}; hacim alt sınırdır")
                 elif n == 0:
                     log_issue(SOURCE, "bos_gun", f"{day} {base}",
-                              "bekleyip tekrar denendi, yine boş (rate limit ya da sonuç yok)")
+                              "bekleyip tekrar denendi, yine boş (rate limit ya da sonuç yok)" if retry
+                              else "hızlı modda tekrar denenmedi; --fill-gaps ile doldurulabilir")
                 page.wait_for_timeout(random.randint(4000, 7000))
 
         for sn, user in list(users.items())[:with_profiles]:
@@ -379,7 +381,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
         if v:
             log_issue(SOURCE, k, f"{v} tweet/yanıt", {"stale_query": "önceki sorgunun geç yanıtı, atlandı",
                                                        "off_day": "istenen gün dışında, o günün kotasına sayılmadı",
-                                                       "irrelevant": "metinde kargo bağlamı yok, elendi",
+                                                       "irrelevant": "metinde konu kelimesi yok, elendi",
                 "query_unknown": "yanıtın sorgusu okunamadı; tarih filtresiyle korundu"}[k])
     print(f"[x] filtre: {stats}")
     return list(records.values()), profiles
@@ -387,10 +389,11 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
 
 def collect(queries: list[str] | None = None, days: int = 14, per_day: int = 20,
             today: date | None = None, with_profiles: int = 30, backend: str = "playwright",
-            headless: bool = True, debug_dir=None, skip=frozenset(), sink=None) -> tuple[list[Record], list[AccountProfile]]:
+            headless: bool = True, debug_dir=None, skip=frozenset(), sink=None,
+            retry: bool = True) -> tuple[list[Record], list[AccountProfile]]:
     queries = queries or config.X_QUERIES
     today = today or datetime.now(config.TR_TZ).date()
     if backend == "twikit":
         return asyncio.run(_twikit_collect(queries, days, per_day, today, with_profiles))
     return _pw_collect(queries, days, per_day, today, with_profiles, headless=headless, debug_dir=debug_dir,
-                       skip=skip, sink=sink)
+                       skip=skip, sink=sink, retry=retry)

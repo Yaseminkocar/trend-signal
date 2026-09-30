@@ -6,7 +6,7 @@ from collections import Counter
 from datetime import datetime
 
 from . import config, issues, store
-from .profiles import AccountProfile, score_profile
+from .profiles import AccountProfile
 
 
 def cmd_collect(a) -> None:
@@ -39,10 +39,11 @@ def cmd_collect(a) -> None:
                            for r in store.load(config.RAW_PATH) if r.source == "x" and r.published_at)
             skip = frozenset(k for k, n in have.items() if n >= min(a.per_day, 15))
             print(f"[x] --fill-gaps: {len(skip)} (sorgu, gün) çifti zaten dolu, atlanacak")
+        print(f"[x] konu: {config.TOPIC}, sorgular: {'; '.join(config.X_QUERIES)}")
         recs, profiles = x.collect(days=a.days, per_day=a.per_day, with_profiles=a.profiles, skip=skip, today=a.until,
                                    sink=lambda rs: store.upsert(config.RAW_PATH, rs),
                                    backend=a.x_backend, headless=not a.headful,
-                                   debug_dir=_debug_dir(a))
+                                   debug_dir=_debug_dir(a), retry=not a.no_retry)
         added, dup = store.upsert(config.RAW_PATH, recs)
         _upsert_profiles(profiles)
         print(f"[x] {len(recs)} tweet ({added} yeni, {dup} zaten vardı), {len(profiles)} profil")
@@ -84,52 +85,22 @@ def _upsert_profiles(profiles: list[AccountProfile]) -> None:
                             for p in sorted(existing.values(), key=lambda p: p.author)), encoding="utf-8")
 
 
-def load_profiles() -> list[AccountProfile]:
-    if not config.PROFILES_PATH.exists():
-        return []
-    return [AccountProfile.from_dict(json.loads(l))
-            for l in config.PROFILES_PATH.read_text(encoding="utf-8").splitlines() if l.strip()]
-
-
 def cmd_analyze(a) -> None:
-    from .analysis.signal import analyze
+    from .pipeline import Options, run_analysis
     from .report import write
-    records = store.load(config.RAW_PATH)
-    sources = tuple(a.sources.split(",")) if a.sources else config.SIGNAL_SOURCES
-    skipped = sum(r.source not in sources for r in records)
-    records = [r for r in records if r.source in sources]
-    if skipped:
-        print(f"kaynaklar: {', '.join(sources)} ({skipped} kayit diger kaynaklardan, analize alinmadi)")
-    if not records:
-        raise SystemExit(f"{config.RAW_PATH} boş. Önce 'python -m trend collect ...' çalıştırın.")
-    from .collectors.x import is_relevant
-    before = len(records)
-    records = [r for r in records if r.source == "eksi" or is_relevant(r.text)]
-    if before != len(records):
-        print(f"konu ile ilgisiz {before - len(records)} kayit cikarildi")
-    from .analysis.ads import is_ad
-    ads = Counter(r.source for r in records if r.source in config.AD_FILTER_SOURCES and is_ad(r.text)[0])
-    records = [r for r in records if not (r.source in config.AD_FILTER_SOURCES and is_ad(r.text)[0])]
-    for src, n in ads.items():
-        print(f"{src}: {n} ilan/kurumsal gonderi cikarildi")
-    asof = datetime.fromisoformat(a.asof) if a.asof else datetime.now(config.TR_TZ).replace(microsecond=0)
-    verdicts = [score_profile(p, asof) for p in load_profiles()]
-    bots = {v.author for v in verdicts if v.label == "bot_olasi"}
-    from .analysis.signal import balance_sampled
-    records, dropped = balance_sampled(records, config.X_TWEETS_PER_DAY)
-    if dropped:
-        print(f"gunluk ust sinir ({config.X_TWEETS_PER_DAY}) asildigi icin {dropped} kayit cikarildi")
-    from .analysis.signal import drop_unbalanced_queries
-    records, excluded = drop_unbalanced_queries(records, asof)
-    for q, why in excluded.items():
-        print(f"sorgu disarida birakildi ({why}): {q}")
-    result = analyze(records, asof, bots=bots)
-    result["excluded_queries"] = excluded
-    result["ads_excluded"] = dict(ads)
-    md = write(result, verdicts, config.OUTPUT_DIR)
+    opts = Options(sources=tuple(a.sources.split(",")) if a.sources else (),
+                   asof=datetime.fromisoformat(a.asof) if a.asof else None, window=a.window)
+    out = run_analysis(opts)
+    warn = [n for n in out.notes if n.startswith("uyari")]
+    for n in out.notes:
+        if n not in warn:
+            print(n)
+    result = out.result
+    md = write(result, out.verdicts, config.OUTPUT_DIR)
     t = result["totals"]
+    w = result["window_days"]
     print(f"\nanaliz: {result['asof']}")
-    print(f"kayit: {t['records']}  son 7 gun: {t['current']}  onceki 7 gun: {t['previous']}")
+    print(f"kayit: {t['records']}  son {w} gun: {t['current']}  onceki {w} gun: {t['previous']}")
     print(f"{'grup':32} {'onceki':>7} {'son':>5} {'puan':>6}  durum")
     for g in result["groups"]:
         if g.status == "yukselis_yok" and g.group != "TUMU":
@@ -137,9 +108,8 @@ def cmd_analyze(a) -> None:
         print(f"{g.group:32} {g.unique_previous:>7} {g.unique_current:>5} {g.clean_score:>+6.2f}  {g.status}")
         if g.missing:
             print(f"{'':32} eksik: {'; '.join(g.missing)}")
-    if t["current"] + t["previous"] < 2 * config.MIN_UNIQUE_CURRENT:
-        print(f"\nuyari: iki donemde toplam {t['current'] + t['previous']} kayit var; sonuc icin veri cok az. "
-              f"topics/{config.TOPIC}.json dosyasina baslik/sorgu ekleyin ya da --collect eksi,x ile ikinci kaynak toplayin")
+    for n in warn:
+        print(f"\n{n}. topics/{config.TOPIC}.json dosyasina baslik/sorgu ekleyin ya da ikinci kaynak toplayin")
     print(f"\ndetayli rapor: {md.relative_to(config.ROOT)}")
 
 
@@ -169,19 +139,20 @@ def cmd_init_topic(a) -> None:
 
 
 def cmd_run(a) -> None:
-    from .topics import _slug, init_topic
+    from .topics import _slug, init_topic, keywords_from_label
     name = a.name or _slug(a.label).replace("-", "_")
     if name not in config.available_topics():
-        keywords = a.keywords.split(",") if a.keywords else [a.label]
+        keywords = a.keywords.split(",") if a.keywords else keywords_from_label(a.label)
         init_topic(name, a.label, keywords, (a.brands or "").split(","))
         print(f"yeni konu: topics/{name}.json")
     else:
         print(f"mevcut konu kullaniliyor: topics/{name}.json")
+    days = a.days or 2 * a.window
     sources = []
     for src in [s.strip() for s in a.collect.split(",") if s.strip()]:
         print(f"\n== {src} ==")
         try:
-            main(["--topic", name, "collect", src, "--days", str(a.days)])
+            main(["--topic", name, "collect", src, "--days", str(days)])
             sources.append(src)
         except SystemExit as e:
             print(f"{src} atlandi: {e}")
@@ -191,7 +162,7 @@ def cmd_run(a) -> None:
         raise SystemExit("hicbir kaynaktan veri toplanamadi")
     if len(sources) < config.MIN_SOURCES:
         print(f"\nuyari: yalniz {', '.join(sources)} ile analiz ediliyor; tek kaynakla sonuc en fazla 'dogrulanamadi' olabilir")
-    args = ["--topic", name, "analyze", "--sources", ",".join(sources)]
+    args = ["--topic", name, "analyze", "--sources", ",".join(sources), "--window", str(a.window)]
     if a.asof:
         args += ["--asof", a.asof]
     main(args)
@@ -213,11 +184,13 @@ def main(argv=None) -> None:
     c.add_argument("--topics", nargs="*", default=None)
     c.add_argument("--x-backend", default="playwright", choices=["playwright", "twikit"])
     c.add_argument("--fill-gaps", action="store_true", help="X: zaten dolu (sorgu, gün) çiftlerini atla")
+    c.add_argument("--no-retry", action="store_true", help="X: bos gunde 60-90 s bekleyip tekrar deneme")
     c.add_argument("--headful", action="store_true", help="X için tarayıcı penceresini göster")
     c.add_argument("--no-discover", action="store_true", help="Ekşi aramasıyla başlık keşfini kapat")
     c.add_argument("--save-html", action="store_true", help="hata ayıklama için ham HTML'i data/debug/ altına kaydet")
     c.set_defaults(fn=cmd_collect)
     an = sub.add_parser("analyze"); an.add_argument("--asof", default=None)
+    an.add_argument("--window", type=int, default=7, help="kiyas donemi (gun): son N gun ile onceki N gun")
     an.add_argument("--sources", default=None); an.set_defaults(fn=cmd_analyze)
     st = sub.add_parser("stats"); st.set_defaults(fn=cmd_stats)
     tp = sub.add_parser("topics"); tp.set_defaults(fn=cmd_topics)
@@ -227,8 +200,9 @@ def main(argv=None) -> None:
     rn.add_argument("--keywords", default=None, help="virgulle; verilmezse konu adi kullanilir")
     rn.add_argument("--brands", default="")
     rn.add_argument("--collect", default="eksi,x", help="virgulle: eksi,x,tiktok,instagram")
-    rn.add_argument("--days", type=int, default=config.EKSI_DAYS)
+    rn.add_argument("--days", type=int, default=None, help="varsayilan: 2 x --window")
     rn.add_argument("--asof", default=None)
+    rn.add_argument("--window", type=int, default=7)
     rn.set_defaults(fn=cmd_run)
     it = sub.add_parser("init-topic"); it.add_argument("name")
     it.add_argument("--label", default=None)

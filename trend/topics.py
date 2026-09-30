@@ -25,6 +25,11 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
 
 
+def keywords_from_label(label: str) -> list[str]:
+    parts = re.split(r",|\bve\b|\bile\b|&", label, flags=re.IGNORECASE)
+    return [p.strip() for p in parts if p.strip()] or [label.strip()]
+
+
 def build_topic(label: str, keywords: list[str], brands: list[str]) -> dict:
     keywords = [k.strip() for k in keywords if k.strip()]
     brands = [b.strip() for b in brands if b.strip()]
