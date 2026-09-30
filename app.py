@@ -4,6 +4,7 @@ import io
 import sys
 from contextlib import redirect_stdout
 from datetime import date, datetime, time, timedelta
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
@@ -15,6 +16,7 @@ from trend.pipeline import Options, run_analysis
 from trend.report import STATUS_TR, write
 from trend.topics import _slug, init_topic, keywords_from_label
 
+ICON = Path(__file__).resolve().parent / "assets" / "icon.png"
 SOURCES = {"eksi": "Ekşi Sözlük", "x": "X (Twitter)", "instagram": "Instagram", "tiktok": "TikTok"}
 SOURCE_COLORS = {"eksi": "#2a78d6", "x": "#eb6834", "instagram": "#1baf7a", "tiktok": "#eda100"}
 NEEDS_LOGIN = {"x": ("X_AUTH_TOKEN", "X_CT0"), "instagram": ("IG_SESSIONID",)}
@@ -245,7 +247,7 @@ def show_result(out, window: int) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Trend Sinyali", layout="wide")
+    st.set_page_config(page_title="Trend Intelligence", page_icon=str(ICON), layout="wide")
     st.markdown(CSS, unsafe_allow_html=True)
     st.markdown('<div class="hero"><h1>Erken trend sinyali</h1><p>Bir konu girin, kaynakları ve dönemi seçin. '
                 'Son dönem önceki dönemle kıyaslanır; kopyalar, ilanlar ve bot olası hesaplar ayıklanır, '
