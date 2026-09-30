@@ -1,7 +1,8 @@
 # trend-signal: erken trend sinyali (örnek konu: kargo/teslimat)
 
 Ekşi Sözlük, X, TikTok ve Instagram'dan bir tüketici konusundaki konuşmaları toplayan, son 7 günü önceki 7 günle kıyaslayan,
-kopyaları, bot olası hesapları ve kapsama dengesizliğini ayıklayarak açıklanabilir bir sinyal puanı üreten prototip.
+kopyaları, ilanları, bot olası hesapları ve kapsama dengesizliğini ayıklayarak açıklanabilir bir sinyal puanı üreten prototip.
+Konu kod dışında (`topics/<konu>.json`); başka bir konu komut satırından ya da Streamlit arayüzünden tek adımda aranabilir.
 Bulgular ve kararlar `RAPOR.md` dosyasında, AI ile çalışma notları `AI_NOTLARI.md` dosyasında.
 
 ## Kurulum (Python 3.12, macOS/Linux)
@@ -12,8 +13,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Yalnız X'ten yeniden veri toplamak için ek olarak `playwright install chromium` çalıştırın ve `cp .env.example .env`
-ile oluşan dosyaya yan hesabın `auth_token` / `ct0` cookie'lerini yazın.
+Testler ve repodaki veriyle analiz için bu kadarı yeterli. X, TikTok ya da Instagram'dan yeni veri toplamak için ek olarak
+`playwright install chromium` çalıştırın ve `cp .env.example .env` ile oluşan dosyaya yan hesabın X `auth_token` / `ct0`
+cookie'lerini (Instagram için `IG_SESSIONID`) yazın. `.env` git'e girmez. Ekşi ve TikTok giriş gerektirmez.
 
 ## Önerilen: arayüzle kullanım
 
@@ -25,11 +27,14 @@ pip install -r requirements-ui.txt
 streamlit run app.py
 ```
 
-Tarayıcıda açılan sayfada konu yazılır, kaynaklar (Ekşi, X, Instagram, TikTok) ve karşılaştırma dönemi (7, 14 ya da
+Tarayıcıda (`http://localhost:8501`) açılan sayfada konu yazılır, kaynaklar (Ekşi, X, Instagram, TikTok) ve karşılaştırma dönemi (7, 14 ya da
 21 gün) seçilir, filtreler (konu dışı içerik, ilan/kurumsal paylaşım, bot olası hesap, en az kaynak sayısı) açılıp
 kapatılabilir. İnternet ve hesap gerektirmeden denemek için konu kutusuna `kargo` yazıp "Kayıtlı veriyle analiz et" düğmesine
 basın: repodaki veriyle `reports/signals_2026-09-30.md` ile aynı sonuç görünür. Sonuç ekranında aday sinyaller, kontroller,
-kanıt linkleri, günlere göre içerik grafiği ve tüm grupların tablosu var; rapor `.md` ve `.json` olarak indirilebilir.
+kanıt linkleri, günlere göre içerik grafiği ve her grubun neden "doğrulanamadı" olduğunu gösteren "eksik kanıt" sütunlu
+tablo var; rapor `.md` ve `.json` olarak indirilebilir. Arayüz çalıştırıldığı bilgisayarda kalır; aranan konuların verisi
+yerel `data/<konu>/` klasörüne yazılır.
+
 Toplama varsayılan olarak hızlı modda çalışır: Ekşi'de aramayla en fazla 10 ek başlık, X'te günde en fazla 10 gönderi ve
 5 profil alınır, bekleme süreleri kısalır, boş dönen gün tekrar denenmez. Hızlı mod kapatılırsa sonuç daha sağlam olur ama X
 toplaması 15-30 dakika sürebilir; bu kadar uzun toplamalar için komut satırı daha güvenlidir
@@ -41,22 +46,25 @@ vermezse en uzun kelimeyle aranıp tüm kelimeleri içeren başlıklar alınır 
 oluşturulan bir konuya sonradan yeni anahtar kelime ya da marka yazılırsa konu dosyası güncellenir; elle ayarlanmış
 konu dosyalarına (ör. `kargo`) dokunulmaz.
 
+Not: tek günde patlayan bir konuşma (bir tanıtım ya da zam günü) "doğrulanamadı" çıkar, çünkü içeriğin %60'tan fazlası tek
+güne yığılmıştır; konuşma birkaç güne yayılınca aynı arama "yükseliş adayı" verebilir (örnekler: RAPOR.md §6).
+
 ## Çalıştırma (komut satırı)
 
-**1) Testler** — internet gerekmez, canlı siteye bağlı değil:
+**1) Testler**: internet gerekmez, canlı siteye bağlı değil:
 
 ```bash
 python -m pytest
 ```
 
-**2) Analizi repodaki veriyle tekrar üret** — internet gerekmez. Çıktı `output/kargo/signals.md` ve `output/kargo/signals.json`
+**2) Analizi repodaki veriyle tekrar üret**: internet gerekmez. Çıktı `output/kargo/signals.md` ve `output/kargo/signals.json`
 dosyalarına yazılır; teslimdeki kopyası `reports/signals_2026-09-30.*`:
 
 ```bash
 python -m trend analyze --asof 2026-09-30T00:00:00+03:00
 ```
 
-**3) Veriyi yeniden topla** — internet gerekir. Sırasıyla: Ekşi (Scrapling; 9 firma başlığı + aramayla keşif, son 15 gün),
+**3) Veriyi yeniden topla**: internet gerekir. Sırasıyla: Ekşi (Scrapling; 9 firma başlığı + aramayla keşif, son 15 gün),
 X (Playwright + cookie; günlük örnekleme + 30 profil), X'te yalnız boş kalan (sorgu, gün) çiftlerini yeniden deneme,
 kaynak/gün dağılımı ve sorun günlüğü özeti, analiz (asof = şimdi):
 
@@ -78,7 +86,7 @@ satış ilanı ve kurumsal paylaşımlar analizden önce `trend/analysis/ads.py`
 python -m trend analyze --asof 2026-09-30T00:00:00+03:00 --sources eksi,x,instagram,tiktok
 ```
 
-**4) Araç karşılaştırması, TikTok/Instagram denemesi, ilan filtresi ölçümü** — sonuçlar `bench/results.md`,
+**4) Araç karşılaştırması, TikTok/Instagram denemesi, ilan filtresi ölçümü**: sonuçlar `bench/results.md`,
 `bench/social_probe.md` ve `bench/ad_filter_eval.md`:
 
 ```bash
@@ -146,16 +154,19 @@ trend/
   store.py         idempotent JSONL upsert
   privacy.py       tuzlu hash ile kullanıcı adı / @mention maskeleme
   fetchers.py      requests | scrapling | playwright, aynı arayüz
-  collectors/      eksi.py (HTML), x.py (GraphQL yanıt dinleme; twikit yedek), social.py (TikTok, Instagram)
+  collectors/      eksi.py (HTML, esnek başlık araması), x.py (GraphQL yanıt dinleme; twikit yedek),
+                   social.py (TikTok, Instagram)
   profiles.py      açıklanabilir bot puanı
   analysis/        grouping.py (tema/firma + yakın-tekrar), signal.py (7/7 kıyas, kontroller), ads.py (ilan filtresi)
   topics.py        konu dosyası üretimi (init-topic)
   pipeline.py      filtreler + analiz (komut satırı ve arayüz ortak kullanır)
   report.py, cli.py
-app.py             Streamlit arayüzü
+app.py             Streamlit arayüzü (tema: .streamlit/config.toml)
 topics/            konu ayarları (kargo.json, elektrikli_arac.json)
 tests/             62 offline test + fixture'lar
-bench/             araç karşılaştırması, TikTok/IG denemesi
+bench/             araç karşılaştırması, TikTok/IG denemesi, ilan filtresi ölçümü
+reports/           teslimdeki analiz çıktıları (signals_2026-09-30*)
+requirements*.txt  ana akış, arayüz (-ui), araç karşılaştırması (-bench); sürümler sabit
 ```
 
 Konudan bağımsız ayarlar (eşikler, günlük üst sınır, sinyal kaynakları): `trend/config.py`.
