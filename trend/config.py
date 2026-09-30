@@ -40,6 +40,7 @@ def use_topic(name: str) -> None:
     g["RELEVANCE_WORDS"] = t.get("relevance_words", [])
     g["EKSI_TOPICS"] = t.get("eksi_topics", [])
     g["EKSI_SEARCH_KEYWORD"] = t.get("eksi_search_keyword")
+    g["EKSI_SEARCH_KEYWORDS"] = t.get("eksi_search_keywords") or ([g["EKSI_SEARCH_KEYWORD"]] if g["EKSI_SEARCH_KEYWORD"] else [])
     g["EKSI_EXCLUDE_SLUG"] = t.get("eksi_exclude_slug") or r"(?!)"
     g["X_QUERIES"] = t.get("x_queries", [])
     g["TIKTOK_QUERIES"] = t.get("tiktok_queries", [])

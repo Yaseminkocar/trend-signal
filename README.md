@@ -30,9 +30,16 @@ Tarayıcıda açılan sayfada konu yazılır, kaynaklar (Ekşi, X, Instagram, Ti
 kapatılabilir. İnternet ve hesap gerektirmeden denemek için konu kutusuna `kargo` yazıp "Kayıtlı veriyle analiz et" düğmesine
 basın: repodaki veriyle `reports/signals_2026-09-30.md` ile aynı sonuç görünür. Sonuç ekranında aday sinyaller, kontroller,
 kanıt linkleri, günlere göre içerik grafiği ve tüm grupların tablosu var; rapor `.md` ve `.json` olarak indirilebilir.
-Yeni konuda X toplaması varsayılan olarak hızlı modda çalışır (günde en fazla 10 gönderi, 10 profil, boş gün için bekleme yok;
-birkaç dakika). Hızlı mod kapatılırsa sonuç daha sağlam olur ama toplama 15-30 dakika sürebilir. Komut satırında karşılığı
-`collect x --per-day 10 --profiles 10 --no-retry`.
+Toplama varsayılan olarak hızlı modda çalışır: Ekşi'de aramayla en fazla 10 ek başlık, X'te günde en fazla 10 gönderi ve
+5 profil alınır, bekleme süreleri kısalır, boş dönen gün tekrar denenmez. Hızlı mod kapatılırsa sonuç daha sağlam olur ama X
+toplaması 15-30 dakika sürebilir; bu kadar uzun toplamalar için komut satırı daha güvenlidir
+(`python -m trend --topic <konu> collect x`). Komut satırında hızlı modun karşılığı
+`collect x --per-day 10 --profiles 5 --no-retry --pace 0.5` ve `collect eksi --delay 1.0 --max-discovered 10`.
+
+Anahtar kelimenin Ekşi başlık adıyla birebir aynı olması gerekmez: her anahtar kelime ayrıca aranır, tam ifade sonuç
+vermezse en uzun kelimeyle aranıp tüm kelimeleri içeren başlıklar alınır ("bmw 3" -> "bmw 3 serisi"). Arayüzden
+oluşturulan bir konuya sonradan yeni anahtar kelime ya da marka yazılırsa konu dosyası güncellenir; elle ayarlanmış
+konu dosyalarına (ör. `kargo`) dokunulmaz.
 
 ## Çalıştırma (komut satırı)
 
@@ -147,7 +154,7 @@ trend/
   report.py, cli.py
 app.py             Streamlit arayüzü
 topics/            konu ayarları (kargo.json, elektrikli_arac.json)
-tests/             60 offline test + fixture'lar
+tests/             62 offline test + fixture'lar
 bench/             araç karşılaştırması, TikTok/IG denemesi
 ```
 

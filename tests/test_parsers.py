@@ -164,3 +164,33 @@ def test_instagram_items():
     assert r.url == "https://instagram.com/p/DAbc123"
     assert r.author == mask_user("mehmet_1")
     assert r.published_at is not None
+
+
+def test_eksi_slug_matches_partial_keyword():
+    from trend.collectors.eksi import slug_matches
+    assert slug_matches("https://eksisozluk.com/bmw-3-serisi--197848", "bmw 3")
+    assert slug_matches("https://eksisozluk.com/iphone-18-pro-max--8100000", "iPhone 18 Pro")
+    assert slug_matches("https://eksisozluk.com/akaryakit-zammi--1014046", "akaryakıt zam")
+    assert not slug_matches("https://eksisozluk.com/bmw-x5--123", "bmw 3")
+    assert not slug_matches("https://eksisozluk.com/audi-a3--123", "bmw 3")
+
+
+def test_eksi_find_topics_falls_back_to_longest_word(tmp_path, monkeypatch):
+    from datetime import date
+    from trend import config
+    from trend.collectors import eksi
+    from trend.fetchers import FetchResult
+
+    monkeypatch.setattr(config, "ISSUE_LOG", tmp_path / "issues.jsonl")
+    pages = {
+        "bmw": '<ul class="topic-list"><li><a href="/bmw-3-serisi--197848?a=1">bmw 3 serisi</a></li>'
+               '<li><a href="/bmw-x5--123">bmw x5</a></li></ul>',
+    }
+
+    class FakeFetcher:
+        def get(self, url):
+            kw = url.split("Keywords=")[1].split("&")[0]
+            return FetchResult(url, 200, pages.get(kw, "<ul class='topic-list'></ul>"), 0.1)
+
+    found = eksi.find_topics(FakeFetcher(), "bmw 3", date(2026, 9, 15), date(2026, 9, 30))
+    assert found == ["https://eksisozluk.com/bmw-3-serisi--197848"]

@@ -113,6 +113,30 @@ def discover_topics(fetcher: Fetcher, keyword: str, since: date, until: date,
     return list(dict.fromkeys(out))
 
 
+def slug_matches(url: str, keyword: str) -> bool:
+    from ..topics import _slug
+    words = urlsplit(url).path.strip("/").split("--")[0].split("-")
+    tokens = [t for t in _slug(keyword).split("-") if t]
+    return bool(tokens) and all(any(w.startswith(t) for w in words) for t in tokens)
+
+
+def find_topics(fetcher: Fetcher, keyword: str, since: date, until: date,
+                save_html: Path | None = None) -> list[str]:
+    found = discover_topics(fetcher, keyword, since, until, save_html)
+    if found:
+        return found
+    from ..topics import _slug
+    tokens = sorted((t for t in _slug(keyword).split("-") if len(t) >= 3), key=len, reverse=True)
+    if not tokens or tokens[0] == _slug(keyword):
+        return []
+    broad = discover_topics(fetcher, tokens[0], since, until)
+    matched = [u for u in broad if slug_matches(u, keyword)]
+    if matched:
+        log_issue(SOURCE, "genis_arama", f"'{keyword}' -> '{tokens[0]}' ile arandi, {len(matched)} baslik eslesti",
+                  "tam ifade baslik dondurmedi, kelimeleri iceren basliklar alindi")
+    return matched
+
+
 def collect(fetcher: Fetcher, topics: list[str] | None = None, days: int = 14,
             max_pages: int = 30, discover: bool = True, max_discovered: int = 25,
             today: date | None = None, save_html_dir: Path | None = None) -> Iterator[Record]:
@@ -129,12 +153,16 @@ def collect(fetcher: Fetcher, topics: list[str] | None = None, days: int = 14,
             raise
         if u:
             urls.append((topic, u))
-    if discover and config.EKSI_SEARCH_KEYWORD:
-        found = discover_topics(fetcher, config.EKSI_SEARCH_KEYWORD, cutoff, today,
-                                save_html_dir / "eksi_search.html" if save_html_dir else None)
-        print(f"[eksi] aramayla bulunan aktif başlık: {len(found)}")
+    if discover:
         known = {u for _, u in urls}
-        urls += [(f"arama:{config.EKSI_SEARCH_KEYWORD}", u) for u in found[:max_discovered] if u not in known]
+        for kw in config.EKSI_SEARCH_KEYWORDS[:4]:
+            found = find_topics(fetcher, kw, cutoff, today,
+                                save_html_dir / "eksi_search.html" if save_html_dir else None)
+            print(f"[eksi] '{kw}' aramasıyla bulunan aktif başlık: {len(found)}")
+            for u in found:
+                if u not in known and len(known) < len(topics) + max_discovered:
+                    urls.append((f"arama:{kw}", u))
+                    known.add(u)
 
     for topic, url in urls:
         try:

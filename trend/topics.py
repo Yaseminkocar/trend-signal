@@ -35,9 +35,12 @@ def build_topic(label: str, keywords: list[str], brands: list[str]) -> dict:
     brands = [b.strip() for b in brands if b.strip()]
     return {
         "label": label,
+        "generated": True,
+        "brand_labels": brands,
         "relevance_words": keywords,
         "eksi_topics": brands + keywords,
         "eksi_search_keyword": keywords[0] if keywords else None,
+        "eksi_search_keywords": keywords,
         "eksi_exclude_slug": None,
         "x_queries": [f'"{k}" lang:tr -filter:retweets' if " " in k else f"{k} lang:tr -filter:retweets"
                       for k in keywords],

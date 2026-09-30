@@ -19,6 +19,36 @@ SOURCES = {"eksi": "Ekşi Sözlük", "x": "X (Twitter)", "instagram": "Instagram
 SOURCE_COLORS = {"eksi": "#2a78d6", "x": "#eb6834", "instagram": "#1baf7a", "tiktok": "#eda100"}
 NEEDS_LOGIN = {"x": ("X_AUTH_TOKEN", "X_CT0"), "instagram": ("IG_SESSIONID",)}
 CONFIDENCE = {"yuksek": "yüksek", "orta": "orta", "dusuk": "düşük", "-": "-"}
+STATUS_PILL = {"yukselis_adayi": ("pill-ok", "Yükseliş adayı"), "dogrulanamadi": ("pill-warn", "Doğrulanamadı"),
+               "yukselis_yok": ("pill-none", "Yükseliş yok")}
+DIMENSION = {"tema": "Tema", "firma": "Firma"}
+
+CSS = """
+<style>
+.block-container {padding-top: 2.2rem; max-width: 1200px;}
+.hero {padding: 1.4rem 1.6rem; border-radius: 16px; margin-bottom: 1.2rem;
+       background: linear-gradient(135deg, rgba(42,120,214,.16), rgba(27,175,122,.10));
+       border: 1px solid rgba(42,120,214,.25);}
+.hero h1 {font-size: 2rem; margin: 0 0 .3rem 0; padding: 0;}
+.hero p {margin: 0; opacity: .8; font-size: .95rem;}
+.pill {display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .78rem;
+       font-weight: 600; letter-spacing: .01em; vertical-align: middle;}
+.pill-ok {background: rgba(27,175,122,.18); color: #12925f; border: 1px solid rgba(27,175,122,.45);}
+.pill-warn {background: rgba(237,161,0,.16); color: #b57a00; border: 1px solid rgba(237,161,0,.45);}
+.pill-none {background: rgba(128,128,128,.14); color: inherit; border: 1px solid rgba(128,128,128,.35);}
+.pill-miss {background: rgba(232,76,61,.14); color: #d0402f; border: 1px solid rgba(232,76,61,.4);}
+.cand-title {font-size: 1.15rem; font-weight: 700; margin-right: .5rem;}
+.cand-sub {opacity: .75; font-size: .88rem; margin-top: .2rem;}
+.check {font-size: .9rem; margin: .15rem 0;}
+div[data-testid="stMetric"] {border: 1px solid rgba(128,128,128,.25); border-radius: 12px; padding: .7rem 1rem;}
+section[data-testid="stSidebar"] h2 {font-size: 1rem; margin-top: .6rem;}
+@media (prefers-color-scheme: dark) {
+  .pill-ok {color: #4cd6a0;}
+  .pill-warn {color: #f2b53a;}
+  .pill-miss {color: #ff8a7a;}
+}
+</style>
+"""
 
 
 class LiveLog(io.StringIO):
@@ -57,20 +87,31 @@ def topic_name(label: str) -> str:
     return _slug(text).replace("-", "_")
 
 
-def ensure_topic(name: str, label: str, keywords: str, brands: str) -> bool:
-    if name in config.available_topics():
-        return False
-    kw = [k.strip() for k in keywords.split(",") if k.strip()] or keywords_from_label(label)
-    init_topic(name, label, kw, [b.strip() for b in brands.split(",") if b.strip()])
-    return True
+def ensure_topic(name: str, label: str, keywords: str, brands: str) -> str:
+    import json
+    kw = [k.strip() for k in keywords.split(",") if k.strip()]
+    br = [b.strip() for b in brands.split(",") if b.strip()]
+    path = config.TOPICS_DIR / f"{name}.json"
+    if not path.exists():
+        init_topic(name, label, kw or keywords_from_label(label), br)
+        return "created"
+    current = json.loads(path.read_text(encoding="utf-8"))
+    if current.get("generated") and (kw or br):
+        new_kw = kw or current.get("relevance_words", [])
+        if new_kw != current.get("relevance_words") or (br and br != current.get("brand_labels")):
+            init_topic(name, current.get("label", label), new_kw, br or current.get("brand_labels", []), force=True)
+            return "updated"
+    return ""
 
 
 def collect(name: str, sources: list[str], days: int, until: date, fast: bool) -> list[str]:
     done = []
     for src in sources:
         args = ["--topic", name, "collect", src, "--days", str(days), "--until", until.isoformat()]
-        if src == "x" and fast:
-            args += ["--per-day", "10", "--profiles", "10", "--no-retry"]
+        if fast and src == "x":
+            args += ["--per-day", "10", "--profiles", "5", "--no-retry", "--pace", "0.5"]
+        if fast and src == "eksi":
+            args += ["--delay", "1.0", "--max-discovered", "10"]
         with st.status(f"{SOURCES[src]} toplanıyor...", expanded=True) as box:
             log = LiveLog(st.empty())
             try:
@@ -101,7 +142,7 @@ def daily_frame(records, asof: datetime, window: int) -> pd.DataFrame:
 
 def group_table(groups) -> pd.DataFrame:
     return pd.DataFrame([{
-        "grup": g.group,
+        "grup": pretty(g.group),
         "önceki": g.unique_previous,
         "son": g.unique_current,
         "temiz puan": round(g.clean_score, 2),
@@ -110,25 +151,42 @@ def group_table(groups) -> pd.DataFrame:
         "gün": g.active_days_current,
         "kaynak": ", ".join(g.sources_current),
         "durum": STATUS_TR[g.status],
+        "eksik kanıt": "; ".join(g.missing),
     } for g in groups])
 
 
+def pill(status: str) -> str:
+    cls, text = STATUS_PILL[status]
+    return f'<span class="pill {cls}">{text}</span>'
+
+
+def pretty(group: str) -> str:
+    dim, _, value = group.partition(":")
+    return f"{DIMENSION.get(dim, dim)} · {value.replace('_', ' ')}"
+
+
 def show_candidate(g, window: int) -> None:
-    title = f"{g.group}: {STATUS_TR[g.status]}"
-    body = (f"Tekil içerik: önceki {window} gün **{g.unique_previous}**, son {window} gün **{g.unique_current}** "
-            f"(temiz puan {g.clean_score:+.2f}, güven: {CONFIDENCE.get(g.confidence, g.confidence)})")
-    if g.status == "yukselis_adayi":
-        st.success(f"**{title}**  \n{body}")
-    else:
-        st.warning(f"**{title}**  \n{body}")
-    for c in g.checks:
-        st.markdown(f"- {'Sağlandı' if c.passed else '**Eksik**'}: {c.detail}")
-    if g.evidence:
-        st.markdown("Kanıt:")
-        for e in g.evidence:
-            when = (e["published_at"] or "tarih yok")[:16].replace("T", " ")
-            text = e["text"][:120].replace("[", "(").replace("]", ")")
-            st.markdown(f"- **{SOURCES.get(e['source'], e['source'])}**, {when}: [{e['url']}]({e['url']})  \n  {text}")
+    with st.container(border=True):
+        st.markdown(f'<span class="cand-title">{pretty(g.group)}</span>{pill(g.status)}'
+                    f'<div class="cand-sub">güven: {CONFIDENCE.get(g.confidence, g.confidence)} · '
+                    f'kaynak: {", ".join(SOURCES.get(s, s) for s in g.sources_current) or "-"}</div>',
+                    unsafe_allow_html=True)
+        c = st.columns(4)
+        c[0].metric(f"Önceki {window} gün", g.unique_previous)
+        c[1].metric(f"Son {window} gün", g.unique_current, delta=g.unique_current - g.unique_previous)
+        c[2].metric("Temiz puan", f"{g.clean_score:+.2f}")
+        c[3].metric("Yazar / gün", f"{g.authors_current} / {g.active_days_current}")
+        left, right = st.columns(2)
+        for i, chk in enumerate(g.checks):
+            tag = '<span class="pill pill-ok">sağlandı</span>' if chk.passed else '<span class="pill pill-miss">eksik</span>'
+            (left if i % 2 == 0 else right).markdown(f'<div class="check">{tag} {chk.detail}</div>',
+                                                     unsafe_allow_html=True)
+        if g.evidence:
+            with st.expander(f"Kanıt ({len(g.evidence)})"):
+                for e in g.evidence:
+                    when = (e["published_at"] or "tarih yok")[:16].replace("T", " ")
+                    text = e["text"][:160].replace("[", "(").replace("]", ")")
+                    st.markdown(f"**{SOURCES.get(e['source'], e['source'])}** · {when} · [bağlantı]({e['url']})  \n{text}")
 
 
 def show_result(out, window: int) -> None:
@@ -138,6 +196,7 @@ def show_result(out, window: int) -> None:
     groups = [g for g in result["groups"] if g.group != "TUMU"]
     candidates = [g for g in groups if g.status != "yukselis_yok"][:3]
 
+    st.markdown(f"Genel durum: {pill(tumu.status)}", unsafe_allow_html=True)
     cols = st.columns(4)
     cols[0].metric("Analize giren kayıt", t["records"])
     cols[1].metric(f"Önceki {window} gün", t["previous"])
@@ -187,9 +246,10 @@ def show_result(out, window: int) -> None:
 
 def main() -> None:
     st.set_page_config(page_title="Trend Sinyali", layout="wide")
-    st.title("Erken trend sinyali")
-    st.caption("Bir konu girin, kaynakları ve dönemi seçin. Son dönem önceki dönemle kıyaslanır; "
-               "kopyalar, ilanlar ve bot olası hesaplar ayıklanır, kanıtı yetersiz sonuç 'doğrulanamadı' diye işaretlenir.")
+    st.markdown(CSS, unsafe_allow_html=True)
+    st.markdown('<div class="hero"><h1>Erken trend sinyali</h1><p>Bir konu girin, kaynakları ve dönemi seçin. '
+                'Son dönem önceki dönemle kıyaslanır; kopyalar, ilanlar ve bot olası hesaplar ayıklanır, '
+                'kanıtı yetersiz sonuç "doğrulanamadı" diye işaretlenir.</p></div>', unsafe_allow_html=True)
 
     label = st.text_input("Konu", value="", placeholder="ör. telefon fiyatları, elektrikli araç, kahve")
     st.caption("Kayıtlı konular: " + ", ".join(config.available_topics()) +
@@ -222,9 +282,10 @@ def main() -> None:
         min_sources = st.number_input("Yükseliş için en az kaynak", 1, 4, config.MIN_SOURCES)
 
         st.header("Toplama")
-        fast = st.checkbox("Hızlı toplama (X)", value=True,
-                           help="X'te günde en fazla 10 gönderi ve 10 hesap profili alınır; boş dönen gün için "
-                                "beklenip tekrar denenmez. Kapatılırsa sonuç daha sağlam ama toplama 15-30 dakika sürebilir.")
+        fast = st.checkbox("Hızlı toplama", value=True,
+                           help="Ekşi'de en fazla 10 ek başlık, X'te günde en fazla 10 gönderi ve 5 hesap profili alınır, "
+                                "bekleme süreleri kısalır ve boş dönen gün tekrar denenmez. Kapatılırsa sonuç daha sağlam "
+                                "ama X toplaması 15-30 dakika sürebilir.")
 
     name = topic_name(label) if label.strip() else ""
     asof = datetime.combine(until + timedelta(days=1), time(0), tzinfo=config.TR_TZ)
@@ -243,8 +304,11 @@ def main() -> None:
     if run_only and name not in config.available_topics():
         st.error(f"'{label}' için kayıtlı veri yok. Önce 'Veri topla ve analiz et' ile toplayın.")
         return
-    if ensure_topic(name, label.strip(), keywords, brands):
+    change = ensure_topic(name, label.strip(), keywords, brands)
+    if change == "created":
         st.info(f"Yeni konu oluşturuldu: topics/{name}.json. Sorgular ve temalar bu dosyadan düzenlenebilir.")
+    elif change == "updated":
+        st.info(f"topics/{name}.json yeni anahtar kelime ve markalarla güncellendi.")
     config.use_topic(name)
 
     sources = picked
@@ -266,8 +330,8 @@ def main() -> None:
         st.error(str(e))
         return
     st.divider()
-    st.header(f"{config.TOPIC_LABEL}: {asof - timedelta(days=window):%d.%m} - {until:%d.%m.%Y} "
-              f"(önceki {window} günle kıyas)")
+    st.subheader(f"{config.TOPIC_LABEL}")
+    st.caption(f"Son dönem {asof - timedelta(days=window):%d.%m} - {until:%d.%m.%Y}, önceki {window} günle kıyaslandı.")
     show_result(out, window)
 
 

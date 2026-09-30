@@ -225,7 +225,10 @@ def in_day(rec: Record, day: str) -> bool:
 
 
 def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, debug_dir=None, skip=frozenset(), sink=None,
-                retry=True):
+                retry=True, pace=1.0):
+    def pause(lo: int, hi: int) -> int:
+        return int(random.randint(lo, hi) * pace)
+
     import json as _json
     from urllib.parse import quote
     from playwright.sync_api import sync_playwright
@@ -304,7 +307,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
             responses.clear()
             page.goto(f"https://x.com/search?q={quote(q)}&src=typed_query&f=live",
                       wait_until="domcontentloaded", timeout=45000)
-            page.wait_for_timeout(4000)
+            page.wait_for_timeout(int(4000 * max(pace, 0.6)))
             if "/login" in page.url or "flow/login" in page.url:
                 raise SystemExit("X giriş sayfasına yönlendirdi: cookie'ler geçersiz/süresi dolmuş.")
             seen_day: set[str] = set()
@@ -327,7 +330,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
                 if len(seen_day) >= per_day:
                     break
                 page.mouse.wheel(0, 4000)
-                page.wait_for_timeout(random.randint(2000, 3500))
+                page.wait_for_timeout(pause(2000, 3500))
             if sink and seen_day:
                 sink([records[i] for i in seen_day])
             return len(seen_day)
@@ -350,7 +353,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
                     log_issue(SOURCE, "bos_gun", f"{day} {base}",
                               "bekleyip tekrar denendi, yine boş (rate limit ya da sonuç yok)" if retry
                               else "hızlı modda tekrar denenmedi; --fill-gaps ile doldurulabilir")
-                page.wait_for_timeout(random.randint(4000, 7000))
+                page.wait_for_timeout(pause(4000, 7000))
 
         for sn, user in list(users.items())[:with_profiles]:
             responses.clear()
@@ -358,10 +361,10 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
             seen_ops.clear()
             try:
                 page.goto(f"https://x.com/{sn}", wait_until="domcontentloaded", timeout=45000)
-                page.wait_for_timeout(5000)
+                page.wait_for_timeout(int(5000 * max(pace, 0.6)))
                 for _ in range(2):
                     page.mouse.wheel(0, 3000)
-                    page.wait_for_timeout(2500)
+                    page.wait_for_timeout(pause(2500, 2500))
                 for rec, u in drain("profile"):
                     if rec is None:
                         user = {**user, **{k: v for k, v in u.items() if v is not None}}
@@ -375,7 +378,7 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
                           "önceki paylaşımlar alınamadı")
             profiles.append(build_profile(user, recent, now_utc_iso()))
             print(f"[x] profil {mask_user(sn)}: {len(recent)} önceki tweet")
-            page.wait_for_timeout(random.randint(1500, 3000))
+            page.wait_for_timeout(pause(1500, 3000))
         browser.close()
     for k, v in stats.items():
         if v:
@@ -390,10 +393,10 @@ def _pw_collect(queries, days, per_day, today, with_profiles, headless=True, deb
 def collect(queries: list[str] | None = None, days: int = 14, per_day: int = 20,
             today: date | None = None, with_profiles: int = 30, backend: str = "playwright",
             headless: bool = True, debug_dir=None, skip=frozenset(), sink=None,
-            retry: bool = True) -> tuple[list[Record], list[AccountProfile]]:
+            retry: bool = True, pace: float = 1.0) -> tuple[list[Record], list[AccountProfile]]:
     queries = queries or config.X_QUERIES
     today = today or datetime.now(config.TR_TZ).date()
     if backend == "twikit":
         return asyncio.run(_twikit_collect(queries, days, per_day, today, with_profiles))
     return _pw_collect(queries, days, per_day, today, with_profiles, headless=headless, debug_dir=debug_dir,
-                       skip=skip, sink=sink, retry=retry)
+                       skip=skip, sink=sink, retry=retry, pace=pace)

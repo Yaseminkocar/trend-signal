@@ -20,7 +20,8 @@ def cmd_collect(a) -> None:
             if dbg:
                 dbg.mkdir(parents=True, exist_ok=True)
             for r in eksi.collect(f, topics=a.topics, days=a.days, max_pages=config.EKSI_MAX_PAGES_PER_TOPIC,
-                                  discover=not a.no_discover, save_html_dir=dbg, today=a.until):
+                                  discover=not a.no_discover, save_html_dir=dbg, today=a.until,
+                                  max_discovered=a.max_discovered):
                 batch.append(r)
                 if len(batch) >= 50:
                     added_total += store.upsert(config.RAW_PATH, batch)[0]; batch = []
@@ -43,7 +44,7 @@ def cmd_collect(a) -> None:
         recs, profiles = x.collect(days=a.days, per_day=a.per_day, with_profiles=a.profiles, skip=skip, today=a.until,
                                    sink=lambda rs: store.upsert(config.RAW_PATH, rs),
                                    backend=a.x_backend, headless=not a.headful,
-                                   debug_dir=_debug_dir(a), retry=not a.no_retry)
+                                   debug_dir=_debug_dir(a), retry=not a.no_retry, pace=a.pace)
         added, dup = store.upsert(config.RAW_PATH, recs)
         _upsert_profiles(profiles)
         print(f"[x] {len(recs)} tweet ({added} yeni, {dup} zaten vardı), {len(profiles)} profil")
@@ -185,6 +186,8 @@ def main(argv=None) -> None:
     c.add_argument("--x-backend", default="playwright", choices=["playwright", "twikit"])
     c.add_argument("--fill-gaps", action="store_true", help="X: zaten dolu (sorgu, gün) çiftlerini atla")
     c.add_argument("--no-retry", action="store_true", help="X: bos gunde 60-90 s bekleyip tekrar deneme")
+    c.add_argument("--pace", type=float, default=1.0, help="X: bekleme sureleri carpani (0.5 = iki kat hizli)")
+    c.add_argument("--max-discovered", type=int, default=25, help="Eksi: aramayla eklenecek en fazla baslik")
     c.add_argument("--headful", action="store_true", help="X için tarayıcı penceresini göster")
     c.add_argument("--no-discover", action="store_true", help="Ekşi aramasıyla başlık keşfini kapat")
     c.add_argument("--save-html", action="store_true", help="hata ayıklama için ham HTML'i data/debug/ altına kaydet")
